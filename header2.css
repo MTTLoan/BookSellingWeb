@@ -1,0 +1,99 @@
+.navbar {
+    border-bottom: 1px solid #ddd;
+    display: flex; /* Sử dụng flexbox cho navbar */
+    justify-content: space-between; /* Đảm bảo không gian giữa các phần tử */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.company-name {
+    color: #C53327;
+    font-size: 25px; 
+    font-family: Old English Text MT;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+/* Tìm kiếm */
+.search-input {
+    border: 1px solid #d35400;
+    border-radius: 0;
+    height: 38px;
+    min-width: 50px; /* Đặt chiều rộng tối thiểu cho thanh tìm kiếm */
+    max-width: 500px;
+    flex-grow: 1; /* Cho phép thanh tìm kiếm mở rộng */
+}
+
+.search-btn {
+    background-color: #d35400;
+    color: white;
+    border-radius: 0;
+    height: 38px;
+}
+
+/* Đảm bảo các phần tử không nhảy xuống dòng trên màn hình nhỏ */
+.navbar-nav {
+    flex-direction: row; /* Giữ các phần tử trên cùng một hàng */
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+/* Biểu tượng người dùng */
+.user-icon {
+    font-size: 1.5rem; /* Kích thước biểu tượng người dùng */
+    color: black;
+}
+
+/* Biểu tượng giỏ hàng */
+.cart-icon {
+    font-size: 1.5rem; /* Kích thước biểu tượng giỏ hàng */
+    color: black;
+}
+
+@media (max-width: 550px) {
+    .navbar {
+        flex-wrap: wrap; /* Đảm bảo các phần tử chuyển sang nhiều dòng khi màn hình nhỏ */
+        justify-content: center; /* Căn giữa các phần tử */
+    }
+
+    .navbar-brand {
+        display: flex; /* Sử dụng flex để căn giữa */
+        justify-content: center; /* Căn giữa logo theo chiều ngang */
+        align-items: center; /* Căn giữa logo theo chiều dọc */
+    }
+
+    .navbar-brand img {
+        width: 30px; /* Giảm kích thước logo khi màn hình nhỏ */
+        height: 25px; /* Giảm chiều cao logo */
+    }
+
+    .company-name {
+        font-size: 20px; /* Giảm kích thước chữ tên công ty */
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row; /* Giữ icon trên một dòng */
+        justify-content: center; /* Căn giữa giữa logo và thanh tìm kiếm */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        gap: 10px; /* Khoảng cách giữa các icon */
+    }
+
+    .navbar-nav .btn {
+        font-size: 1.2rem; /* Điều chỉnh kích thước icon */
+    }
+
+    .search-input {
+        min-width: 0;
+        font-size: 0.9rem; /* Giảm kích thước chữ trong thanh tìm kiếm */
+    }
+
+    .search-btn {
+        font-size: 0.9rem; /* Giảm kích thước chữ cho nút tìm kiếm */
+    }
+}
