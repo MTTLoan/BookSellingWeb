@@ -1,0 +1,90 @@
+.navbar {
+  background-color: #DA392B;
+  padding: 0 60px; /* Padding for both sides */
+}
+
+.navbar .nav-link, 
+.navbar .navbar-brand, 
+.navbar .nav-link i {
+  color: white !important;
+}
+
+.navbar .dropdown-menu {
+  background-color: #C53327; 
+}
+
+.navbar .dropdown-item {
+  color: white !important; 
+}
+
+.navbar .dropdown-item i {
+  color: white !important; 
+}
+
+.navbar-toggler {
+  background-color: transparent; /* Make the background transparent */
+  border: none; /* Remove the border */
+}
+
+.navbar-toggler .bi {
+  color: white; /* Change the icon color to white */
+}
+
+/* Change hover color for navbar links */
+.nav-link:hover, 
+.dropdown-item:hover {
+  color: #6c757d; /* Gray for hover state */
+  background-color: transparent; /* Ensure no background change on hover */
+}
+
+/* Change active color for navbar links */
+.nav-link.active, 
+.dropdown-item.active {
+  color: #9E291F; /* Red for active state */
+}
+
+/* Optional: Change background color for dropdown items when hovered */
+.dropdown-item:hover {
+  background-color: darkred;
+}
+
+/* Small screen (max-width: 576px) */
+@media (max-width: 576px) {
+  .navbar {
+      padding: 0; /* Remove extra padding on small screens */
+  }
+
+  .navbar-collapse {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .navbar-nav {
+      width: 100%;
+      text-align: left;
+  }
+
+  .navbar-nav .nav-item {
+      width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+      padding: 10px 20px;
+  }
+
+  .navbar-brand {
+      margin-left: 0;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+  }
+
+  .navbar-toggler {
+      margin-left: 0;
+  }
+
+  .navbar-nav.ms-auto {
+      justify-content: center; /* Center items on small screens */
+      margin-right: 0;
+  }
+}
