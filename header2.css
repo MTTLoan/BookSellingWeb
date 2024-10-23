@@ -37,10 +37,10 @@
 
 /* Đảm bảo các phần tử không nhảy xuống dòng trên màn hình nhỏ */
 .navbar-nav {
-    flex-direction: row; /* Giữ các phần tử trên cùng một hàng */
     display: flex;
-    align-items: center;
-    justify-content: center; 
+    flex-direction: row; /* Giữ các phần tử trên cùng một hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: flex-end; /* Căn lề phải */
 }
 
 /* Biểu tượng người dùng */
@@ -55,16 +55,17 @@
     color: black;
 }
 
-@media (max-width: 550px) {
+@media (max-width: 576px) {
     .navbar {
-        flex-wrap: wrap; /* Đảm bảo các phần tử chuyển sang nhiều dòng khi màn hình nhỏ */
-        justify-content: center; /* Căn giữa các phần tử */
+        flex-wrap: wrap; /* Giữ các phần tử trên cùng một hàng */
+        justify-content: center; /* Căn giữa theo chiều ngang */
     }
 
     .navbar-brand {
+        flex-grow: 1; /* Cho phép logo mở rộng và căn giữa */
         display: flex; /* Sử dụng flex để căn giữa */
-        justify-content: center; /* Căn giữa logo theo chiều ngang */
-        align-items: center; /* Căn giữa logo theo chiều dọc */
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
     }
 
     .navbar-brand img {
@@ -77,15 +78,29 @@
     }
 
     .navbar-nav {
-        display: flex;
-        flex-direction: row; /* Giữ icon trên một dòng */
-        justify-content: center; /* Căn giữa giữa logo và thanh tìm kiếm */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        gap: 10px; /* Khoảng cách giữa các icon */
+        display: none; /* Ẩn menu ở chế độ mobile */
+    }
+
+    .navbar-toggler {
+        display: block; /* Hiện nút toggle */
+    }
+
+    /* Khi menu được mở ra */
+    .navbar-collapse.show {
+        display: flex !important; /* Hiện menu khi toggle được kích hoạt */
+        flex-direction: column; /* Đặt menu theo chiều dọc */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.9rem; /* Giảm kích thước chữ cho các liên kết */
+        padding: 0 10px;
+        text-align: center; /* Căn giữa text */
+        width: 100%; /* Đảm bảo width bằng 100% */
+        justify-content: center;
     }
 
     .navbar-nav .btn {
-        font-size: 1.2rem; /* Điều chỉnh kích thước icon */
+        font-size: 1.2rem; /* Giảm kích thước biểu tượng */
     }
 
     .search-input {

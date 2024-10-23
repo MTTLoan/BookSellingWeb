@@ -9,9 +9,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <link rel="stylesheet" href="header1.css">
+    <script src="header1.js" defer></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-white bg-white">
+    <nav class="navbar navbar-expand-sm navbar-white bg-white">
         <div class="container-fluid d-flex justify-content-between align-items-center" id="Logo">
             <!-- Toggler nằm bên trái -->
             <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,21 +37,21 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <button class="nav-link register-link" href="#">ĐĂNG KÝ</button>
+                        <button class="nav-link register-link" id="registerButton">ĐĂNG KÝ</button>
                     </li>
     
                     <li class="nav-item">
-                        <button class="nav-link login-link" href="#">ĐĂNG NHẬP</button>
+                        <button class="nav-link login-link" id="loginButton">ĐĂNG NHẬP</button>
                     </li>
     
                     <li class="nav-item">
-                        <button class="nav-link cart-icon" href="#">
+                        <button class="nav-link cart-icon" id="cartButton">
                             <i class="bi bi-bag-heart-fill"></i>
                         </button>
                     </li>
                 </ul>
             </div>
         </div>
-    </nav>   
+    </nav>
 </body>
 </html>

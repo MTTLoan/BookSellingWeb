@@ -18,24 +18,7 @@
     margin-left: 5px;
 }
 
-/* Tìm kiếm */
-.search-input {
-    border: 1px solid #d35400;
-    border-radius: 0;
-    height: 38px;
-    min-width: 50px; /* Đặt chiều rộng tối thiểu cho thanh tìm kiếm */
-    max-width: 500px;
-    flex-grow: 1; /* Cho phép thanh tìm kiếm mở rộng */
-}
-
-.search-btn {
-    background-color: #d35400;
-    color: white;
-    border-radius: 0;
-    height: 38px;
-}
-
-/* Đảm bảo các phần tử không nhảy xuống dòng trên màn hình nhỏ */
+/* Nội dung menu */
 .navbar-nav {
     flex-direction: row; /* Giữ các phần tử trên cùng một hàng */
     display: flex;
@@ -49,29 +32,23 @@
     justify-content: center; /* Căn giữa theo chiều ngang */
     width: auto;
     align-items: center; 
-    background: none;
 }
 
-.register-link {
-    color: black;
-    border: none;
+.icon-button {
+    background: none; /* Không có nền */
+    border: none; /* Không có viền */
+    color: black; /* Màu sắc cho biểu tượng */
+    font-size: 1.5rem; /* Kích thước biểu tượng */
 }
 
-.login-link {
-    color: #9E291F;
-    border-left: 2px solid #9E291F; 
-    border-right: 2px solid #9E291F; 
-    border-top: none; 
-    border-bottom: none; 
-    padding: 0 10px; 
-    margin: 0 5px; 
+/* Nhãn chi nhánh */
+.branch-label {
+    margin-right: 5px; /* Khoảng cách giữa nhãn và nút */
 }
 
-/* Biểu tượng giỏ hàng */
-.cart-icon {
-    font-size: 1.5rem; /* Kích thước biểu tượng giỏ hàng */
-    color: black;
-    border: none;
+/* Tên tài khoản */
+.account-name {
+    margin-right: 5px; /* Khoảng cách giữa tên tài khoản và nút */
 }
 
 @media (max-width: 576px) {
@@ -96,14 +73,18 @@
         font-size: 20px; /* Giảm kích thước chữ tên công ty */
     }
 
-    .search-input {
-        width: 100%; /* Tăng chiều rộng thanh tìm kiếm trên màn hình nhỏ */
-        min-width: 0; /* Xóa chiều rộng tối thiểu */
-        font-size: 0.9rem; /* Giảm kích thước chữ trong thanh tìm kiếm */
+    .navbar-nav {
+        display: none; /* Ẩn menu ở chế độ mobile */
     }
 
-    .search-btn {
-        font-size: 0.9rem; /* Giảm kích thước chữ cho nút tìm kiếm */
+    .navbar-toggler {
+        display: block; /* Hiện nút toggle */
+    }
+
+    /* Khi menu được mở ra */
+    .navbar-collapse.show {
+        display: flex !important; /* Hiện menu khi toggle được kích hoạt */
+        flex-direction: column; /* Đặt menu theo chiều dọc */
     }
 
     .navbar-nav .nav-link {
@@ -111,14 +92,13 @@
         padding: 0 10px;
         text-align: center; /* Căn giữa text */
         width: 100%; /* Đảm bảo width bằng 100% */
+        justify-content: center;
     }
 
-    .cart-icon {
-        font-size: 1.2rem; /* Giảm kích thước biểu tượng giỏ hàng */
-    }
-
-    .navbar-nav {
-        margin-top: 5px;
-        align-items: center; 
+    .branch-label,
+    .account-name {
+        font-size: 0.5rem; /* Tăng kích thước chữ lên một chút */
+        display: inline-flexbox;
+        align-items: center; /* Căn giữa theo chiều dọc */
     }
 }

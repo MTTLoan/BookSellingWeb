@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
-    <link rel="stylesheet" href="header2.css">
-    <script src="header2.js" defer></script>
+    <link rel="stylesheet" href="header_NV.css">
+    <script src="header_NV.js" defer></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-white bg-white">
@@ -17,32 +17,37 @@
             <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
             </button>
-            
-            <!-- Logo và tên công ty -->
+    
             <a class="navbar-brand" href="#">
                 <img src="ảnh/Favicon.png" alt="" width="40" height="40">
                 <span class="company-name">Chapter One</span>
             </a>
-
-            <!-- Thanh tìm kiếm nằm kế logo -->
-            <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
-                <input class="form-control search-input" type="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">
-                <button class="btn search-btn" type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-            </form>
-
+    
             <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                 <ul class="navbar-nav d-flex align-items-center">
-                    <li class="nav-item me-3">
-                        <button class="btn icon-button user-icon" id="userButton">
-                            <i class="bi bi-person-fill"></i>
+                    <li class="nav-item me-3 d-flex align-items-center">
+                        <label class="branch-label me-1">Chi nhánh trung tâm:</label>
+                        <button class="nav-link icon-button" id="branchButton">
+                            <i class="bi bi-geo-alt"></i>
                         </button>
                     </li>
-
+    
                     <li class="nav-item me-3">
-                        <button class="btn icon-button cart-icon" id="cartButton">
-                            <i class="bi bi-bag-heart-fill"></i>
+                        <button class="nav-link icon-button" id="emailButton">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                    </li>
+    
+                    <li class="nav-item me-3">
+                        <button class="nav-link icon-button" id="settingsButton">
+                            <i class="bi bi-gear"></i>
+                        </button>
+                    </li>
+    
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="account-name me-1">Tài khoản</span>
+                        <button class="nav-link icon-button" id="accountButton">
+                            <i class="bi bi-person-circle"></i>
                         </button>
                     </li>
                 </ul>
