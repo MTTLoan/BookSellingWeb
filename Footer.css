@@ -1,0 +1,84 @@
+/* Định dạng cho cột 1 (Logo) */
+#col1 {
+    display: flex;
+    flex-direction: column; /* Đặt hướng dọc cho các phần tử bên trong */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: center; /* Căn giữa theo chiều dọc */
+    text-align: center; /* Căn giữa văn bản */
+}
+
+/* Định dạng chung cho footer */
+.footer {
+    padding: 40px 0;
+    background-color: white;
+    border-top: 1px solid white; /* Viền top chung cho footer */
+}
+
+/* Định dạng cho các cột trong footer */
+.footer .footer-column {
+    display: flex;
+    flex-direction: column; /* Đặt hướng dọc cho các phần tử bên trong */
+    align-items: flex-start; /* Căn lề trái cho các cột khác */
+    text-align: left; /* Căn lề trái cho văn bản */
+}
+
+/* Các định dạng khác không thay đổi */
+.footer .footer-title {
+    font-weight: bold; /* Siêu đậm */
+    font-size: 18px; /* Kích thước chữ lớn hơn */
+    margin-bottom: 10px; /* Thêm khoảng cách giữa tiêu đề và danh sách */
+}
+
+/* Viền trên cho các cột riêng biệt */
+.footer .footer-border {
+    border-top: 1px solid #d3d3d3; /* Viền top màu xám cho các cột */
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/* Định dạng cho các đoạn văn bản trong footer */
+.footer-column p {
+    word-wrap: break-word; /* Tự động xuống dòng khi văn bản quá dài */
+    word-break: break-word; /* Đảm bảo từ quá dài sẽ được tách ra */
+    line-height: 1.6; /* Tăng khoảng cách giữa các dòng cho dễ đọc */
+    margin-bottom: 10px; /* Khoảng cách giữa các đoạn văn */
+}
+
+/* Định dạng cho button trong footer */
+.footer-button {
+    background: none;
+    border: none;
+    color: black;
+    text-align: left;
+    padding: 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.footer-button:hover {
+    color: #007bff; /* Màu khi hover */
+}
+
+/* Định dạng cho tên công ty */
+.company-name {
+    color: #F2584C;
+    font-size: 40px; /* Kích thước giảm để cân đối với logo */
+    font-family: 'Old English Text MT', serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    display: inline-block; /* Hiển thị cùng dòng với logo */
+    margin-left: 10px; /* Thêm khoảng cách giữa logo và tên */
+}
+
+/* Định dạng cho logo trong footer */
+.footer-logo {
+    max-width: 80%; /* Đặt max-width để logo có thể co dãn */
+    height: auto; /* Giữ tỉ lệ hình ảnh */
+}
+
+/* Định dạng cho hình xác nhận */
+.footer-check {
+    width: 100%; /* Điều chỉnh kích thước hình xác nhận (có thể thay đổi theo ý bạn) */
+    max-width: 150px; /* Đặt kích thước tối đa để không vượt quá */
+    height: auto; /* Giữ tỉ lệ hình ảnh */
+}
