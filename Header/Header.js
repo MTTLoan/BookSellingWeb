@@ -1,6 +1,6 @@
 // Chuyển hướng đến trang Đăng Ký
 document.getElementById("registerButton").addEventListener("click", function() {
-    window.location.href = "ĐangKy.html"; // Thay đổi thành URL trang đăng ký của bạn
+    window.location.href = "DangKy.html"; // Thay đổi thành URL trang đăng ký của bạn
 });
 
 // Chuyển hướng đến trang Đăng Nhập
