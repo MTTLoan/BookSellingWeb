@@ -11,6 +11,8 @@
 
 .navbar .dropdown-menu {
   background-color: #C53327; 
+  margin-top: 0; /* Remove the gap between navbar and dropdown */
+  padding: 0;
 }
 
 .navbar .dropdown-item {
@@ -48,8 +50,17 @@
   background-color: darkred;
 }
 
-/* Small screen (max-width: 576px) */
-@media (max-width: 576px) {
+@media (max-width: 940px) {
+  .navbar {
+      padding: 0; /* Set padding to 0 on both sides when screen width is 940px or less */
+  }
+
+  .navbar-brand {
+      margin-left: 20px; /* Adjust the margin for the brand if needed */
+  }
+}
+
+@media (max-width: 840px) {
   .navbar {
       padding: 0; /* Remove extra padding on small screens */
   }
@@ -73,10 +84,10 @@
   }
 
   .navbar-brand {
-      margin-left: 0;
-      justify-content: center;
-      text-align: center;
-      width: 100%;
+      margin-left: 0; /* Remove margin entirely on small screens */
+      justify-content: center; /* Center the brand */
+      text-align: center; /* Ensure text is centered */
+      width: 100%; /* Make the brand take up full width */
   }
 
   .navbar-toggler {
