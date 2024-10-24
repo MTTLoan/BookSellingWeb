@@ -1,14 +1,30 @@
-// Chuyển hướng đến trang Đăng Ký
-document.getElementById("registerButton").addEventListener("click", function() {
-    window.location.href = "DangKy.html"; // Thay đổi thành URL trang đăng ký của bạn
-});
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy các nút theo ID
+    const registerButton = document.getElementById('registerButton');
+    const loginButton = document.getElementById('loginButton');
+    const cartButton = document.getElementById('cartButton');
 
-// Chuyển hướng đến trang Đăng Nhập
-document.getElementById("loginButton").addEventListener("click", function() {
-    window.location.href = "DangNhap.html"; // Thay đổi thành URL trang đăng nhập của bạn
-});
+    // Kiểm tra và gán sự kiện click cho nút ĐĂNG KÝ
+    if (registerButton) {
+        registerButton.addEventListener('click', function() {
+            // Chuyển hướng đến trang Đăng ký
+            window.location.href = '../DangKy.html';
+        });
+    }
 
-// Chuyển hướng đến trang Giỏ Hàng
-document.getElementById("cartButton").addEventListener("click", function() {
-    window.location.href = "GioHang.html"; // Thay đổi thành URL trang giỏ hàng của bạn
+    // Kiểm tra và gán sự kiện click cho nút ĐĂNG NHẬP
+    if (loginButton) {
+        loginButton.addEventListener('click', function() {
+            // Chuyển hướng đến trang Đăng nhập
+            window.location.href = '../DangNhap.html';
+        });
+    }
+
+    // Kiểm tra và gán sự kiện click cho nút giỏ hàng
+    if (cartButton) {
+        cartButton.addEventListener('click', function() {
+            // Chuyển hướng đến trang Giỏ hàng
+            window.location.href = '../GioHang.html';
+        });
+    }
 });
