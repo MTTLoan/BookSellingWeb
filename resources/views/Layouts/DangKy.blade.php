@@ -1,6 +1,6 @@
 <?php
 // Include the Header.php file
-include './../Components/Header_DaDangNhap.php';
+include './../Components/Header_ChuaDangNhap.blade.php';
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ include './../Components/Header_DaDangNhap.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>Đăng Ký</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -111,7 +111,7 @@ include './../Components/Header_DaDangNhap.php';
 
     <?php
     // Include the Footer.php file
-    include './../Components/Footer.php';
+    include './../Components/Footer.blade.php';
     ?>
 
     <script>
@@ -121,7 +121,7 @@ include './../Components/Header_DaDangNhap.php';
             event.preventDefault(); // Ngăn chặn hành động mặc định của form
 
             // Chuyển hướng đến trang NhapOTP.php
-            window.location.href = 'NhapOTP.php'; // Đảm bảo đường dẫn đến file đúng
+            window.location.href = 'NhapOTP.blade.php'; // Đảm bảo đường dẫn đến file đúng
         });
 
     });

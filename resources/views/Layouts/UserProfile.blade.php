@@ -1,6 +1,6 @@
 <?php
 // Include the Header.php file
-include './../Components/Header_DaDangNhap.php';
+include './../Components/Header_DaDangNhap.blade.php';
 ?>
 
 <!DOCTYPE html>
@@ -238,7 +238,7 @@ include './../Components/Header_DaDangNhap.php';
 
     <?php
     // Include the Footer.php file
-    include './../Components/Footer.php';
+    include './../Components/Footer.blade.php';
     ?>
 
 </body>

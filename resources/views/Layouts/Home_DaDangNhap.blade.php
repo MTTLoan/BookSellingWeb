@@ -1,6 +1,6 @@
 <?php
 // Include the Header.php file
-include './../Components/Header_ChuaDangNhap.php';
+include './../Components/Header_DaDangNhap.blade.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +27,113 @@ include './../Components/Header_ChuaDangNhap.php';
         padding: 20px;
     }
 
-    /* Sidebar */
-    .category-menu {
-        border: 1px solid #ddd;
+
+    /* Button Section */
+    .button-section {
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        margin-top: 0;
+        /* Đặt margin-top bằng 0 để căn chỉnh với các phần tử khác */
         border-radius: 10px;
-        padding: 15px;
-        background-color: #f8f9fa;
+        background-color: #ffffff;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
+    }
+
+    .button-section button {
+        flex: 1 1 50px;
+        /* Các nút sẽ chiếm ít nhất 150px, nhưng có thể linh hoạt */
+        white-space: nowrap;
+        /* Đảm bảo chữ không bị ngắt dòng */
+    }
+
+    /*3 ảnh*/
+    /* Điều chỉnh chiều cao của các ô */
+    .table-responsive .banner-cell {
+        height: 400px;
+        /* Điều chỉnh chiều cao của ảnh banner */
+    }
+
+    .table-responsive .book-cell {
+        height: 200px;
+        /* Điều chỉnh chiều cao của ảnh sách */
+    }
+
+    /* Ảnh banner sẽ không bị cắt, giữ nguyên tỷ lệ */
+    .table-responsive .banner-cell img {
+        object-fit: contain;
+        /* Giữ nguyên tỷ lệ ảnh, không cắt */
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Ảnh sách tự động cắt phần thừa */
+    .table-responsive .book-cell img {
+        object-fit: cover;
+        /* Cắt ảnh để chiếm toàn bộ không gian của ô */
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Cột Banner */
+    .banner-cell {
+        width: 75%;
+        /* Điều chỉnh chiều rộng của cột banner */
+    }
+
+    /* Cột sách */
+    .book-cell {
+        width: 25%;
+        /* Điều chỉnh chiều rộng của cột sách */
+    }
+
+    /* Media Queries - khi màn hình nhỏ lại */
+    @media (max-width: 1300px) {
+        .table-responsive .banner-cell {
+            height: 300px;
+            /* Giảm chiều cao của ảnh banner */
+        }
+
+        .table-responsive .book-cell {
+            height: 150px;
+            /* Giảm chiều cao của ảnh sách */
+        }
+
+        /* Khi màn hình nhỏ, ảnh sẽ tự động thu nhỏ và không bị cắt */
+        .table-responsive .banner-cell img,
+        .table-responsive .book-cell img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .table-responsive .banner-cell {
+            height: 200px;
+            /* Giảm chiều cao của ảnh banner */
+        }
+
+        .table-responsive .book-cell {
+            height: 120px;
+            /* Giảm chiều cao của ảnh sách */
+        }
+
+        /* Điều chỉnh ảnh khi màn hình nhỏ hơn 768px */
+        .table-responsive .banner-cell img,
+        .table-responsive .book-cell img {
+            width: 100%;
+            height: auto;
+            /* Giữ nguyên tỷ lệ ảnh, không bị méo */
+        }
+    }
+
+    .category-menu {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .category-menu .d-block {
+        margin-bottom: 0.5rem;
     }
 
     .category-header {
@@ -61,16 +160,6 @@ include './../Components/Header_ChuaDangNhap.php';
         background-color: #e2e6ea;
     }
 
-    /* Button Section */
-    .button-section {
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        background-color: #ffffff;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-    }
-
     .button-section .btn {
         width: 150px;
         font-size: 16px;
@@ -82,46 +171,7 @@ include './../Components/Header_ChuaDangNhap.php';
     }
 
     .button-section .btn:hover {
-        background-color: #a02a21;
-    }
-
-    /* Main Banner Section */
-    .image-section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    .image-section img {
-        border-radius: 50%;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
-    }
-
-    .image-section img:hover {
-        transform: scale(1.05);
-    }
-
-    .main-logo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        color: #ff5722;
-        font-family: 'Georgia', serif;
-    }
-
-    .main-logo h1 {
-        font-size: 32px;
-        margin: 0;
-    }
-
-    .main-logo p {
-        font-size: 14px;
-        color: #666;
-        margin: 0;
+        background-color: #e2e6ea;
     }
 
     /* Title Above Card Group */
@@ -161,7 +211,13 @@ include './../Components/Header_ChuaDangNhap.php';
     }
 
     /* Link style for 'Xem thêm' */
-    .card-group-link {
+    .card-group-link-1,
+    .card-group-link-2,
+    .card-group-link-3,
+    .card-group-link-4,
+    .card-group-link-5,
+    .card-group-link-6,
+    .card-group-link-blog {
         font-size: 0.9rem;
         color: #C53327;
         /* Color for the link */
@@ -187,20 +243,63 @@ include './../Components/Header_ChuaDangNhap.php';
                             <i class="bi bi-list"></i> Danh mục sản phẩm
                         </h5>
                     </div>
-                    <a href="#" class="d-block py-1">VĂN HỌC</a>
-                    <a href="#" class="d-block py-1">SÁCH THIẾU NHI</a>
-                    <a href="#" class="d-block py-1">PHÁT TRIỂN BẢN THÂN</a>
-                    <a href="#" class="d-block py-1">SÁCH GIÁO DỤC</a>
-                    <a href="#" class="d-block py-1">KINH DOANH</a>
-                    <a href="#" class="d-block py-1">NGOẠI NGỮ</a>
+                    <a href="#VanHoc" class="d-block py-1">VĂN HỌC</a>
+                    <a href="#SachThieuNhi" class="d-block py-1">SÁCH THIẾU NHI</a>
+                    <a href="#PhatTrienBanThan" class="d-block py-1">PHÁT TRIỂN BẢN THÂN</a>
+                    <a href="#SachGiaoDuc" class="d-block py-1">SÁCH GIÁO DỤC</a>
+                    <a href="#KinhDoanh" class="d-block py-1">KINH DOANH</a>
+                    <a href="#NgoaiNgu" class="d-block py-1">NGOẠI NGỮ</a>
                 </aside>
+
+                <!-- Main Content -->
+                <main class="col-md-9 col-lg-9">
+                    <!-- Button Section with Border -->
+                    <div class="button-section border rounded d-flex justify-content-start my-4 p-3">
+                        <button class="btn me-3" data-target="DonHang">Đơn hàng</button>
+                        <button class="btn me-3" data-target="Voucher">Voucher</button>
+                        <button class="btn me-3" data-target="Review">Review</button>
+                        <button class="btn" data-target="Blog">Blog</button>
+                    </div>
+
+
+                    <!-- Image Section -->
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <!-- Column 1 (Banner Image) - Cột 1 chiếm 2 dòng -->
+                                    <td rowspan="2" class="banner-cell">
+                                        <img src="../../../public/assets/images/Banner.png" alt="Banner Image"
+                                            class="img-fluid rounded w-100">
+                                    </td>
+
+                                    <!-- Column 2, Row 1 (Book 1) -->
+                                    <td class="book-cell">
+                                        <img src="../../../public/assets/images/sach1.jpg" alt="Book 1"
+                                            class="img-fluid rounded w-100">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- Column 2, Row 2 (Book 2) -->
+                                    <td class="book-cell">
+                                        <img src="../../../public/assets/images/Sach2.jpg" alt="Book 2"
+                                            class="img-fluid rounded w-100">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </main>
+
+
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="VanHoc" class="card-group-title">
                 <span class="card-group-title-main" data-category="VanHoc">Văn học</span>
                 <span class="card-group-subtitle">Tiểu thuyết | Trinh thám | Truyện ngắn | Giả tưởng | Kinh dị | Thơ
                     ca</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-1">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -224,15 +323,15 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="SachThieuNhi" class="card-group-title">
                 <span class="card-group-title-main" data-category="SachThieuNhi">Sách thiếu nhi</span>
                 <span class="card-group-subtitle">Tô màu | Kiến thức bách khoa | Truyện tranh</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-2">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -256,15 +355,15 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="PhatTrienBanThan" class="card-group-title">
                 <span class="card-group-title-main" data-category="PhatTrienBanThan">Phát triển bản thân</span>
                 <span class="card-group-subtitle">Kỹ năng mềm | Tư duy | Quản lý thời gian | Thiền & Sống khỏe</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-3">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -288,15 +387,15 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="SachGiaoDuc" class="card-group-title">
                 <span class="card-group-title-main" data-category="SachGiaoDuc">Sách giáo dục</span>
                 <span class="card-group-subtitle">Sách giáo khoa | Sách tham khảo | Sách luyện thi | Luyện chữ</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-4">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -320,15 +419,15 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="KinhDoanh" class="card-group-title">
                 <span class="card-group-title-main" data-category="KinhDoanh">Kinh doanh</span>
                 <span class="card-group-subtitle">Quản trị | Marketing | Khởi nghiệp | Đầu tư</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-5">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -352,15 +451,15 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
-            <h4 class="card-group-title">
+            <h4 id="NgoaiNgu" class="card-group-title">
                 <span class="card-group-title-main" data-category="NgoaiNgu">Ngoại ngữ</span>
                 <span class="card-group-subtitle">Tiếng Anh | Tiếng Nhật | Tiếng Hàn | Tiếng Trung</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-6">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -384,14 +483,14 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
 
             <h4 class="card-group-title">
                 <span class="card-group-title-main" data-category="Blog">Blog</span>
-                <a href="#" class="card-group-link">Xem thêm ></a>
+                <a href="#" class="card-group-link-blog">Xem thêm ></a>
             </h4>
 
             <!-- Product Cards -->
@@ -409,7 +508,7 @@ include './../Components/Header_ChuaDangNhap.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/BlogCard.php'; // Gọi file chứa card sản phẩm
+        include '../Components/BlogCard.blade.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -419,39 +518,62 @@ include './../Components/Header_ChuaDangNhap.php';
 
     <?php
     // Include the Footer.php file
-    include './../Components/Footer.php';
+    include './../Components/Footer.blade.php';
     ?>
 
     <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const viewMoreLinks = document.querySelectorAll('.card-group-link');
-        console.log(viewMoreLinks); // Kiểm tra xem các liên kết đã được chọn chưa
+        // Chọn tất cả các liên kết có class 'card-group-link-1', 'card-group-link-2', ..., 'card-group-link-6' và 'card-group-link-blog'
+        const viewMoreLinks = document.querySelectorAll(
+            '.card-group-link-1, .card-group-link-2, .card-group-link-3, .card-group-link-4, .card-group-link-5, .card-group-link-6, .card-group-link-blog'
+        );
 
+        // Lặp qua tất cả các liên kết và gắn sự kiện click cho mỗi liên kết
         viewMoreLinks.forEach(link => {
             link.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
+                event.preventDefault(); // Ngừng hành vi mặc định của liên kết
 
-                // Kiểm tra xem phần tử trước liên kết có tồn tại không
-                const titleElement = this.previousElementSibling.querySelector(
+                // Lấy phần tử tiêu đề chứa class 'card-group-title-main'
+                const titleElement = this.closest('.card-group-title').querySelector(
                     '.card-group-title-main');
-                console.log(titleElement); // Kiểm tra phần tử .card-group-title-main
 
                 if (titleElement) {
+                    // Lấy giá trị category từ thuộc tính dataset
                     const category = titleElement.dataset.category;
-
-                    // Kiểm tra dữ liệu category có hợp lệ không
                     console.log("Category: ", category);
 
-                    // Tạo URL động
-                    const targetUrl = `${category.replace(/\s+/g, '')}_danhmuc.php`;
-                    console.log("Redirecting to: ", targetUrl); // Kiểm tra URL
-
-                    // Chuyển hướng đến trang mục tương ứng
-                    window.location.href = targetUrl;
+                    // Gọi hàm chuyển hướng đến trang tương ứng
+                    navigateToPage(category);
                 } else {
-                    console.error("Không tìm thấy phần tử 'card-group-title-main'");
+                    console.error("Không tìm thấy phần tử 'card-group-title-main'.");
                 }
             });
+        });
+    });
+
+    // Hàm chuyển hướng đến trang danh mục
+    function navigateToPage(category) {
+        if (category) {
+            const targetUrl = `${category}_DanhMuc.blade.php`; // Tạo URL động
+            window.location.href = targetUrl; // Chuyển hướng đến trang category_DanhMuc.blade.php
+        } else {
+            console.error("Category không hợp lệ.");
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    document.querySelectorAll('.button-section .btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetPage = this.getAttribute('data-target');
+            window.location.href = targetPage + ".blade.php";
         });
     });
     </script>

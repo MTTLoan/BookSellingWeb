@@ -1,6 +1,6 @@
 <?php
 // Include the Header.php file
-include './../Components/Header_ChuaDangNhap.php';
+include './../Components/Header_ChuaDangNhap.blade.php';
 ?>
 
 
@@ -153,7 +153,7 @@ include './../Components/Header_ChuaDangNhap.php';
 
     <?php
     // Include the Footer.php file
-    include './../Components/Footer.php';
+    include './../Components/Footer.blade.php';
     ?>
 
     <!-- Internal JavaScript -->
@@ -177,7 +177,7 @@ include './../Components/Header_ChuaDangNhap.php';
         // Định nghĩa hàm redirectToLogin
         window.redirectToLogin = function() {
             // Chuyển hướng đến trang Đăng nhập
-            window.location.href = 'DangNhap.html'; // Đảm bảo đường dẫn chính xác
+            window.location.href = 'DangNhap.blade.php'; // Đảm bảo đường dẫn chính xác
         };
     });
     </script>

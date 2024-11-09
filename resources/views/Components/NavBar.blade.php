@@ -222,43 +222,43 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('productCategoryButton').addEventListener('click', function() {
-            window.location.href = 'DanhMucSP.html'; // Replace with actual HTML file
+            window.location.href = 'DanhMucSP.blade.php'; // Replace with actual HTML file
         });
 
         document.getElementById('promotionButton').addEventListener('click', function() {
-            window.location.href = 'KhuyenMai.html'; // Replace with actual HTML file
+            window.location.href = 'KhuyenMai.blade.php'; // Replace with actual HTML file
         });
 
         document.getElementById('orderSlipButton').addEventListener('click', function() {
-            window.location.href = 'PhieuDatHang.html'; // Replace with actual HTML file
+            window.location.href = 'PhieuDatHang.blade.php'; // Replace with actual HTML file
         });
 
         document.getElementById('importButton').addEventListener('click', function() {
-            window.location.href = 'NhapHang.html'; // Replace with actual HTML file
+            window.location.href = 'NhapHang.blade.php';
         });
 
         document.getElementById('customerButton').addEventListener('click', function() {
-            window.location.href = 'KhachHang.html'; // Replace with actual HTML file
+            window.location.href = 'KhachHang.blade.php';
         });
 
         document.getElementById('supplierButton').addEventListener('click', function() {
-            window.location.href = 'NhaCungCap.html'; // Replace with actual HTML file
+            window.location.href = 'NhaCungCap.blade.php';
         });
 
         document.getElementById('employeeButton').addEventListener('click', function() {
-            window.location.href = 'NhanVien.html'; // Replace with actual HTML file
+            window.location.href = 'NhanVien.blade.php';
         });
 
         document.getElementById('salesReportButton').addEventListener('click', function() {
-            window.location.href = 'BaoCaoBanHang.html'; // Replace with actual HTML file
+            window.location.href = 'BaoCaoBanHang.blade.php';
         });
 
         document.getElementById('financialReportButton').addEventListener('click', function() {
-            window.location.href = 'BaoCaoTaiChinh.html'; // Replace with actual HTML file
+            window.location.href = 'BaoCaoTaiChinh.blade.php';
         });
 
         document.getElementById('salesButton').addEventListener('click', function() {
-            window.location.href = 'BanHang.html'; // Replace with actual HTML file
+            window.location.href = 'BanHang.blade.php';
         });
     });
     </script>

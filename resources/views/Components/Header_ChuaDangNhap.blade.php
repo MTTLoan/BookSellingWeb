@@ -147,19 +147,19 @@
 
         if (registerButton) {
             registerButton.addEventListener('click', function() {
-                window.location.href = 'DangKy.php';
+                window.location.href = 'DangKy.blade.php';
             });
         }
 
         if (loginButton) {
             loginButton.addEventListener('click', function() {
-                window.location.href = 'DangNhap.php';
+                window.location.href = 'DangNhap.blade.php';
             });
         }
 
         if (cartButton) {
             cartButton.addEventListener('click', function() {
-                window.location.href = 'GioHang.php';
+                window.location.href = 'GioHang.blade.php';
             });
         }
     });

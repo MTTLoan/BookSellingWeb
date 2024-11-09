@@ -173,7 +173,7 @@
 
     <script>
     function navigateToPage(page) {
-        window.location.href = page + ".php";
+        window.location.href = page + ".blade.php";
     }
     </script>
 </body>
