@@ -388,6 +388,31 @@ include './../Components/Header_ChuaDangNhap.php';
     }
                 ?>
             </div>
+
+            <h4 class="card-group-title">
+                <span class="card-group-title-main" data-category="Blog">Blog</span>
+                <a href="#" class="card-group-link">Xem thêm ></a>
+            </h4>
+
+            <!-- Product Cards -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <?php
+    // Dữ liệu sản phẩm (có thể lấy từ CSDL hoặc API)
+    $products = [
+        ['image' => '../../../public/assets/images/review.png', 'name' => 'Cây cam ngọt của tôi'],
+        ['image' => '../../../public/assets/images/review.png', 'name' => 'Cây cam ngọt của tôi'],
+        ['image' => '../../../public/assets/images/review.png', 'name' => 'Cây cam ngọt của tôi'],
+        ['image' => '../../../public/assets/images/review.png', 'name' => 'Cây cam ngọt của tôi'],
+        // Thêm nhiều sản phẩm ở đây
+        // ['image' => 'path-to-image', 'price' => 'price', 'name' => 'product name', 'sold' => sold_count],
+    ];
+
+    // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
+    foreach ($products as $product) {
+        include '../Components/BlogCard.php'; // Gọi file chứa card sản phẩm
+    }
+                ?>
+            </div>
         </div>
         </div>
     </main>
@@ -398,26 +423,39 @@ include './../Components/Header_ChuaDangNhap.php';
     ?>
 
     <script>
-    const viewMoreLinks = document.querySelectorAll('.card-group-link');
+    document.addEventListener("DOMContentLoaded", function() {
+        const viewMoreLinks = document.querySelectorAll('.card-group-link');
+        console.log(viewMoreLinks); // Kiểm tra xem các liên kết đã được chọn chưa
 
-    // Add click event to each link
-    viewMoreLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default link behavior
+        viewMoreLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
 
-            // Get the category from the title
-            const category = this.previousElementSibling.querySelector('.card-group-title-main').dataset
-                .category;
+                // Kiểm tra xem phần tử trước liên kết có tồn tại không
+                const titleElement = this.previousElementSibling.querySelector(
+                    '.card-group-title-main');
+                console.log(titleElement); // Kiểm tra phần tử .card-group-title-main
 
-            // Construct the URL dynamically based on the category
-            const targetUrl =
-                `${category.replace(/\s+/g, '')}_danhmuc.php`; // Convert space to remove for filename
+                if (titleElement) {
+                    const category = titleElement.dataset.category;
 
-            // Redirect to the corresponding PHP page
-            window.location.href = targetUrl;
+                    // Kiểm tra dữ liệu category có hợp lệ không
+                    console.log("Category: ", category);
+
+                    // Tạo URL động
+                    const targetUrl = `${category.replace(/\s+/g, '')}_danhmuc.php`;
+                    console.log("Redirecting to: ", targetUrl); // Kiểm tra URL
+
+                    // Chuyển hướng đến trang mục tương ứng
+                    window.location.href = targetUrl;
+                } else {
+                    console.error("Không tìm thấy phần tử 'card-group-title-main'");
+                }
+            });
         });
     });
     </script>
+
 </body>
 
 </html>
