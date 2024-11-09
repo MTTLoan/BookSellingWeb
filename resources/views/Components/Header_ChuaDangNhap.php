@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <style>
-    /* Thêm một lớp cha để tăng độ cụ thể */
     .header .navbar {
         border-bottom: 1px solid #ddd;
         display: flex;

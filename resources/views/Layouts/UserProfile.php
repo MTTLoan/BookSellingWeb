@@ -15,7 +15,7 @@ include './../Components/Header_DaDangNhap.php';
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
-    <title>Đăng Ký</title>
+    <title>Thông tin cá nhân</title>
     <style>
     /* Inline CSS */
     body {
