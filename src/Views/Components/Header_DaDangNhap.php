@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <style>
-    /* Thêm một lớp cha để tăng độ cụ thể */
     .header .navbar {
         border-bottom: 1px solid #ddd;
         display: flex;
@@ -89,6 +88,13 @@
         margin-right: 60px;
     }
 
+    .header .user-icon {
+        font-size: 1.5rem;
+        color: black;
+        border: none;
+        margin-right: 10px;
+    }
+
     @media (max-width: 576px) {
         .header .navbar {
             flex-wrap: wrap;
@@ -129,32 +135,35 @@
             width: 100%;
         }
 
-        .header .cart-icon {
-            font-size: 1.2rem;
-            margin-left: 0px;
-        }
-
         .header .navbar-nav {
             margin-top: 5px;
             align-items: center;
+        }
+
+        .header .cart-icon {
+            font-size: 1.5rem;
+            color: black;
+            border: none;
+            margin-right: 60px;
+        }
+
+        .header .user-icon {
+            font-size: 1.5rem;
+            color: black;
+            border: none;
+            margin-right: 10px;
         }
     }
     </style>
     <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        const registerButton = document.getElementById('registerButton');
-        const loginButton = document.getElementById('loginButton');
+        const userButton = document.getElementById('userButton');
         const cartButton = document.getElementById('cartButton');
 
-        if (registerButton) {
-            registerButton.addEventListener('click', function() {
-                window.location.href = 'DangKy.php';
-            });
-        }
-
-        if (loginButton) {
-            loginButton.addEventListener('click', function() {
-                window.location.href = 'DangNhap.php';
+        if (userButton) {
+            userButton.addEventListener('click', function() {
+                window.location.href =
+                    'UserProfile.php'; // Change this to the appropriate page for user profile or authentication
             });
         }
 
@@ -176,7 +185,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="./../../../public/images/Favicon.png" alt="" width="40" height="40">
+                    <img src="./../../../../public/images/Favicon.png" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
                 <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
@@ -188,11 +197,11 @@
                 </form>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                     <ul class="navbar-nav">
+                        <!-- Replaced Register and Login buttons with a User Icon button -->
                         <li class="nav-item">
-                            <button class="nav-link register-link" id="registerButton">ĐĂNG KÝ</button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="nav-link login-link" id="loginButton">ĐĂNG NHẬP</button>
+                            <button class="nav-link user-icon" id="userButton">
+                                <i class="bi bi-person-fill"></i>
+                            </button>
                         </li>
                         <li class="nav-item">
                             <button class="nav-link cart-icon" id="cartButton">

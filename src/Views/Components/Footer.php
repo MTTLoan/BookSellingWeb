@@ -104,8 +104,8 @@
             <!-- Column 1: Logo -->
             <div class="row">
                 <div class="col-md-3 footer-column" id="col1">
-                    <img src="./../../../public/images/Logo.png" alt="Logo" class="footer-logo">
-                    <img src="./../../../public/images/bct 1.png" alt="Xác nhận" class="footer-check">
+                    <img src="./../../../../public/images/Logo.png" alt="Logo" class="footer-logo">
+                    <img src="./../../../../public/images/bct 1.png" alt="Xác nhận" class="footer-check">
                 </div>
 
                 <!-- Column 2: Chính sách -->

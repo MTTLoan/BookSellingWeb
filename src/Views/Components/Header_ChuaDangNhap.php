@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <style>
+    /* Thêm một lớp cha để tăng độ cụ thể */
     .header .navbar {
         border-bottom: 1px solid #ddd;
         display: flex;
@@ -81,11 +82,11 @@
         margin: 0 5px;
     }
 
-    .header .icon-button {
-        background: none;
-        border: none;
+    .header .cart-icon {
         font-size: 1.5rem;
         color: black;
+        border: none;
+        margin-right: 60px;
     }
 
     @media (max-width: 576px) {
@@ -128,53 +129,38 @@
             width: 100%;
         }
 
+        .header .cart-icon {
+            font-size: 1.2rem;
+            margin-left: 0px;
+        }
+
         .header .navbar-nav {
             margin-top: 5px;
             align-items: center;
-        }
-
-        /* Adjust label and span for smaller size */
-        .header .branch-label,
-        .header .account-name {
-            font-size: 0.8rem;
-            /* Smaller font size */
-        }
-
-        /* Optional: Adjust the icon button size if needed */
-        .header .icon-button {
-            font-size: 1.2rem;
-            /* Adjust icon size */
         }
     }
     </style>
     <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        const branchButton = document.getElementById('branchButton');
-        const emailButton = document.getElementById('emailButton');
-        const settingsButton = document.getElementById('settingsButton');
-        const accountButton = document.getElementById('accountButton');
+        const registerButton = document.getElementById('registerButton');
+        const loginButton = document.getElementById('loginButton');
+        const cartButton = document.getElementById('cartButton');
 
-        if (branchButton) {
-            branchButton.addEventListener('click', function() {
-                window.location.href = 'ChiNhanh.php';
+        if (registerButton) {
+            registerButton.addEventListener('click', function() {
+                window.location.href = 'DangKy.php';
             });
         }
 
-        if (emailButton) {
-            emailButton.addEventListener('click', function() {
-                window.location.href = 'Email.php';
+        if (loginButton) {
+            loginButton.addEventListener('click', function() {
+                window.location.href = 'DangNhap.php';
             });
         }
 
-        if (settingsButton) {
-            settingsButton.addEventListener('click', function() {
-                window.location.href = 'Settings.php';
-            });
-        }
-
-        if (accountButton) {
-            accountButton.addEventListener('click', function() {
-                window.location.href = 'Account.php';
+        if (cartButton) {
+            cartButton.addEventListener('click', function() {
+                window.location.href = 'GioHang.php';
             });
         }
     });
@@ -190,7 +176,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="./../../../public/images/Favicon.png" alt="" width="40" height="40">
+                    <img src="./../../../../public/images/Favicon.png" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
                 <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
@@ -201,30 +187,16 @@
                     </button>
                 </form>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
-                    <ul class="navbar-nav d-flex align-items-center">
-                        <li class="nav-item me-3 d-flex align-items-center">
-                            <span class="branch-label me-1">Chi nhánh trung tâm:</span>
-                            <button class="nav-link icon-button" id="branchButton">
-                                <i class="bi bi-geo-alt"></i>
-                            </button>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button class="nav-link register-link" id="registerButton">ĐĂNG KÝ</button>
                         </li>
-
-                        <li class="nav-item me-3">
-                            <button class="nav-link icon-button" id="emailButton">
-                                <i class="bi bi-envelope"></i>
-                            </button>
+                        <li class="nav-item">
+                            <button class="nav-link login-link" id="loginButton">ĐĂNG NHẬP</button>
                         </li>
-
-                        <li class="nav-item me-3">
-                            <button class="nav-link icon-button" id="settingsButton">
-                                <i class="bi bi-gear"></i>
-                            </button>
-                        </li>
-
-                        <li class="nav-item d-flex align-items-center">
-                            <span class="account-name me-1">Tài khoản</span>
-                            <button class="nav-link icon-button" id="accountButton">
-                                <i class="bi bi-person-circle"></i>
+                        <li class="nav-item">
+                            <button class="nav-link cart-icon" id="cartButton">
+                                <i class="bi bi-bag-heart-fill"></i>
                             </button>
                         </li>
                     </ul>

@@ -81,18 +81,11 @@
         margin: 0 5px;
     }
 
-    .header .cart-icon {
+    .header .icon-button {
+        background: none;
+        border: none;
         font-size: 1.5rem;
         color: black;
-        border: none;
-        margin-right: 60px;
-    }
-
-    .header .user-icon {
-        font-size: 1.5rem;
-        color: black;
-        border: none;
-        margin-right: 10px;
     }
 
     @media (max-width: 576px) {
@@ -140,36 +133,48 @@
             align-items: center;
         }
 
-        .header .cart-icon {
-            font-size: 1.5rem;
-            color: black;
-            border: none;
-            margin-right: 60px;
+        /* Adjust label and span for smaller size */
+        .header .branch-label,
+        .header .account-name {
+            font-size: 0.8rem;
+            /* Smaller font size */
         }
 
-        .header .user-icon {
-            font-size: 1.5rem;
-            color: black;
-            border: none;
-            margin-right: 10px;
+        /* Optional: Adjust the icon button size if needed */
+        .header .icon-button {
+            font-size: 1.2rem;
+            /* Adjust icon size */
         }
     }
     </style>
     <script defer>
     document.addEventListener('DOMContentLoaded', function() {
-        const userButton = document.getElementById('userButton');
-        const cartButton = document.getElementById('cartButton');
+        const branchButton = document.getElementById('branchButton');
+        const emailButton = document.getElementById('emailButton');
+        const settingsButton = document.getElementById('settingsButton');
+        const accountButton = document.getElementById('accountButton');
 
-        if (userButton) {
-            userButton.addEventListener('click', function() {
-                window.location.href =
-                    'UserProfile.php'; // Change this to the appropriate page for user profile or authentication
+        if (branchButton) {
+            branchButton.addEventListener('click', function() {
+                window.location.href = 'ChiNhanh.php';
             });
         }
 
-        if (cartButton) {
-            cartButton.addEventListener('click', function() {
-                window.location.href = 'GioHang.php';
+        if (emailButton) {
+            emailButton.addEventListener('click', function() {
+                window.location.href = 'Email.php';
+            });
+        }
+
+        if (settingsButton) {
+            settingsButton.addEventListener('click', function() {
+                window.location.href = 'Settings.php';
+            });
+        }
+
+        if (accountButton) {
+            accountButton.addEventListener('click', function() {
+                window.location.href = 'Account.php';
             });
         }
     });
@@ -185,7 +190,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="./../../../public/images/Favicon.png" alt="" width="40" height="40">
+                    <img src="./../../../../public/images/Favicon.png" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
                 <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
@@ -196,16 +201,30 @@
                     </button>
                 </form>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
-                    <ul class="navbar-nav">
-                        <!-- Replaced Register and Login buttons with a User Icon button -->
-                        <li class="nav-item">
-                            <button class="nav-link user-icon" id="userButton">
-                                <i class="bi bi-person-fill"></i>
+                    <ul class="navbar-nav d-flex align-items-center">
+                        <li class="nav-item me-3 d-flex align-items-center">
+                            <span class="branch-label me-1">Chi nhánh trung tâm:</span>
+                            <button class="nav-link icon-button" id="branchButton">
+                                <i class="bi bi-geo-alt"></i>
                             </button>
                         </li>
-                        <li class="nav-item">
-                            <button class="nav-link cart-icon" id="cartButton">
-                                <i class="bi bi-bag-heart-fill"></i>
+
+                        <li class="nav-item me-3">
+                            <button class="nav-link icon-button" id="emailButton">
+                                <i class="bi bi-envelope"></i>
+                            </button>
+                        </li>
+
+                        <li class="nav-item me-3">
+                            <button class="nav-link icon-button" id="settingsButton">
+                                <i class="bi bi-gear"></i>
+                            </button>
+                        </li>
+
+                        <li class="nav-item d-flex align-items-center">
+                            <span class="account-name me-1">Tài khoản</span>
+                            <button class="nav-link icon-button" id="accountButton">
+                                <i class="bi bi-person-circle"></i>
                             </button>
                         </li>
                     </ul>
