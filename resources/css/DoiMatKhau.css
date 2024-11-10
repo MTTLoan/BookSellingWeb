@@ -1,0 +1,47 @@
+body {
+    margin: 20px 0 20px 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f7f7;
+    font-size: 16px;
+}
+form {
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+}
+.form-label {
+    width: 210px !important;
+}
+input {
+    height: 48px;
+}
+.btn_cancel {
+    background-color: ffffff;
+    border: 1px solid #c53327;
+    color: #c53327;
+}
+.btn_cancel:hover {
+    background-color: #e6e6e6;
+    border: 1px solid #c53327;
+    color: #c53327;
+}
+.btn_save {
+    background-color: #c53327;
+    color: white;
+}
+.btn_save:hover {
+    background-color: #9e291f;
+    color: white;
+}
+.btn {
+    min-width: 145px !important;
+}
+.btn_close {
+    background-color: #00b63e;
+    color: white;
+}
+.btn_close:hover {
+    background-color: #009232;
+    color: white;
+}
