@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Lắng nghe sự kiện nhấn nút
   document.getElementById("btnAdd").addEventListener("click", function () {
-    window.location.href = "ThemSP.html";
+    window.location.href = "/quan-ly-san-pham/them-san-pham";
   });
   document.getElementById("btnPreview").addEventListener("click", function () {
     window.location.href = "XemSP.html";
