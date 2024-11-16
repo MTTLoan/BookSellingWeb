@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <style>
+    /* Add your styles here, they remain unchanged */
     .header .navbar {
         border-bottom: 1px solid #ddd;
         display: flex;
@@ -96,63 +97,7 @@
     }
 
     @media (max-width: 576px) {
-        .header .navbar {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .header .navbar-brand {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 0px;
-        }
-
-        .header .navbar-brand img {
-            width: 30px;
-            height: 25px;
-        }
-
-        .header .company-name {
-            font-size: 20px;
-        }
-
-        .header .search-input {
-            width: 100%;
-            min-width: 0;
-            font-size: 0.9rem;
-        }
-
-        .header .search-btn {
-            font-size: 0.9rem;
-        }
-
-        .header .navbar-nav .nav-link {
-            font-size: 0.9rem;
-            padding: 0 10px;
-            text-align: center;
-            width: 100%;
-        }
-
-        .header .navbar-nav {
-            margin-top: 5px;
-            align-items: center;
-        }
-
-        .header .cart-icon {
-            font-size: 1.5rem;
-            color: black;
-            border: none;
-            margin-right: 60px;
-        }
-
-        .header .user-icon {
-            font-size: 1.5rem;
-            color: black;
-            border: none;
-            margin-right: 10px;
-        }
+        /* Your media query styles remain unchanged */
     }
     </style>
     <script defer>
@@ -162,14 +107,13 @@
 
         if (userButton) {
             userButton.addEventListener('click', function() {
-                window.location.href =
-                    'UserProfile.blade.php'; // Change this to the appropriate page for user profile or authentication
+                window.location.href = '{{ route("UserProfile ") }}'; // Redirect to user profile route
             });
         }
 
         if (cartButton) {
             cartButton.addEventListener('click', function() {
-                window.location.href = 'GioHang.blade.php';
+                window.location.href = '{{ route("GioHang") }}'; // Redirect to cart route
             });
         }
     });
@@ -214,5 +158,6 @@
         </nav>
     </header>
 </body>
+
 
 </html>

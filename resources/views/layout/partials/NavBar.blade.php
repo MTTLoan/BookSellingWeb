@@ -222,43 +222,43 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('productCategoryButton').addEventListener('click', function() {
-            window.location.href = 'DanhMucSP.blade.php'; // Replace with actual HTML file
+            window.location.href = '{{ route("DanhMucSP") }}';
         });
 
         document.getElementById('promotionButton').addEventListener('click', function() {
-            window.location.href = 'KhuyenMai.blade.php'; // Replace with actual HTML file
+            window.location.href = '{{ route ("KhuyenMai")}}';
         });
 
         document.getElementById('orderSlipButton').addEventListener('click', function() {
-            window.location.href = 'PhieuDatHang.blade.php'; // Replace with actual HTML file
+            window.location.href = '{{ route ("PhieuDatHang")}}';
         });
 
         document.getElementById('importButton').addEventListener('click', function() {
-            window.location.href = 'NhapHang.blade.php';
+            window.location.href = '{{ route ("NhapHang")}}';
         });
 
         document.getElementById('customerButton').addEventListener('click', function() {
-            window.location.href = 'KhachHang.blade.php';
+            window.location.href = '{{ route ("KhachHang")}}';
         });
 
         document.getElementById('supplierButton').addEventListener('click', function() {
-            window.location.href = 'NhaCungCap.blade.php';
+            window.location.href = '{{ route ("NCC")}}';
         });
 
         document.getElementById('employeeButton').addEventListener('click', function() {
-            window.location.href = 'NhanVien.blade.php';
+            window.location.href = '{{ route ("NhanVien")}}';
         });
 
         document.getElementById('salesReportButton').addEventListener('click', function() {
-            window.location.href = 'BaoCaoBanHang.blade.php';
+            window.location.href = '{{ route ("BaoCaoBanHang")}}';
         });
 
         document.getElementById('financialReportButton').addEventListener('click', function() {
-            window.location.href = 'BaoCaoTaiChinh.blade.php';
+            window.location.href = '{{ route ("BaoCaoTaiChinh")}}';
         });
 
         document.getElementById('salesButton').addEventListener('click', function() {
-            window.location.href = 'BanHang.blade.php';
+            window.location.href = '{{ route ("BanHang")}}';
         });
     });
     </script>
