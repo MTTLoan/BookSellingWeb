@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Book;
+use App\Models\GoodsReceipt;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('goods_receipt_details', function(Blueprint $table) {
             $table->id();
-            //Khoá ngoại GoodsReceipt
-            //Khoá ngoại Book
-            $table->integer('sl');
-            $table->integer('SoTien');   
-            $table->primary(['MaPN', 'MaS']);      
+            $table->foreignIdFor(GoodsReceipt::class);
+            $table->foreignIdFor(Book::class);
+            $table->integer('quantity');
+            $table->integer('price');   
+            $table->timestamps();
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employee;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +15,12 @@ return new class extends Migration
         Schema::create('branches', function(Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('address', 100);
-            $table->string('ward', 100);
-            $table->string('district', 100);
-            $table->string('province', 100);
-            // $table->foreignIdFor(Employee::class);
+            $table->string('address', 100)->nullable();
+            $table->string('ward', 100)->nullable();
+            $table->string('district', 100)->nullable();
+            $table->string('province', 100)->nullable();
+            $table->foreignIdFor(Employee::class, 'manager_id');
+            $table->timestamps();
         });
     }
 

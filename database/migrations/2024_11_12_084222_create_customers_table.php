@@ -15,15 +15,16 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->date('birthday');
-            $table->string('address', 100);
-            $table->string('ward', 100);
-            $table->string('district', 100);
-            $table->string('province', 100);
+            $table->date('birthday')->nullable();
+            $table->string('address', 100)->nullable();
+            $table->string('ward', 100)->nullable();
+            $table->string('district', 100)->nullable();
+            $table->string('province', 100)->nullable();
             $table->enum('sex', ['Nam', 'Nữ']);
             $table->string('phone_number', 11);
             $table->string('total_revenue')->default(0);
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->nullable();
+            $table->timestamps();
         });
     }
 

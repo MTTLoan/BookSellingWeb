@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Employee;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,11 +15,14 @@ return new class extends Migration
         Schema::create('discounts', function(Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->enum('type', ['Website', 'Shop']);
+            $table->enum('type', ['Website', 'Cửa hàng']);
             $table->date('start_date');
             $table->date('end_date');
             $table->integer('value');
             $table->integer('starting_price');
+            //Ai la ng tao ra khuyen mai nay
+            // $table->foreignIdFor(Employee::class, 'made_by');
+            $table->timestamps();
         });
     }
 

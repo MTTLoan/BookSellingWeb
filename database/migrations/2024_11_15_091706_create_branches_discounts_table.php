@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Branch;
+use App\Models\Discount;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('branches_discounts', function(Blueprint $table) {
             $table->id();
-            //Khoá ngoại Branch
-            //Khoá ngoại Discount
+            $table->foreignIdFor(Branch::class);
+            $table->foreignIdFor(Discount::class);
+            $table->timestamps();
         });
     }
 

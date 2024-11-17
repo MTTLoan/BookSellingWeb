@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Branch;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,18 +18,17 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->enum('sex', ['Nam', 'Nữ']);
-            $table->date('birthday');
-            $table->string('address', 100);
-            $table->string('ward', 100);
-            $table->string('district', 100);
-            $table->string('province', 100);
+            $table->date('birthday')->nullable();
+            $table->string('address', 100)->nullable();
+            $table->string('ward', 100)->nullable();
+            $table->string('district', 100)->nullable();
+            $table->string('province', 100)->nullable();
             $table->date('starting_date');
-            $table->integer('salary');
-            $table->enum('position', ['Director', 'Branch Manager', 'Staff', 'Admin']);
-            //Khoá ngoại Branch (chi nhánh)
-            // $table->foreignIdFor(Branch::class)
-            //Khoá ngoại User (tài khoản)
+            $table->integer('salary')->default(0);
+            $table->enum('position', ['Giám đốc', 'Trưởng chi nhánh', 'Nhân viên', 'Admin']);
+            $table->foreignIdFor(Branch::class);
             $table->foreignIdFor(User::class);
+            $table->timestamps();
         });
     }
 

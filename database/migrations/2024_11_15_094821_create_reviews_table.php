@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Book;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +19,10 @@ return new class extends Migration
             $table->integer('score');
             $table->string('description', 1000);
             //Khoá ngoại Order
+            $table->foreignIdFor(Order::class);
             //Khoá ngoại Book
+            $table->foreignIdFor(Book::class);
+            $table->timestamps();
         });
     }
 
