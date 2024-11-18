@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('province', 100)->nullable();
             $table->enum('sex', ['Nam', 'Nữ']);
             $table->string('phone_number', 11);
-            $table->string('total_revenue')->default(0);
+            $table->integer('total_revenue')->default(0);
             $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
         });
