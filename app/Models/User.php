@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function customer() {
+
+    }
+
+    public function employee() {
+        
+    }
 }

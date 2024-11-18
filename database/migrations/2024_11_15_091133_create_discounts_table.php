@@ -20,8 +20,6 @@ return new class extends Migration
             $table->date('end_date');
             $table->integer('value');
             $table->integer('starting_price');
-            //Ai la ng tao ra khuyen mai nay
-            // $table->foreignIdFor(Employee::class, 'made_by');
             $table->timestamps();
         });
     }
