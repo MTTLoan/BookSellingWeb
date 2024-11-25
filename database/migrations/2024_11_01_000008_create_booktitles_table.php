@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('name', 200);
             $table->string('author', 50);
             $table->string('description', 800);
-            //Khoá ngoại BookType (loại sách)
-            $table->foreignIdFor(BookType::class);
-            //Khoá ngoại Supplier (nhà cung cấp)
-            $table->foreignIdFor(Supplier::class);
+            $table->foreignIdFor(BookType::class, 'book_type_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignIdFor(Supplier::class, 'supplier_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

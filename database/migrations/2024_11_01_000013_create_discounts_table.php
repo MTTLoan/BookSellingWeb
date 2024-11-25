@@ -16,10 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->enum('type', ['Website', 'Cửa hàng']);
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->integer('value');
-            $table->integer('starting_price');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->integer('value')->default(10);
+            $table->integer('starting_price')->default(100000);
             $table->timestamps();
         });
     }

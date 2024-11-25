@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function(Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Customer::class);
-            $table->foreignIdFor(Book::class);
-            $table->integer('quantity');
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('book_id')->nullable();
+            $table->integer('quantity')->default(1);
             $table->timestamps();
+        
+            // Khai báo khóa ngoại
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
         });
     }
 

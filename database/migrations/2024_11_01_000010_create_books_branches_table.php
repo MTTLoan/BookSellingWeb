@@ -15,11 +15,9 @@ return new class extends Migration
     {
         Schema::create('books_branches', function(Blueprint $table) {
             $table->id();
-            //Khoá ngoại Book
-            $table->foreignIdFor(Book::class);
-            //Khoá ngoại Branch
-            $table->foreignIdFor(Branch::class);
-            $table->integer('quantity');
+            $table->foreignIdFor(Book::class, 'book_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Branch::class, 'branch_id')->constrained()->cascadeOnDelete();
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }
