@@ -32,3 +32,9 @@ document.getElementById("btnSave").addEventListener("click", function (e) {
         console.log("Vui lòng điền đầy đủ các trường bắt buộc.");
     }
 });
+
+
+// Click vào "Quên mật khẩu"
+document.getElementById("forgot").onclick = function() {
+    window.location.href = "/resources/views/QuenMatKhau_NhapEmail.html";
+};

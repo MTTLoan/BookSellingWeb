@@ -45,3 +45,12 @@ input {
     background-color: #009232;
     color: white;
 }
+#forgot {
+    cursor: pointer;
+}
+#forgot:hover {
+    color: #9e291f;
+}
+.modal-dialog{
+    max-width: 350px;
+  }

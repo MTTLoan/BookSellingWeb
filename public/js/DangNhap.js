@@ -10,3 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.history.back(); // Quay trở lại trang trước đó
   });
 });
+// Click vào "Quên mật khẩu"
+document.getElementById("forgot").onclick = function() {
+  window.location.href = "/resources/views/QuenMatKhau_NhapEmail.html";
+};

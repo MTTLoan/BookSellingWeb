@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Đăng nhập</title>
+        <title>Quên mật khẩu</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
@@ -29,11 +29,11 @@
             <div class="content p-4">
                 <form id="login">
                     <div class="title fw-bold text-center mb-4">
-                        <h2>ĐĂNG NHẬP</h2>
+                        <h2>ĐẶT LẠI MẬT KHẨU</h2>
                     </div>
                     <div class="mb-3">
                         <label for="account_name" class="form-label"
-                            >Tên tài khoản</label
+                            >Email</label
                         >
                         <i class="text-danger">(*)</i>
                         <input
@@ -41,26 +41,9 @@
                             class="form-control"
                             name="account_name"
                             id="account_name"
-                            placeholder="Nhập vào tên tài khoản..."
+                            placeholder="Nhập vào email đã đăng ký..."
                             required
                         />
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label"
-                            >Mật khẩu</label
-                        >
-                        <i class="text-danger">(*)</i>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="password"
-                            id="password"
-                            placeholder="Nhập vào mật khẩu..."
-                            required
-                        />
-                    </div>
-                    <div class="d-flex justify-content-start text-danger">
-                        <span id="forgot">Bạn quên mật khẩu ư?</span>
                     </div>
                     <div
                         class="group_btn d-flex justify-content-center mt-4 p-2"
@@ -74,15 +57,60 @@
                         </button>
                         <button
                             type="button"
-                            class="btn btn_login"
-                            id="btnLogin"
+                            class="btn btn_save"
+                            id="btnSave"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modal_ResetPassWord"
                         >
-                            Đăng nhập
+                            Gửi email
                         </button>
                     </div>
                 </form>
             </div>
         </div>
-        <script src="/public/js/DangNhap.js"></script>
+        <!-- The Modal -->
+        <div class="modal fade" id="modal_ResetPassWord" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Đặt lại mật khẩu</h4>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                        ></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body text-center">
+                        Liên kết đã được gửi, vui lòng kiểm tra email để đặt lại
+                        mật khẩu.
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button
+                            type="button"
+                            class="btn btn_close"
+                            id="btnClose"
+                            data-bs-dismiss="modal"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lắng nghe sự kiện nhấn nút
+            document
+                .getElementById("btnCancel")
+                .addEventListener("click", function () {
+                    window.history.back(); // Quay trở lại trang trước đó
+                });
+        });
+    </script>
 </html>
