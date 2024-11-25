@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function(Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['Website', 'Cửa hàng']);
             $table->enum('status', ['Phiếu tạm', 'Đã xác nhận', 'Đang giao hàng', 'Hoàn thành', 'Đã huỷ']);
@@ -24,10 +24,26 @@ return new class extends Migration
             $table->string('province', 100);
             $table->date('date_received')->nullable();
             $table->integer('total_price');
-            $table->foreignIdFor(Discount::class)->nullable();
-            $table->foreignIdFor(Customer::class);
-            $table->foreignIdFor(Employee::class);
+            $table->unsignedBigInteger('discount_id')->nullable();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->unsignedBigInteger('employee_id')->nullable();
+        
             $table->timestamps();
+        
+            $table->foreign('discount_id')
+                  ->references('id')
+                  ->on('discounts')
+                  ->onDelete('set null');
+        
+            $table->foreign('customer_id')
+                  ->references('id')
+                  ->on('customers')
+                  ->onDelete('set null');
+        
+            $table->foreign('employee_id')
+                  ->references('id')
+                  ->on('employees')
+                  ->onDelete('set null');
         });
     }
 

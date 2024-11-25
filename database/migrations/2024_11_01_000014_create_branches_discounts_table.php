@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Branch;
+use App\Models\Discount;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('goods_receipts', function(Blueprint $table) {
+        Schema::create('branches_discounts', function(Blueprint $table) {
             $table->id();
-            
-            $table->date('import_date')->nullable();
-            $table->enum('status', ['Phiếu tạm', 'Đã nhập hàng', 'Đã huỷ']);
-            $table->integer('total_quantity')->nullable();
-            $table->integer('total_price')->nullable();
-            $table->foreignIdFor(Branch::class);
+            $table->foreignIdFor(Branch::class, 'branch_id')->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Discount::class, 'discount_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('goods_receipts');
+        Schema::dropIfExists('branches_discounts');
     }
 };
