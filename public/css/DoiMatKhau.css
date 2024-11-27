@@ -51,6 +51,20 @@ input {
 #forgot:hover {
     color: #9e291f;
 }
-.modal-dialog{
+.modal-dialog {
     max-width: 350px;
-  }
+}
+
+@media (max-width: 768px) {
+    #resetPassWord {
+        width: auto !important;
+        padding: 10px 20px 10px 20px !important;
+    }
+}
+#resetPassWord {
+    width: 700px;
+    margin: auto;
+    padding: 48px 70px 48px 70px;
+    background-color: white;
+    border-radius: 8px;
+}
