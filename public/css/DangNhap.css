@@ -5,8 +5,14 @@ body {
     background-color: #f7f7f7;
     font-size: 16px;
 }
+@media (max-width: 768px) {
+    form {
+        width: auto !important;
+        padding: 10px 20px 10px 20px !important;
+    }
+}
 form {
-    width: 700px !important;
+    width: 700px;
     margin: auto;
     padding: 48px 70px 48px 70px;
     background-color: white;
@@ -22,25 +28,29 @@ form {
     border: 1px solid #c53327;
     color: #c53327;
 }
-.btn_login, .btn_save {
+.btn_login,
+.btn_save {
     background-color: #c53327;
     color: white;
 }
-.btn_login:hover, .btn_save:hover {
+.btn_login:hover,
+.btn_save:hover {
     background-color: #9e291f;
     color: white;
 }
 .btn {
     min-width: 145px !important;
 }
-.btn_close, .btn_loginAgain {
+.btn_close,
+.btn_loginAgain {
     background-color: #00b63e;
     color: white;
 }
-.btn_close:hover, .btn_loginAgain:hover {
+.btn_close:hover,
+.btn_loginAgain:hover {
     background-color: #009232;
     color: white;
 }
-.modal-dialog{
-  max-width: 350px;
+.modal-dialog {
+    max-width: 350px;
 }
