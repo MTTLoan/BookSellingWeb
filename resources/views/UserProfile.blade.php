@@ -4,86 +4,104 @@
 <!-- Tiêu đề của trang -->
 
 @section('content')
-<div class="container">
-    <div class="form-container">
-        <div class="form-header">
-            <div class="form-title">THÔNG TIN CÁ NHÂN</div>
-            <p class="form-subtitle">Cập nhật thông tin của bạn</p>
-        </div>
+<main>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="form-title">THÔNG TIN CÁ NHÂN</div>
+                <p class="form-subtitle">Cập nhật thông tin của bạn</p>
+            </div>
 
-        <form id="personal-info-form" method="POST" action="{{ route('personalInfo.update') }}">
-            @csrf
-            <!-- CSRF token for security -->
-            <div class="form-group mb-3 row">
-                <label for="name" class="col-sm-3 col-form-label">Họ và tên (*)</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Mô tả cụ thể tại đây"
-                        required>
+            <form id="personal-info-form">
+                <div class="form-group mb-3 row">
+                    <label for="name" class="col-sm-3 col-form-label">Họ và tên (*)</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="name" placeholder="Mô tả cụ thể tại đây">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="dob" class="col-sm-3 col-form-label">Ngày sinh</label>
-                <div class="col-sm-9">
-                    <input type="date" class="form-control" id="dob" name="dob">
+                <div class="form-group mb-3 row">
+                    <label for="dob" class="col-sm-3 col-form-label">Ngày sinh</label>
+                    <div class="col-sm-9">
+                        <input type="date" class="form-control" id="dob">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="gender" class="col-sm-3 col-form-label">Giới tính</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="gender" name="gender"
-                        placeholder="Mô tả cụ thể tại đây">
+                <div class="form-group mb-3 row">
+                    <label for="gender" class="col-sm-3 col-form-label">Giới tính</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="gender" placeholder="Mô tả cụ thể tại đây">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="email" class="col-sm-3 col-form-label">Email (*)</label>
-                <div class="col-sm-9">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Mô tả cụ thể tại đây"
-                        required>
+                <div class="form-group mb-3 row">
+                    <label for="email" class="col-sm-3 col-form-label">Email (*)</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="email" placeholder="Mô tả cụ thể tại đây">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="phone" class="col-sm-3 col-form-label">Số điện thoại (*)</label>
-                <div class="col-sm-9">
-                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Mô tả cụ thể tại đây"
-                        required>
+                <div class="form-group mb-3 row">
+                    <label for="phone" class="col-sm-3 col-form-label">Số điện thoại (*)</label>
+                    <div class="col-sm-9">
+                        <input type="tel" class="form-control" id="phone" placeholder="Mô tả cụ thể tại đây">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="city" class="col-sm-3 col-form-label">Tỉnh, thành</label>
-                <div class="col-sm-9">
-                    <select id="city" name="city" class="form-select">
-                        <option>Chọn</option>
-                    </select>
+                <div class="form-group mb-3 row">
+                    <label for="city" class="col-sm-3 col-form-label">Tỉnh, thành</label>
+                    <div class="col-sm-9">
+                        <select id="city" class="form-select">
+                            <option>Chọn</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="district" class="col-sm-3 col-form-label">Quận, huyện</label>
-                <div class="col-sm-9">
-                    <select id="district" name="district" class="form-select">
-                        <option>Chọn</option>
-                    </select>
+                <div class="form-group mb-3 row">
+                    <label for="district" class="col-sm-3 col-form-label">Quận, huyện</label>
+                    <div class="col-sm-9">
+                        <select id="district" class="form-select">
+                            <option>Chọn</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="ward" class="col-sm-3 col-form-label">Phường, xã</label>
-                <div class="col-sm-9">
-                    <select id="ward" name="ward" class="form-select">
-                        <option>Chọn</option>
-                    </select>
+                <div class="form-group mb-3 row">
+                    <label for="ward" class="col-sm-3 col-form-label">Phường, xã</label>
+                    <div class="col-sm-9">
+                        <select id="ward" class="form-select">
+                            <option>Chọn</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group mb-3 row">
-                <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" id="address" name="address"
-                        placeholder="Mô tả cụ thể tại đây">
+                <div class="form-group mb-3 row">
+                    <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="address" placeholder="Mô tả cụ thể tại đây">
+                    </div>
                 </div>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-cancel" onclick="resetForm()">Hủy</button>
+                    <button type="submit" class="btn btn-register" onclick="submitForm(event)">Lưu</button>
+                    <button type="button" class="btn btn-change-password" onclick="changePassword()">Đổi mật
+                        khẩu</button>
+                    <button type="button" class="btn btn-logout" onclick="logout()">Đăng xuất</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<!-- Modal xác nhận đăng xuất -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Xác nhận đăng xuất</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="btn-container">
-                <button type="button" class="btn btn-cancel" onclick="resetForm()">Hủy</button>
-                <button type="submit" class="btn btn-register">Lưu</button>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?
             </div>
-        </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" onclick="confirmLogout()">Đăng xuất</button>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -197,6 +215,25 @@ body {
     color: #a02a21 !important;
 }
 
+.btn-change-password {
+    background-color: orange !important;
+    color: #fff !important;
+}
+
+.btn-change-password:hover {
+    background-color: #e0a800 !important;
+}
+
+.btn-logout {
+    background-color: green !important;
+    color: white !important;
+}
+
+.btn-logout:hover {
+    background-color: #c82333 !important;
+}
+
+
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(0.5);
@@ -226,6 +263,21 @@ function submitForm(event) {
         address: document.getElementById('address').value,
     };
     console.log('Form Data Submitted:', formData);
+}
+// Hiển thị modal xác nhận đăng xuất
+function logout() {
+    const logoutModal = new bootstrap.Modal(document.getElementById('logoutModal'));
+    logoutModal.show();
+}
+
+function confirmLogout() {
+    // Chuyển hướng đến trang xử lý đăng xuất
+    window.location.href = 'DangNhap.html'; // Cập nhật đường dẫn phù hợp
+}
+
+// Chuyển đến trang Đổi mật khẩu
+function changePassword() {
+    window.location.href = 'DoiMatKhau.html'; // Đến trang Đổi mật khẩu
 }
 </script>
 @endpush
