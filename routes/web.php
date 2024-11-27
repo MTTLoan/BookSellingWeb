@@ -7,9 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['prefix' => 'account'], function () {
-    
-    // Route::get('/login', [AccountController::class, 'login'])->name('account.login');
-    // Route::post('/login', [AccountController::class, 'checkLogin']);
+
+    Route::get('/login', [AccountController::class, 'login'])->name('account.login');
+    Route::post('/login', [AccountController::class, 'checkLogin']);
 
     Route::get('/verify-account/{email}', [AccountController::class, 'verify'])->name('account.verify');
     Route::get('/register', [AccountController::class, 'register'])->name('account.register');

@@ -14,13 +14,47 @@ use Illuminate\Support\Facades\Password;
 
 class AccountController extends Controller
 {
-    public function register(){
+    public function login()
+    {
+        return view('account.login');
+    }
+
+    public function checkLogin(Request $req)
+    {
+        $validated = $req->validate([
+            'name' => 'required|exists:users',
+            'password' => 'required'
+        ], [
+            'name.required' => 'Tên tài khoản không được để trống.',
+            'password.required' => 'Mật khẩu không được để trống.'
+        ]);
+
+        $data = $req->only('name', 'password');
+
+        $check = Auth::attempt($data);
+
+        if ($check) {
+            if (Auth::user()->email_verified_at == null) {
+                Auth::logout();
+                return back()->withErrors(['email' => 'Tài khoản chưa được xác thực.']);
+            }
+
+            return redirect()->route('home');
+        }
+
+        return back()->withErrors(['password' => 'Sai tên tài khoản hoặc mật khẩu.']);
+    }
+
+
+    public function register()
+    {
         return view('account.register');
     }
 
-    public function checkRegister(Request $req){
+    public function checkRegister(Request $req)
+    {
         $validated = $req->validate([
-            'name' => 'required|min:3|max:100|regex:/^[\S]*$/', 
+            'name' => 'required|min:3|max:100|regex:/^[\S]*$/',
             'fullname' => 'required|min:3|max:100',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
@@ -79,7 +113,7 @@ class AccountController extends Controller
             'sex.required' => 'Giới tính không được để trống.',
             'sex.in' => 'Giới tính không hợp lệ. Chỉ chấp nhận Nam, Nữ',
         ]);
-    
+
         if ($validated) {
             try {
                 // Tạo người dùng và khách hàng như bình thường
@@ -88,9 +122,9 @@ class AccountController extends Controller
                     'email' => $req->email,
                     'password' => bcrypt($req->password),
                 ];
-    
+
                 $user = User::create($userData);
-    
+
                 $customerData = [
                     'fullname' => $req->fullname,
                     'birthday' => $req->birthday,
@@ -103,21 +137,20 @@ class AccountController extends Controller
                     'total_revenue' => 0,
                     'user_id' => $user->id,
                 ];
-    
+
                 Customer::create($customerData);
-    
+
                 // Gửi email xác nhận
                 Mail::to($req->email)->send(new VerifyAccount($user));
-    
+
                 // Trả về JSON khi thành công
                 return response()->json([
                     'success' => true,
                     'message' => 'Đăng ký thành công. Kiểm tra email của bạn để xác nhận tài khoản.'
                 ], 200);
-
             } catch (\Exception $e) {
                 Log::error('Lỗi khi đăng ký: ' . $e->getMessage());
-    
+
                 // Trả về lỗi nếu có lỗi xảy ra
                 return response()->json([
                     'success' => false,
@@ -125,7 +158,7 @@ class AccountController extends Controller
                 ], 500);
             }
         }
-    
+
         // Nếu có lỗi xác thực, trả về phản hồi lỗi dưới dạng JSON
         return response()->json([
             'errors' => $req->errors(),
@@ -133,10 +166,11 @@ class AccountController extends Controller
         ], 422);
     }
 
-    public function verify($email){
-        $acc=User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
-        User::where('email', $email)->update(['email_verified_at'=>now()]);
-        return redirect()->route('account.login')->with('ok','Verify account successfully');
+    public function verify($email)
+    {
+        $acc = User::where('email', $email)->whereNull('email_verified_at')->firstOrFail();
+        User::where('email', $email)->update(['email_verified_at' => now()]);
+        return redirect()->route('account.login')->with('ok', 'Verify account successfully');
     }
 
     public function changePassword()
@@ -145,32 +179,32 @@ class AccountController extends Controller
     }
 
     public function checkChangePassword(Request $request)
-{
-    // Xác thực dữ liệu đầu vào
-    $request->validate([
-        'current_password' => 'required',
-        'new_password' => 'required|min:8|confirmed',
-    ]);
+    {
+        // Xác thực dữ liệu đầu vào
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
 
-    // Lấy người dùng hiện tại
-    $user = Auth::user();
+        // Lấy người dùng hiện tại
+        $user = Auth::user();
 
-    // Ensure $user is an instance of User model
-    if (!$user instanceof User) {
-        return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
-    }
+        // Ensure $user is an instance of User model
+        if (!$user instanceof User) {
+            return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
+        }
 
-    // Kiểm tra mật khẩu hiện tại
-    if (!Hash::check($request->current_password, $user->password)) {
-        return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
-    }
+        // Kiểm tra mật khẩu hiện tại
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
+        }
 
-    // Cập nhật mật khẩu mới
-    $user->password = Hash::make($request->new_password);
-    $user->save();
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
 
-    // Trả về thông báo thành công
-    return redirect()->route('account.change-password')->with('success', 'Đổi mật khẩu thành công!');
+        // Trả về thông báo thành công
+        return redirect()->route('account.change-password')->with('success', 'Đổi mật khẩu thành công!');
     }
 
     // public function forgotPassword()
@@ -195,7 +229,7 @@ class AccountController extends Controller
     //         return back()->with('status', 'Đã gửi email reset mật khẩu.');
     //     }
     //     return back()->withErrors(['email'=>'Email khong ton tai.']);
-    // } 
+    // }
 
     // public function resetPassword(Request $request)
     // {
@@ -224,5 +258,6 @@ class AccountController extends Controller
     //     return $status == Password::PASSWORD_RESET
     //                 ? redirect()->route('login')->with('status', __($status))
     //                 : back()->withErrors(['email' => __($status)]);
-    // }
+
+   // }
 }
