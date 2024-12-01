@@ -11,7 +11,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>@yield('title', 'Header UI')</title>
+    <title>Header UI</title>
     <style>
     .header .navbar {
         border-bottom: 1px solid #ddd;
@@ -29,7 +29,7 @@
     .header .company-name {
         color: #C53327;
         font-size: 25px;
-        font-family: 'Old English Text MT', serif;
+        font-family: Old English Text MT;
         font-weight: 400;
         margin-left: 5px;
     }
@@ -139,6 +139,31 @@
         }
     }
     </style>
+    <script defer>
+    document.addEventListener('DOMContentLoaded', function() {
+        const registerButton = document.getElementById('registerButton');
+        const loginButton = document.getElementById('loginButton');
+        const cartButton = document.getElementById('cartButton');
+
+        if (registerButton) {
+            registerButton.addEventListener('click', function() {
+                window.location.href = 'DangKy.blade.php';
+            });
+        }
+
+        if (loginButton) {
+            loginButton.addEventListener('click', function() {
+                window.location.href = 'DangNhap.blade.php';
+            });
+        }
+
+        if (cartButton) {
+            cartButton.addEventListener('click', function() {
+                window.location.href = 'GioHang.blade.php';
+            });
+        }
+    });
+    </script>
 </head>
 
 <body>
@@ -150,7 +175,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('assets/images/Favicon.png') }}" alt="" width="40" height="40">
+                    <img src="../../../public/assets/images/Favicon.png" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
                 <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
@@ -163,15 +188,15 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link register-link">ĐĂNG KÝ</a>
+                            <button class="nav-link register-link" id="registerButton">ĐĂNG KÝ</button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link login-link">ĐĂNG NHẬP</a>
+                            <button class="nav-link login-link" id="loginButton">ĐĂNG NHẬP</button>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link cart-icon">
+                            <button class="nav-link cart-icon" id="cartButton">
                                 <i class="bi bi-bag-heart-fill"></i>
-                            </a>
+                            </button>
                         </li>
                     </ul>
                 </div>
