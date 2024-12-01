@@ -7,194 +7,147 @@
     <div class="form-title">ĐĂNG KÝ</div>
     <form id="registrationForm" method="POST" action="{{ route('account.register') }}">
         @csrf
-        <!-- Các trường input form ở đây -->
+        <!-- Tên tài khoản -->
         <div class="mb-3">
             <label for="name" class="form-label">Tên tài khoản (*)</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Mô tả cụ thể tại đây" required>
-        </div>
-        <div class="mb-3">
-            <label for="fullname" class="form-label">Họ và tên (*)</label>
-            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Mô tả cụ thể tại đây"
-                required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email (*)</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Mô tả cụ thể tại đây"
-                required>
-        </div>
-        <div class="mb-3">
-            <label for="phone_number" class="form-label">Số điện thoại (*)</label>
-            <input type="tel" class="form-control" id="phone_number" name="phone_number"
-                placeholder="Mô tả cụ thể tại đây" required>
-        </div>
-        <div class="col-md-4 p-2">
-            <label for="sex" class="form-label">Giới tính (*)</label>
-            <select class="form-select" id="sex" name="sex" required>
-                <option value="">Chọn giới tính</option>
-                <option value="Nam">Nam</option>
-                <option value="Nữ">Nữ</option>
-            </select>
-        </div>
-        <div class="col-md-4 p-2">
-            <label for="birthday" class="form-label">Ngày sinh (*)</label>
-            <input type="date" class="form-control" id="birthday" name="birthday" required>
-        </div>
-        <div class="col-md-4 p-2">
-            <label for="province" class="form-label">Tỉnh, thành phố (*)</label>
-            <select class="form-select" id="province" name="province">
-                <option value="">Chọn tỉnh, thành phố</option>
-            </select>
-        </div>
-        <div class="col-md-4 p-2">
-            <label for="district" class="form-label">Quận, huyện (*)</label>
-            <select class="form-select" id="district" name="district">
-                <option value="">Chọn quận, huyện</option>
-            </select>
-        </div>
-        <div class="col-md-4 p-2">
-            <label for="ward" class="form-label">Phường, xã (*)</label>
-            <select class="form-select" id="ward" name="ward">
-                <option value="">Chọn phường, xã</option>
-            </select>
-        </div>
-        <div class="col-md-12 p-2">
-            <label for="address" class="form-label">Địa chỉ (*)</label>
-            <input type="text" class="form-control" name="address" id="address" placeholder="Nhập vào địa chỉ..."
-                required>
+            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                value="{{ old('name') }}" placeholder="Nhập tên tài khoản" required>
+            @error('name')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
+        <!-- Họ và tên -->
+        <div class="mb-3">
+            <label for="fullname" class="form-label">Họ và tên (*)</label>
+            <input type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname"
+                name="fullname" value="{{ old('fullname') }}" placeholder="Nhập họ và tên" required>
+            @error('fullname')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email (*)</label>
+            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                value="{{ old('email') }}" placeholder="Nhập email" required>
+            @error('email')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Số điện thoại -->
+        <div class="mb-3">
+            <label for="phone_number" class="form-label">Số điện thoại (*)</label>
+            <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
+                name="phone_number" value="{{ old('phone_number') }}" placeholder="Nhập số điện thoại" required>
+            @error('phone_number')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Giới tính -->
+        <div class="mb-3">
+            <label for="sex" class="form-label">Giới tính (*)</label>
+            <select class="form-select @error('sex') is-invalid @enderror" id="sex" name="sex" required>
+                <option value="">Chọn giới tính</option>
+                <option value="Nam" {{ old('sex') == 'Nam' ? 'selected' : '' }}>Nam</option>
+                <option value="Nữ" {{ old('sex') == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+            </select>
+            @error('sex')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Ngày sinh -->
+        <div class="mb-3">
+            <label for="birthday" class="form-label">Ngày sinh (*)</label>
+            <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday"
+                name="birthday" value="{{ old('birthday') }}" required>
+            @error('birthday')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Tỉnh, thành phố -->
+        <div class="mb-3">
+            <label for="province" class="form-label">Tỉnh, thành phố (*)</label>
+            <select class="form-select @error('province') is-invalid @enderror" id="province" name="province" required>
+                <option value="">Chọn tỉnh, thành phố</option>
+                <!-- Các option tỉnh/thành phố -->
+            </select>
+            @error('province')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Quận, huyện -->
+        <div class="mb-3">
+            <label for="district" class="form-label">Quận, huyện (*)</label>
+            <select class="form-select @error('district') is-invalid @enderror" id="district" name="district" required>
+                <option value="">Chọn quận, huyện</option>
+                <!-- Các option quận/huyện -->
+            </select>
+            @error('district')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Phường, xã -->
+        <div class="mb-3">
+            <label for="ward" class="form-label">Phường, xã (*)</label>
+            <select class="form-select @error('ward') is-invalid @enderror" id="ward" name="ward" required>
+                <option value="">Chọn phường, xã</option>
+                <!-- Các option phường/xã -->
+            </select>
+            @error('ward')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Địa chỉ -->
+        <div class="mb-3">
+            <label for="address" class="form-label">Địa chỉ (*)</label>
+            <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address"
+                value="{{ old('address') }}" placeholder="Nhập địa chỉ" required>
+            @error('address')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Mật khẩu -->
         <div class="mb-3">
             <label for="password" class="form-label">Mật khẩu (*)</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Mô tả cụ thể tại đây"
-                required>
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
+                name="password" placeholder="Nhập mật khẩu" required>
+            @error('password')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
+
+        <!-- Nhập lại mật khẩu -->
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Nhập lại mật khẩu (*)</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
-                placeholder="Mô tả cụ thể tại đây" required>
+                placeholder="Xác nhận mật khẩu" required>
         </div>
+
+        <!-- Nút hành động -->
         <div class="btn-container">
             <button type="reset" class="btn btn-cancel">Hủy</button>
             <button type="submit" class="btn btn-register">Đăng ký</button>
         </div>
-
     </form>
 </div>
 @endsection
 
+
 @push('styles')
-<style>
-body {
-    background-color: #f7f7f7 !important;
-}
-
-.form-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-title {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.form-group label {
-    font-weight: bold;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.btn {
-    flex: 0 0 30%;
-}
-
-.btn-register {
-    background-color: #C53327 !important;
-    color: white !important;
-}
-
-.btn-cancel {
-    background-color: white !important;
-    color: #C53327 !important;
-    border-color: #C53327 !important;
-}
-</style>
+<link href="{{ asset('css/register.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Ngăn chặn submit mặc định
-
-        const formData = new FormData(this); // Thu thập dữ liệu từ form
-
-        axios.post(this.action, formData)
-            .then(function(response) {
-                alert('Đăng ký thành công!'); // Thông báo thành công
-            })
-            .catch(function(error) {
-                if (error.response) {
-                    console.error(error.response.data); // Xử lý lỗi từ server
-                    alert('Đăng ký thất bại. Vui lòng kiểm tra thông tin!');
-                }
-            });
-    });
-});
-
-const province = document.getElementById("province");
-const districts = document.getElementById("district");
-const wards = document.getElementById("ward");
-
-const Parameter = {
-    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-    method: "GET",
-    responseType: "application/json",
-};
-
-const promise = axios(Parameter);
-promise.then(function(result) {
-    renderProvince(result.data);
-});
-
-function renderProvince(data) {
-    for (const x of data) {
-        province.options[province.options.length] = new Option(x.Name, x.Id);
-    }
-
-    province.onchange = function() {
-        districts.length = 1;
-        wards.length = 1;
-        if (this.value != "") {
-            const result = data.filter((n) => n.Id === this.value);
-            for (const k of result[0].Districts) {
-                districts.options[districts.options.length] = new Option(k.Name, k.Id);
-            }
-        }
-    };
-
-    districts.onchange = function() {
-        wards.length = 1;
-        const dataProvince = data.filter((n) => n.Id === province.value);
-        if (this.value != "") {
-            const dataWards = dataProvince[0].Districts.filter(
-                (n) => n.Id === this.value
-            )[0].Wards;
-            for (const w of dataWards) {
-                wards.options[wards.options.length] = new Option(w.Name, w.Id);
-            }
-        }
-    };
-}
-</script>
+<script src="{{ asset('js/register.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
