@@ -1,56 +1,66 @@
 body {
-    margin: 20px 0 20px 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-    background-color: #f7f7f7;
-    font-size: 16px;
+    margin: 20px 0 20px 0 !important;
+    box-sizing: border-box !important;
+    font-family: "Roboto", sans-serif !important;
+    background-color: #f7f7f7 !important;
+    font-size: 16px !important;
 }
+
 @media (max-width: 768px) {
     form {
         width: auto !important;
         padding: 10px 20px 10px 20px !important;
     }
 }
-form {
-    width: 700px;
-    margin: auto;
-    padding: 48px 70px 48px 70px;
-    background-color: white;
-    border-radius: 8px;
+
+.content form {
+    width: 700px !important;
+    margin: auto !important;
+    padding: 48px 70px 48px 70px !important;
+    background-color: white !important;
+    border-radius: 8px !important;
 }
+
 .btn_cancel {
-    background-color: ffffff;
-    border: 1px solid #c53327;
-    color: #c53327;
+    background-color: #ffffff !important; /* Sửa lại màu trắng cho đúng mã */
+    border: 1px solid #c53327 !important;
+    color: #c53327 !important;
 }
+
 .btn_cancel:hover {
-    background-color: #e6e6e6;
-    border: 1px solid #c53327;
-    color: #c53327;
+    background-color: #e6e6e6 !important;
+    border: 1px solid #c53327 !important;
+    color: #c53327 !important;
 }
+
 .btn_login,
 .btn_save {
-    background-color: #c53327;
-    color: white;
+    background-color: #c53327 !important;
+    color: white !important;
 }
+
 .btn_login:hover,
 .btn_save:hover {
-    background-color: #9e291f;
-    color: white;
+    background-color: #9e291f !important;
+    color: white !important;
 }
+
 .btn {
     min-width: 145px !important;
 }
+
 .btn_close,
 .btn_loginAgain {
-    background-color: #00b63e;
-    color: white;
+    background-color: #00b63e !important;
+    color: white !important;
 }
+
 .btn_close:hover,
 .btn_loginAgain:hover {
-    background-color: #009232;
-    color: white;
+    background-color: #009232 !important;
+    color: white !important;
 }
+
 .modal-dialog {
-    max-width: 350px;
+    max-width: 350px !important;
 }

@@ -20,30 +20,37 @@ class AccountController extends Controller
     }
 
     public function checkLogin(Request $req)
-    {
-        $validated = $req->validate([
-            'name' => 'required|exists:users',
-            'password' => 'required'
-        ], [
-            'name.required' => 'Tên tài khoản không được để trống.',
-            'password.required' => 'Mật khẩu không được để trống.'
-        ]);
+{
+    $validated = $req->validate([
+        'name' => 'required|exists:users,name', // Kiểm tra tên tài khoản
+        'password' => 'required',
+    ]);
 
-        $data = $req->only('name', 'password');
+    $data = $req->only('name', 'password');
 
-        $check = Auth::attempt($data);
-
-        if ($check) {
-            if (Auth::user()->email_verified_at == null) {
-                Auth::logout();
-                return back()->withErrors(['email' => 'Tài khoản chưa được xác thực.']);
-            }
-
-            return redirect()->route('home');
+    // Sử dụng key đúng trong auth()->attempt()
+    if (auth('web')->attempt(['name' => $data['name'], 'password' => $data['password']])) {
+        if (auth('web')->check() && auth('web')->user()->email_verified_at == null) {
+            auth('web')->logout();
+            return response()->json([
+                'success' => false,
+                'message' => 'Tài khoản chưa được xác thực.',
+            ], 403);
         }
 
-        return back()->withErrors(['password' => 'Sai tên tài khoản hoặc mật khẩu.']);
+        return response()->json([
+            'success' => true,
+            'message' => 'Đăng nhập thành công.',
+            'user' => auth('web')->user(),
+        ], 200);
     }
+
+    return response()->json([
+        'success' => false,
+        'message' => 'Sai tên tài khoản hoặc mật khẩu.',
+    ], 422);
+}
+
 
 
     public function register()

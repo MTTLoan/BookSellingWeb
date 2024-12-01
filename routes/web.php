@@ -5,7 +5,7 @@ use App\Http\Controllers\AccountController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::group(['prefix' => 'account'], function () {
 
     Route::get('/login', [AccountController::class, 'login'])->name('account.login');
