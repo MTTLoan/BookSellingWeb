@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\HomePageController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,4 +23,9 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('/forgot-password', [AccountController::class, 'checkForgotPassword']);
     Route::get('/reset-password', [AccountController::class, 'resetPassword'])->name('account.reset-password');
     Route::post('/reset-password', [AccountController::class, 'checkResetPassword']);
+});
+
+// Route::get('/homepage', [HomePageController::class, 'index'])->name('homepage.index'); 
+Route::get('/homepage', function() {
+    return view('Home_ChuaDangNhap');   
 });

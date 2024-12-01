@@ -1,6 +1,133 @@
 <!-- resources/views/home.blade.php -->
 @extends('layout.app')
 
+@push('styles')
+    <style>
+        body {
+            background-color: #f7f7f7 !important;
+        }
+
+        .container-fluid-product {
+            margin: 10px 60px;
+            padding: 20px;
+        }
+
+        .button-section {
+            display: flex;
+            justify-content: start;
+            flex-wrap: wrap;
+            margin-top: 0;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-section button {
+            flex: 1 1 50px;
+            white-space: nowrap;
+        }
+
+        .table-responsive .banner-cell {
+            height: 400px;
+        }
+
+        .table-responsive .banner-cell img {
+            object-fit: contain;
+            width: 100%;
+            height: 100%;
+        }
+
+        .table-responsive .book-cell img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .category-menu {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .category-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .category-menu a {
+            display: block;
+            color: #333;
+            padding: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+            margin-left: 10px;
+        }
+
+        .category-menu a:hover {
+            background-color: #e2e6ea;
+        }
+
+        .button-section .btn {
+            width: 150px;
+            font-size: 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: black;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .button-section .btn:hover {
+            background-color: #e2e6ea;
+        }
+
+        .card-group-title {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .card-group-title-main {
+            font-size: 1.5 rem;
+            color: #333;
+        }
+
+        .card-group-subtitle {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: #888;
+            margin-left: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-group-link-1,
+        .card-group-link-2,
+        .card-group-link-3,
+        .card-group-link-4,
+        .card-group-link-5,
+        .card-group-link-6,
+        .card-group-link-blog {
+            font-size: 0.9rem;
+            color: #C53327;
+            text-decoration: none;
+        }
+
+        .card-group-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+@endpush
+
 @section('content')
 <div class="container-fluid-product">
     <div class="row">
@@ -100,7 +227,7 @@
         @endphp
 
         @foreach ($products as $product)
-        @include('layout.partials.ProductCard', ['product' => $product])
+            @include('layout.partials.ProductCard', ['product' => $product])
         @endforeach
     </div>
 
@@ -325,140 +452,12 @@
     <!-- Render Product Cards -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         @foreach ($products as $product)
-        @include('layout.partials.BlogCard', ['product' => $product])
+            @include('layout.partials.BlogCard', ['product' => $product])
         @endforeach
     </div>
 
 </div>
-</div>
 @endsection
-
-@push('styles')
-<style>
-body {
-    background-color: #f7f7f7 !important;
-}
-
-.container-fluid-product {
-    margin: 10px 60px;
-    padding: 20px;
-}
-
-.button-section {
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    margin-top: 0;
-    border-radius: 10px;
-    background-color: #ffffff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.button-section button {
-    flex: 1 1 50px;
-    white-space: nowrap;
-}
-
-.table-responsive .banner-cell {
-    height: 400px;
-}
-
-.table-responsive .banner-cell img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-}
-
-.table-responsive .book-cell img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
-
-.category-menu {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-}
-
-.category-header {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    border-radius: 5px;
-}
-
-.category-menu a {
-    display: block;
-    color: #333;
-    padding: 8px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    transition: background-color 0.2s;
-    margin-left: 10px;
-}
-
-.category-menu a:hover {
-    background-color: #e2e6ea;
-}
-
-.button-section .btn {
-    width: 150px;
-    font-size: 16px;
-    border-radius: 5px;
-    font-weight: bold;
-    color: black;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-.button-section .btn:hover {
-    background-color: #e2e6ea;
-}
-
-.card-group-title {
-    font-size: 2rem;
-    font-weight: bold;
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-}
-
-.card-group-title-main {
-    font-size: 1.5 rem;
-    color: #333;
-}
-
-.card-group-subtitle {
-    font-size: 0.9rem;
-    font-weight: normal;
-    color: #888;
-    margin-left: 1rem;
-    flex-grow: 1;
-}
-
-.card-group-link-1,
-.card-group-link-2,
-.card-group-link-3,
-.card-group-link-4,
-.card-group-link-5,
-.card-group-link-6,
-.card-group-link-blog {
-    font-size: 0.9rem;
-    color: #C53327;
-    text-decoration: none;
-}
-
-.card-group-link:hover {
-    text-decoration: underline;
-}
-</style>
-@endpush
 
 @push('scripts')
 <script>
