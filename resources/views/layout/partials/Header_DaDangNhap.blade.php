@@ -129,7 +129,7 @@
                     <i class="bi bi-list"></i>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="../../../public/assets/images/Favicon.png" alt="" width="40" height="40">
+                    <img src="../../../../public/assets/images/Favicon.png" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
                 <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">

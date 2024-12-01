@@ -1,6 +1,6 @@
 <?php
 // Include the Header.php file
-include './../Components/Header_DaDangNhap.blade.php';
+include 'layout/partials/Header_ChuaDangNhap.blade.php';
 ?>
 
 <!DOCTYPE html>
@@ -269,20 +269,20 @@ include './../Components/Header_DaDangNhap.blade.php';
                                 <tr>
                                     <!-- Column 1 (Banner Image) - Cột 1 chiếm 2 dòng -->
                                     <td rowspan="2" class="banner-cell">
-                                        <img src="../../../public/assets/images/Banner.png" alt="Banner Image"
+                                        <img src="../../public/assets/images/Banner.png" alt="Banner Image"
                                             class="img-fluid rounded w-100">
                                     </td>
 
                                     <!-- Column 2, Row 1 (Book 1) -->
                                     <td class="book-cell">
-                                        <img src="../../../public/assets/images/sach1.jpg" alt="Book 1"
+                                        <img src="../../public/assets/images/sach1.jpg" alt="Book 1"
                                             class="img-fluid rounded w-100">
                                     </td>
                                 </tr>
                                 <tr>
                                     <!-- Column 2, Row 2 (Book 2) -->
                                     <td class="book-cell">
-                                        <img src="../../../public/assets/images/Sach2.jpg" alt="Book 2"
+                                        <img src="../../public/assets/images/Sach2.jpg" alt="Book 2"
                                             class="img-fluid rounded w-100">
                                     </td>
                                 </tr>
@@ -307,23 +307,23 @@ include './../Components/Header_DaDangNhap.blade.php';
                 <?php
     // Dữ liệu sản phẩm (có thể lấy từ CSDL hoặc API)
     $products = [
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
-        ['image' => '../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
+        ['image' => '../../public/assets/images/tron-len-mai-nha-de-khoc.jpg', 'price' => '84,240 VND', 'name' => 'Trốn Lên Mái Nhà Để Khóc - Tặng Kèm Bookmark', 'sold' => 2],
         // Thêm nhiều sản phẩm ở đây
         // ['image' => 'path-to-image', 'price' => 'price', 'name' => 'product name', 'sold' => sold_count],
     ];
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -355,7 +355,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -387,7 +387,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -419,7 +419,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -451,7 +451,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -483,7 +483,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/ProductCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/ProductCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -508,7 +508,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     // Lặp qua các sản phẩm và include card cho mỗi sản phẩm
     foreach ($products as $product) {
-        include '../Components/BlogCard.blade.php'; // Gọi file chứa card sản phẩm
+        include 'layout/partials/BlogCard.php'; // Gọi file chứa card sản phẩm
     }
                 ?>
             </div>
@@ -518,7 +518,7 @@ include './../Components/Header_DaDangNhap.blade.php';
 
     <?php
     // Include the Footer.php file
-    include './../Components/Footer.blade.php';
+    include 'layout/partials/Footer.blade.php';
     ?>
 
     <script>
