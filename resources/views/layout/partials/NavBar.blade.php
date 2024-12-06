@@ -12,144 +12,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
-    <style>
-    .navbar {
-        background-color: #DA392B;
-        padding: 0 60px;
-        /* Padding for both sides */
-    }
-
-    .navbar .nav-link,
-    .navbar .navbar-brand,
-    .navbar .nav-link i {
-        color: white !important;
-    }
-
-    .navbar .dropdown-menu {
-        background-color: #C53327;
-        margin-top: 0;
-        /* Remove the gap between navbar and dropdown */
-        padding: 0;
-    }
-
-    .navbar .dropdown-item {
-        color: white !important;
-    }
-
-    .navbar-toggler {
-        background-color: transparent;
-        /* Make the background transparent */
-        border: none;
-        /* Remove the border */
-    }
-
-    .navbar-toggler .bi {
-        color: white;
-        /* Change the icon color to white */
-    }
-
-    .nav-link:hover,
-    .dropdown-item:hover {
-        color: #fff !important;
-        /* Change text color to white */
-        background-color: #9E291F;
-        /* Dark red background on hover */
-    }
-
-    /* Active state color for navbar links and dropdown items */
-    .nav-link.active,
-    .dropdown-item.active {
-        color: #fff !important;
-        /* Change text color to white */
-        background-color: #9E291F;
-        /* Dark red background when active */
-    }
-
-    /* Change active color for navbar links */
-    .nav-link.active,
-    .dropdown-item.active {
-        color: #9E291F;
-        /* Red for active state */
-    }
-
-    @media (max-width: 940px) {
-        .navbar {
-            padding: 0;
-            /* Set padding to 0 on both sides when screen width is 940px or less */
-        }
-
-        .navbar-brand {
-            margin-left: 20px;
-            /* Adjust the margin for the brand if needed */
-        }
-    }
-
-    @media (max-width: 840px) {
-        .navbar {
-            padding: 0;
-            /* Remove extra padding on small screens */
-        }
-
-        .navbar-collapse {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .navbar-nav {
-            width: 100%;
-            text-align: left;
-        }
-
-        .navbar-nav .nav-item {
-            width: 100%;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 10px 20px;
-        }
-
-        .navbar-brand {
-            margin-left: 0;
-            /* Remove margin entirely on small screens */
-            justify-content: center;
-            /* Center the brand */
-            text-align: center;
-            /* Ensure text is centered */
-            width: 100%;
-            /* Make the brand take up full width */
-        }
-
-        .navbar-toggler {
-            margin-left: 0;
-        }
-
-        .navbar-nav.ms-auto {
-            justify-content: center;
-            /* Center items on small screens */
-            margin-right: 0;
-        }
-    }
-    </style>
+    <link href="{{ asset('assets/css/layout/partials/NavBar.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm">
         <div class="container-fluid">
             <div class="d-flex justify-content-between align-items-center">
-                <!-- Navbar Toggle Button -->
+                <!-- Navbar Toggle Buttton -->
                 <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="bi bi-list"></i>
                 </button>
 
-                <!-- Tổng quan with eye icon -->
-                <a class="navbar-brand" href="#" id="overviewButton">
-                    <i class="bi bi-eye"></i> Tổng quan
-                </a>
             </div>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <!-- Tổng quan with eye icon -->
+                    <li class="nav-item" href="#" id="overviewButton">
+                        <i class="bi bi-eye"></i> Tổng quan
+                    </li>
+
                     <!-- Dropdown 1 -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navDropdown1" role="button"
@@ -219,49 +103,7 @@
         </div>
     </nav>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('productCategoryButton').addEventListener('click', function() {
-            window.location.href = '{{ route("DanhMucSP") }}';
-        });
-
-        document.getElementById('promotionButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("KhuyenMai")}}';
-        });
-
-        document.getElementById('orderSlipButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("PhieuDatHang")}}';
-        });
-
-        document.getElementById('importButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("NhapHang")}}';
-        });
-
-        document.getElementById('customerButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("KhachHang")}}';
-        });
-
-        document.getElementById('supplierButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("NCC")}}';
-        });
-
-        document.getElementById('employeeButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("NhanVien")}}';
-        });
-
-        document.getElementById('salesReportButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("BaoCaoBanHang")}}';
-        });
-
-        document.getElementById('financialReportButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("BaoCaoTaiChinh")}}';
-        });
-
-        document.getElementById('salesButton').addEventListener('click', function() {
-            window.location.href = '{{ route ("BanHang")}}';
-        });
-    });
-    </script>
+    <script src="{{ asset('assets/js/layout/partials/NavBar.js') }}"></script>
 </body>
 
 </html>

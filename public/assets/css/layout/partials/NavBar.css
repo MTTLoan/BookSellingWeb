@@ -1,0 +1,121 @@
+.navbar {
+    background-color: #DA392B;
+    padding: 0 60px;
+    /* Padding for both sides */
+}
+
+#overviewButton {
+    padding: .5rem 1rem ;
+    font-size: 1rem ;
+    margin: 0px;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand,
+.navbar .nav-link i {
+    color: white !important;
+}
+
+.navbar .dropdown-menu {
+    background-color: #C53327;
+    margin-top: 0;
+    /* Remove the gap between navbar and dropdown */
+    padding: 0;
+}
+
+.navbar .dropdown-item {
+    color: white !important;
+}
+
+.navbar-toggler {
+    background-color: transparent;
+    /* Make the background transparent */
+    border: none;
+    /* Remove the border */
+}
+
+.navbar-toggler .bi {
+    color: white;
+    /* Change the icon color to white */
+}
+
+.nav-item {
+    color: #fff !important;
+}
+
+.nav-link:hover,
+.dropdown-item:hover {
+    color: #fff !important;
+    /* Change text color to white */
+    background-color: #9E291F;
+    /* Dark red background on hover */
+}
+
+/* Active state color for navbar links and dropdown items */
+.nav-link.active,
+.dropdown-item.active {
+    color: #fff !important;
+    /* Change text color to white */
+    background-color: #9E291F;
+    /* Dark red background when active */
+}
+
+/* Change active color for navbar links */
+.nav-link.active,
+.dropdown-item.active {
+    color: #9E291F;
+    /* Red for active state */
+}
+
+@media (max-width: 940px) {
+    .navbar {
+        padding: 0;
+        /* Set padding to 0 on both sides when screen width is 940px or less */
+    }
+}
+
+@media (max-width: 840px) {
+    .navbar {
+        padding: 0;
+        /* Remove extra padding on small screens */
+    }
+
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .navbar-nav {
+        width: 100%;
+        text-align: left;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 20px;
+    }
+
+    .navbar-brand {
+        margin-left: 0;
+        /* Remove margin entirely on small screens */
+        justify-content: center;
+        /* Center the brand */
+        text-align: center;
+        /* Ensure text is centered */
+        width: 100%;
+        /* Make the brand take up full width */
+    }
+
+    .navbar-toggler {
+        margin-left: 0;
+    }
+
+    .navbar-nav.ms-auto {
+        justify-content: center;
+        /* Center items on small screens */
+        margin-right: 0;
+    }
+}

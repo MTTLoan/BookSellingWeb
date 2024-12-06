@@ -1,0 +1,149 @@
+body {
+    background-color: #f7f7f7 !important;
+}
+
+.container-fluid-product {
+    margin: 10px 60px;
+    padding: 20px;
+}
+
+.category-menu {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 10px;
+}
+
+.category-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.category-menu .list-group .list-group-item {
+    border: none;
+}
+
+.category-menu .list-group a {
+    display: block;
+    color: #333;
+    padding: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+.category-menu a:hover {
+    color: #c53327;
+}
+
+.button-section {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-top: 0;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 7px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button-section button {
+    flex: 1 1 50px;
+    white-space: nowrap;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* Title Above Card Group */
+.card-group-title {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: end;
+    /* Vertically center the items */
+    justify-content: space-between;
+    /* Space out the title and the link */
+    width: 100%;
+    /* Ensure the title takes the full width */
+    margin-bottom: 1rem;
+    /* Spacing between title and description */
+    margin-top: 2rem;
+}
+
+/* Title text */
+.card-group-title-main {
+    font-size: 1.5 rem;
+    color: #333;
+    /* Title color */
+}
+
+/* Subtitle (Smaller Text) */
+.card-group-subtitle {
+    font-size: 0.9rem;
+    font-weight: normal;
+    color: #888;
+    /* Gray color */
+    margin-left: 1rem;
+    /* Space between title and subtitle */
+    flex-grow: 1;
+    /* Allow the subtitle to take available space */
+}
+
+/* Link style for 'Xem thêm' */
+.card-group-link-1,
+.card-group-link-2,
+.card-group-link-3,
+.card-group-link-4,
+.card-group-link-5,
+.card-group-link-6,
+.card-group-link-blog {
+    font-size: 0.9rem;
+    color: #C53327;
+    /* Color for the link */
+    text-decoration: none;
+}
+
+.card-group-link:hover {
+    text-decoration: underline;
+    /* Underline on hover */
+}
+
+@media (max-width: 992px) {
+    .container-fluid-product {
+        margin: 10px 20px;
+        padding: 10px;
+    }
+
+    .category-menu {
+        display: none;
+    }
+
+    .button-section {
+        width: 100%;
+    }
+
+    .button-section button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .card-group-title {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-group-link-1, .card-group-link-blog {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .book-cell{
+        display: none;
+    }
+}

@@ -1,0 +1,133 @@
+.header .navbar {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+}
+
+.header .company-name {
+    color: #C53327;
+    font-size: 25px;
+    font-family: Old English Text MT;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.header .search-input {
+    border: 1px solid #d35400;
+    border-radius: 0;
+    height: 38px;
+    min-width: 50px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+
+.header .search-btn {
+    background-color: #d35400;
+    color: white;
+    border-radius: 0;
+    height: 38px;
+}
+
+.header .navbar-nav {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .navbar-nav .nav-link {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    align-items: center;
+    background: none;
+}
+
+.header .register-link {
+    color: black;
+    border: none;
+}
+
+.header .login-link {
+    color: #9E291F;
+    border-left: 2px solid #9E291F;
+    border-right: 2px solid #9E291F;
+    border-top: none;
+    border-bottom: none;
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+.header .icon-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: black;
+}
+
+@media (max-width: 576px) {
+    .header .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .header .navbar-brand {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+    }
+
+    .header .navbar-brand img {
+        width: 30px;
+        height: 25px;
+    }
+
+    .header .company-name {
+        font-size: 20px;
+    }
+
+    .header .search-input {
+        width: 100%;
+        min-width: 0;
+        font-size: 0.9rem;
+    }
+
+    .header .search-btn {
+        font-size: 0.9rem;
+    }
+
+    .header .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 0 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .header .navbar-nav {
+        margin-top: 5px;
+        align-items: center;
+    }
+
+    /* Adjust label and span for smaller size */
+    .header .branch-label,
+    .header .account-name {
+        font-size: 0.8rem;
+        /* Smaller font size */
+    }
+
+    /* Optional: Adjust the icon button size if needed */
+    .header .icon-button {
+        font-size: 1.2rem;
+        /* Adjust icon size */
+    }
+}

@@ -11,90 +11,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
     <title>Footer UI</title>
-    <style>
-    /* Styles for the footer */
-    #col1 {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .footer {
-        padding: 40px 0;
-        background-color: white;
-        border-top: 1px solid white;
-    }
-
-    .footer .footer-column {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .footer .footer-title {
-        font-weight: bold;
-        font-size: 18px;
-        margin-bottom: 10px;
-    }
-
-    .footer .footer-border {
-        border-top: 1px solid #d3d3d3;
-        margin-top: 20px;
-        padding-top: 20px;
-    }
-
-    .footer-column p {
-        word-wrap: break-word;
-        word-break: break-word;
-        line-height: 1.6;
-        margin-bottom: 10px;
-    }
-
-    .footer-button {
-        background: none;
-        border: none;
-        color: black;
-        text-align: left;
-        padding: 0;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    .footer-button:hover {
-        color: #007bff;
-    }
-
-    .company-name {
-        color: #F2584C;
-        font-size: 40px;
-        font-family: 'Old English Text MT', serif;
-        font-weight: 400;
-        word-wrap: break-word;
-        display: inline-block;
-        margin-left: 10px;
-    }
-
-    .footer-logo {
-        max-width: 50%;
-    }
-
-    .footer-check {
-        max-width: 60%;
-    }
-
-    @media (max-width: 576px) {
-        .footer-logo {
-            max-width: 30%;
-        }
-
-        .footer-check {
-            max-width: 30%;
-        }
-    }
-    </style>
+    <link href="{{ asset('assets/css/layout/partials/Footer.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -104,8 +21,8 @@
             <!-- Column 1: Logo -->
             <div class="row">
                 <div class="col-md-3 footer-column" id="col1">
-                    <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo" class="footer-logo">
-                    <img src="{{ asset('assets/images/bct 1.png') }}" alt="Xác nhận" class="footer-check">
+                    <img src="{{ asset('uploads/logo/Logo.png') }}" alt="Logo" class="footer-logo">
+                    <img src="{{ asset('uploads/images/bct 1.png') }}" alt="Xác nhận" class="footer-check">
                 </div>
 
                 <!-- Column 2: Chính sách -->
@@ -171,11 +88,7 @@
         </div>
     </footer>
 
-    <script>
-    function navigateToPage(page) {
-        window.location.href = page + ".blade.php";
-    }
-    </script>
+    <script src="{{ asset('assets/js/layout/partials/Footer.js') }}"></script>
 </body>
 
 </html>

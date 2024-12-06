@@ -37,9 +37,9 @@
 @endsection
 
 @push('styles')
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ asset('css/account/login.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('js/login.js') }}"></script>
+<script src="{{ asset('js/account/login.js') }}"></script>
 @endpush

@@ -1,0 +1,85 @@
+.header .navbar {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: 60px;
+}
+
+.header .company-name {
+    color: #C53327;
+    font-size: 25px;
+    font-family: Old English Text MT;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.header .search-input {
+    border: 1px solid #d35400;
+    border-radius: 0;
+    height: 38px;
+    min-width: 50px;
+    max-width: 500px;
+    flex-grow: 1;
+}
+
+.header .search-btn {
+    background-color: #d35400;
+    color: white;
+    border-radius: 0;
+    height: 38px;
+}
+
+.header .navbar-nav {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .navbar-nav .nav-link {
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    align-items: center;
+    background: none;
+}
+
+.header .register-link {
+    color: black;
+    border: none;
+}
+
+.header .login-link {
+    color: #9E291F;
+    border-left: 2px solid #9E291F;
+    border-right: 2px solid #9E291F;
+    border-top: none;
+    border-bottom: none;
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+.header .cart-icon {
+    font-size: 1.5rem;
+    color: black;
+    border: none;
+    margin-right: 60px;
+}
+
+.header .user-icon {
+    font-size: 1.5rem;
+    color: black;
+    border: none;
+    margin-right: 10px;
+}
+
+@media (max-width: 576px) {
+    /* Your media query styles remain unchanged */
+}

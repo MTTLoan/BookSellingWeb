@@ -144,10 +144,9 @@
 
 
 @push('styles')
-<link href="{{ asset('css/register.css') }}" rel="stylesheet">
+<link href="{{ asset('css/account/register.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('js/register.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/account/register.js') }}"></script>
 @endpush
