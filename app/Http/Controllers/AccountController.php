@@ -19,8 +19,14 @@ class AccountController extends Controller
         return view('account.login');
     }
 
+    public function logout()
+    {
+        auth('web')->logout();
+        return redirect()->route('home')->with('ok', 'Verify account successfully');
+    }
+
     public function checkLogin(Request $req)
-{
+    {
     $validated = $req->validate([
         'name' => 'required|exists:users,name', // Kiểm tra tên tài khoản
         'password' => 'required',

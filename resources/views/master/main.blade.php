@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('uploads/logo/Favicon.png') }}" type="image/x-icon">
     <title>@yield('title', 'Trang Chủ')</title>
     <!-- link bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -27,7 +28,8 @@
 </head>
 
 <body>
-    @include('layout.partials.Header_NoLogin')
+
+    @include('layout.partials.Header')
 
     @yield('content')
 

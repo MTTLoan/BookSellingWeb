@@ -6,7 +6,7 @@
 <div class="container-fluid-product">
     <div class="row">
         <!-- Sidebar - Categories -->
-        <aside class="col-md-3 col-lg-3 category-menu border rounded p-0 bg-white">
+        <aside class="col-md-3 col-lg-3 category-menu border rounded p-0 bg-white d-none d-lg-block">
             <div class="category-header bg-light">
                 <h5 class="fw-medium">
                     <i class="bi bi-list"></i> DANH MỤC
@@ -38,31 +38,31 @@
         <!-- Main Content -->
         <div class="col-lg-9 px-3">
             <!-- Button Section with Border -->
-            <div class="button-section border rounded d-flex justify-content-start mb-3 p-1">
+            <div class="button-section border rounded d-flex justify-content-between mb-3 p-1 d-none d-md-flex">
                 <button class="btn me-3" data-target="DonHang">ĐƠN HÀNG</button>
                 <button class="btn me-3" data-target="Voucher">VOUCHER</button>
                 <button class="btn me-3" data-target="Review">REVIEW</button>
-                <button class="btn" data-target="Blog">BLOG</button>
+                <button class="btn " data-target="Blog">BLOG</button>
             </div>
+
 
 
             <!-- Image Section -->
             <div class="container p-0">
                 <div class="row">
                     <!-- Column 1 (Banner Image) - Cột 1 chiếm 2 dòng -->
-                    <div class="col-md-9 main_banner">
+                    <div class="col-lg-9 main_banner">
                         <img src=" {{ asset('uploads/banner/Banner.png') }}" alt="Banner Image"
                             class="img-fluid rounded img-responsive">
                     </div>
                     <!-- Column 2, Row 1 (Book 1) -->
-                    <div class="col-md-3 book-cell ps-0">
+                    <div class="col-lg-3 book-cell ps-0">
                         <img src="{{ asset('uploads/banner/Banner1.jpg') }}" alt="Book 1"
                             class="img-fluid img-responsive rounded pb-3">
                         <img src="{{ asset('uploads/banner/Banner2.jpg') }}" alt="Book 2"
                             class="img-fluid img-responsive rounded ">
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -95,7 +95,6 @@
 <link href="{{ asset('assets/css/home/index.css') }}" rel="stylesheet">
 @endpush
 
-@push('s
-cripts')
+@push('scripts')
 <script src="{{ asset('assets/js/home/index.js') }}"></script>
 @endpush

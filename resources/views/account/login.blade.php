@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('master.main')
 
 @section('title', 'Đăng Nhập')
 
@@ -37,9 +37,9 @@
 @endsection
 
 @push('styles')
-<link href="{{ asset('css/account/login.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/account/login.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('js/account/login.js') }}"></script>
+<script src="{{ asset('assets/js/account/login.js') }}"></script>
 @endpush

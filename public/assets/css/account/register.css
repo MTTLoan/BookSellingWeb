@@ -28,17 +28,15 @@ body {
     gap: 10px;
 }
 
-.btn {
-    flex: 0 0 30%;
-}
-
 .btn-register {
     background-color: #c53327 !important;
     color: white !important;
+    flex: 0 0 30%;
 }
 
 .btn-cancel {
     background-color: white !important;
     color: #c53327 !important;
     border-color: #c53327 !important;
+    flex: 0 0 30%;
 }
