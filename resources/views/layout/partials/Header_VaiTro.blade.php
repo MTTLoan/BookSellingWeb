@@ -85,7 +85,7 @@
         background: none;
         border: none;
         font-size: 1.5rem;
-        color: black;
+        color: black !important;
     }
 
     @media (max-width: 576px) {

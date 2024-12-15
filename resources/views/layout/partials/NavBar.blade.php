@@ -52,7 +52,7 @@
     .dropdown-item:hover {
         color: #fff !important;
         /* Change text color to white */
-        background-color: #9E291F;
+        background-color: #9E291F !important;
         /* Dark red background on hover */
     }
 
