@@ -7,10 +7,9 @@ Route::get('/home', function () {
     return view('home.index');
 })->name('home');
 Route::group(['prefix' => 'account'], function () {
-
-    Route::get('/login', [AccountController::class, 'login'])->name('account.login');
-    Route::post('/login', [AccountController::class, 'checkLogin']);
-    Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
+    
+    // Route::get('/login', [AccountController::class, 'login'])->name('account.login');
+    // Route::post('/login', [AccountController::class, 'checkLogin']);
 
     Route::get('/verify-account/{email}', [AccountController::class, 'verify'])->name('account.verify');
     Route::get('/register', [AccountController::class, 'register'])->name('account.register');

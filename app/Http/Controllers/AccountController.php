@@ -6,7 +6,9 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Mail\VerifyAccount;
 use App\Models\User;
+use Illuminate\Container\Attributes\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -70,7 +72,7 @@ class AccountController extends Controller
             'name' => 'required|min:3|max:100|regex:/^[\S]*$/',
             'fullname' => 'required|min:3|max:100',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
             'phone_number' => 'required|digits_between:10,11',
             'birthday' => 'required|date|before:today',
@@ -95,7 +97,7 @@ class AccountController extends Controller
             'email.unique' => 'Email này đã được sử dụng.',
 
             'password.required' => 'Mật khẩu không được để trống.',
-            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
 
             'password_confirmation.required' => 'Nhập lại mật khẩu không được để trống.',
             'password_confirmation.same' => 'Nhập lại mật khẩu không khớp.',
@@ -192,38 +194,38 @@ class AccountController extends Controller
     }
 
     public function checkChangePassword(Request $request)
-    {
-        // Xác thực dữ liệu đầu vào
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
-        ]);
+{
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
 
-        // Lấy người dùng hiện tại
-        $user = Auth::user();
+    // Lấy người dùng hiện tại
+    $user = Auth::user();
 
-        // Ensure $user is an instance of User model
-        if (!$user instanceof User) {
-            return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
-        }
+    // Ensure $user is an instance of User model
+    if (!$user instanceof User) {
+        return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
+    }
 
-        // Kiểm tra mật khẩu hiện tại
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
-        }
+    // Kiểm tra mật khẩu hiện tại
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
+    }
 
-        // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+    // Cập nhật mật khẩu mới
+    $user->password = Hash::make($request->new_password);
+    $user->save();
 
         // Trả về thông báo thành công
         return redirect()->route('account.change-password')->with('success', 'Đổi mật khẩu thành công!');
     }
 
-    // public function forgotPassword()
-    // {
-    //     return view('account.forgot-password');
-    // }
+    public function forgotPassword()
+    {
+        return view('account.forgot-password');
+    }
 
     // public function checkForgotPassword(Request $request)
     // {
@@ -242,35 +244,42 @@ class AccountController extends Controller
     //         return back()->with('status', 'Đã gửi email reset mật khẩu.');
     //     }
     //     return back()->withErrors(['email'=>'Email khong ton tai.']);
-    // }
+    // } 
 
     // public function resetPassword(Request $request)
     // {
     //     return view('account.reset-password', ['token' => $request->token, 'email' => $request->email]);
     // }
 
-    // // Xử lý reset mật khẩu
-    // public function checkResetPassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required|confirmed|min:8',
-    //         'token' => 'required',
-    //     ]);
+public function checkResetPassword(Request $request)
+{
+    $request->validate([
+        'password' => 'required|min:8|confirmed',
+        'token' => 'required',
+        'email' => '',
+    ]);
 
-    //     // Kiểm tra token và email
-    //     $status = Password::reset(
-    //         $request->only('email', 'password', 'password_confirmation', 'token'),
-    //         function ($user, $password) {
-    //             $user->forceFill([
-    //                 'password' => Hash::make($password),
-    //             ])->save();
-    //         }
-    //     );
+    $email=$request->input('email');
+    $token=$request->input('token');
+    // $email=urldecode($request->query('email'));
+    // dd($email);
+$passwordReset=FacadesDB::table('password_reset_tokens')->where('email',$email)->where('token', $token)->first();
+
+    $user = User::where('email', $email)->first();
+    if (!$user) {
+        return back()->withErrors(['email' => 'Không tìm thấy người dùng với email này.']);
+    }
+
+    $status = Password::reset(
+        $request->only('password', 'password_confirmation', 'token', 'email'),
+        function ($user, $password) {
+            $user->password = Hash::make($password);
+            $user->save();
+        }
+    );
 
     //     return $status == Password::PASSWORD_RESET
     //                 ? redirect()->route('login')->with('status', __($status))
     //                 : back()->withErrors(['email' => __($status)]);
-
-   // }
+    // }
 }
