@@ -27,36 +27,35 @@ class AccountController extends Controller
 
     public function checkLogin(Request $req)
     {
-    $validated = $req->validate([
-        'name' => 'required|exists:users,name', // Kiểm tra tên tài khoản
-        'password' => 'required',
-    ]);
+        $validated = $req->validate([
+            'name' => 'required|exists:users,name', // Kiểm tra tên tài khoản
+            'password' => 'required',
+        ]);
 
-    $data = $req->only('name', 'password');
+        $data = $req->only('name', 'password');
 
-    // Sử dụng key đúng trong auth()->attempt()
-    if (auth('web')->attempt(['name' => $data['name'], 'password' => $data['password']])) {
-        if (auth('web')->check() && auth('web')->user()->email_verified_at == null) {
-            auth('web')->logout();
+        // Sử dụng key đúng trong auth()->attempt()
+        if (auth('web')->attempt(['name' => $data['name'], 'password' => $data['password']])) {
+            if (auth('web')->check() && auth('web')->user()->email_verified_at == null) {
+                auth('web')->logout();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tài khoản chưa được xác thực.',
+                ], 403);
+            }
+
             return response()->json([
-                'success' => false,
-                'message' => 'Tài khoản chưa được xác thực.',
-            ], 403);
+                'success' => true,
+                'message' => 'Đăng nhập thành công.',
+                'user' => auth('web')->user(),
+            ], 200);
         }
 
         return response()->json([
-            'success' => true,
-            'message' => 'Đăng nhập thành công.',
-            'user' => auth('web')->user(),
-        ], 200);
+            'success' => false,
+            'message' => 'Sai tên tài khoản hoặc mật khẩu.',
+        ], 422);
     }
-
-    return response()->json([
-        'success' => false,
-        'message' => 'Sai tên tài khoản hoặc mật khẩu.',
-    ], 422);
-}
-
 
 
     public function register()
@@ -186,6 +185,119 @@ class AccountController extends Controller
         return redirect()->route('account.login')->with('ok', 'Verify account successfully');
     }
 
+    public function profile()
+    {
+        // Lấy người dùng hiện tại
+        $user = Auth::user();
+
+        // Kiểm tra xem người dùng có tồn tại hay không
+        if (!$user) {
+            return redirect()->route('account.login')->with('error', 'Bạn cần đăng nhập để xem thông tin tài khoản.');
+        }
+
+        // Lấy thông tin từ bảng customers
+        $customer = $user->customer;
+
+        // Truyền dữ liệu đến view
+        return view('account.profile', compact('user', 'customer'));
+    }
+    public function checkProfile(Request $req)
+    {
+        $user = Auth::user();
+
+        // Validate dữ liệu đầu vào
+        $validated = $req->validate([
+            'name' => 'required|min:3|max:100|regex:/^[\S]*$/',
+            'fullname' => 'required|min:3|max:100',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone_number' => 'required|digits_between:10,11',
+            'birthday' => 'date|before:today',
+            'address' => 'min:5|max:255',
+            'ward' => 'string|max:100',
+            'district' => 'string|max:100',
+            'province' => 'string|max:100',
+            'sex' => 'required|in:Nam,Nữ',
+        ], [
+            // Thông báo lỗi tùy chỉnh
+            'name.required' => 'Tên không được để trống.',
+            'name.min' => 'Tên phải có ít nhất 3 ký tự.',
+            'name.max' => 'Tên không được vượt quá 100 ký tự.',
+            'name.regex' => 'Tên không được chứa khoảng trắng.',
+
+            'fullname.required' => 'Họ và tên không được để trống.',
+            'fullname.min' => 'Họ và tên phải có ít nhất 3 ký tự.',
+            'fullname.max' => 'Họ và tên không được vượt quá 100 ký tự.',
+
+            'email.required' => 'Email không được để trống.',
+            'email.email' => 'Email không hợp lệ.',
+            'email.unique' => 'Email này đã được sử dụng.',
+
+            'phone_number.required' => 'Số điện thoại không được để trống.',
+            'phone_number.digits_between' => 'Số điện thoại phải có từ 10 đến 11 chữ số.',
+
+            'birthday.date' => 'Ngày sinh phải là ngày hợp lệ.',
+            'birthday.before' => 'Ngày sinh phải nhỏ hơn ngày hiện tại.',
+
+            'address.min' => 'Địa chỉ phải có ít nhất 5 ký tự.',
+            'address.max' => 'Địa chỉ không được vượt quá 255 ký tự.',
+
+            'ward.string' => 'Phường/xã phải là một chuỗi ký tự hợp lệ.',
+            'ward.max' => 'Phường/xã không được vượt quá 100 ký tự.',
+
+            'district.string' => 'Quận/huyện phải là một chuỗi ký tự hợp lệ.',
+            'district.max' => 'Quận/huyện không được vượt quá 100 ký tự.',
+
+            'province.string' => 'Tỉnh/thành phố phải là một chuỗi ký tự hợp lệ.',
+            'province.max' => 'Tỉnh/thành phố không được vượt quá 100 ký tự.',
+
+            'sex.required' => 'Giới tính không được để trống.',
+            'sex.in' => 'Giới tính không hợp lệ. Chỉ chấp nhận Nam, Nữ',
+        ]);
+
+        if ($validated) {
+            try {
+                $userData = [
+                    'name' => $req->name,
+                    'email' => $req->email,
+                ];
+
+                User::where('id', $user->id)->update($userData);
+
+                $customerData = [
+                    'fullname' => $req->fullname,
+                    'birthday' => $req->birthday,
+                    'address' => $req->address,
+                    'ward' => $req->ward,
+                    'district' => $req->district,
+                    'province' => $req->province,
+                    'sex' => $req->sex,
+                    'phone_number' => $req->phone_number,
+                ];
+
+                Customer::where('user_id', $user->id)->update($customerData);
+
+                // Trả về JSON khi thành công
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Cập nhật thông tin thành công.',
+                ], 200);
+            } catch (\Exception $e) {
+                // Ghi log lỗi và trả về thông báo lỗi
+                Log::error('Lỗi khi cập nhật: ' . $e->getMessage());
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Có lỗi xảy ra khi cập nhật thông tin.',
+                ], 500);
+            }
+        }
+
+        return response()->json([
+            'errors' => $req->errors(),
+            'message' => 'Dữ liệu không hợp lệ.',
+        ], 422);
+    }
+
+
     public function changePassword()
     {
         return view('account.change-password'); // Hiển thị giao diện đổi mật khẩu
@@ -272,5 +384,5 @@ class AccountController extends Controller
     //                 ? redirect()->route('login')->with('status', __($status))
     //                 : back()->withErrors(['email' => __($status)]);
 
-   // }
+    // }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home.index');
 })->name('home');
 Route::group(['prefix' => 'account'], function () {
@@ -15,6 +15,9 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('/verify-account/{email}', [AccountController::class, 'verify'])->name('account.verify');
     Route::get('/register', [AccountController::class, 'register'])->name('account.register');
     Route::post('/register', [AccountController::class, 'checkRegister']);
+
+    Route::get('/profile', [AccountController::class, 'profile'])->name('account.profile');
+    Route::post('/profile', [AccountController::class, 'checkProfile']);
 
     Route::get('/change-password', [AccountController::class, 'changePassword'])->name('account.change-password');
     Route::post('/change-password', [AccountController::class, 'checkChangePassword']);
