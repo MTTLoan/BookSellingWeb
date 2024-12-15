@@ -33,16 +33,23 @@ document
                         Swal.fire({
                             icon: "warning",
                             title: "Đăng nhập thất bại",
-                            text: data.message || "Tài khoản chưa được xác thực.", // Hiển thị message từ server
+                            text:
+                                data.message || "Tài khoản chưa được xác thực.", // Hiển thị message từ server
                         });
-                        throw new Error(data.message || "Tài khoản chưa được xác thực.");
+                        throw new Error(
+                            data.message || "Tài khoản chưa được xác thực."
+                        );
                     } else if (response.status === 422) {
                         Swal.fire({
                             icon: "error",
                             title: "Đăng nhập thất bại",
-                            text: data.message || "Sai tên tài khoản hoặc mật khẩu.", // Hiển thị message từ server
+                            text:
+                                data.message ||
+                                "Sai tên tài khoản hoặc mật khẩu.", // Hiển thị message từ server
                         });
-                        throw new Error(data.message || "Sai tên tài khoản hoặc mật khẩu.");
+                        throw new Error(
+                            data.message || "Sai tên tài khoản hoặc mật khẩu."
+                        );
                     }
 
                     throw new Error(data.message || "Lỗi không xác định");
@@ -55,8 +62,10 @@ document
                         icon: "success",
                         title: "Đăng nhập thành công!",
                         text: "Chào mừng bạn trở lại.",
+                        timer: 3000,
+                    }).then(() => {
+                        window.location.href = data.redirect_url || "/";
                     });
-                    window.location.href = data.redirect_url || "/";
                 }
             })
             .catch((error) => {
@@ -65,7 +74,9 @@ document
                 Swal.fire({
                     icon: "error",
                     title: "Có lỗi xảy ra",
-                    text: error.message || "Không thể gửi thông tin. Vui lòng thử lại sau!",
+                    text:
+                        error.message ||
+                        "Không thể gửi thông tin. Vui lòng thử lại sau!",
                 });
             });
     });
@@ -89,5 +100,5 @@ document.getElementById("btnCancel").addEventListener("click", function () {
 
 // Handle forgot password click
 document.getElementById("forgot").addEventListener("click", function () {
-    window.location.href = "{{ route('account.forgot-password') }}";
+    window.location.href = forgotPasswordUrl;
 });

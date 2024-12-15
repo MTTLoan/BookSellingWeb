@@ -79,6 +79,7 @@ document
                         icon: "success",
                         title: "Đăng ký thành công!",
                         text: "Hãy kiểm tra email để xác nhận tài khoản.",
+                        timer: 3000,
                     });
                     form.reset();
                     clearErrors();

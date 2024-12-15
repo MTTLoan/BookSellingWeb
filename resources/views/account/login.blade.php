@@ -9,6 +9,12 @@
         <div class="title fw-bold text-center mb-4">
             <h2>ĐĂNG NHẬP</h2>
         </div>
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+
         <div class="mb-3">
             <label for="name" class="form-label">Tên tài khoản</label>
             <i class="text-danger">(*)</i>
@@ -34,6 +40,9 @@
         </div>
     </form>
 </div>
+<script>
+const forgotPasswordUrl = "{{ route('account.forgot-password') }}";
+</script>
 @endsection
 
 @push('styles')

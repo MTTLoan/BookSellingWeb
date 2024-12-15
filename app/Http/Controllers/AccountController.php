@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Mail\VerifyAccount;
 use App\Models\User;
 use Illuminate\Container\Attributes\DB;
+use App\Mail\PasswordReset;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash;
@@ -190,11 +191,11 @@ class AccountController extends Controller
 
     public function changePassword()
     {
-        return view('account.change-password'); // Hiển thị giao diện đổi mật khẩu
+        return view('account.change-password'); 
     }
 
     public function checkChangePassword(Request $request)
-{
+    {
     // Xác thực dữ liệu đầu vào
     $request->validate([
         'current_password' => 'required',
@@ -227,59 +228,52 @@ class AccountController extends Controller
         return view('account.forgot-password');
     }
 
-    // public function checkForgotPassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'email'=>'required|email',
-    //     ]);
 
-    //     $user=User::where('email',$request->email)->first();
+    public function checkForgotPassword(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email',
+        ]);
 
-    //     if ($user) {
-    //         $token=app('auth.password.broker')->createToken($user);
+        $user=User::where('email',$request->email)->first();
 
-    //         $resetLink=route('account.reset-password', ['token', 'email'=>$request->email]);
-    //         Mail::to($user->email)->send(new PasswordReset($resetLink));
+        if ($user) {
+            $token = Password::createToken($user);
+            $resetLink=route('account.reset-password', ['token' => $token, 'email'=>$request->email]);
+            Mail::to($user->email)->send(new PasswordReset($resetLink));
 
-    //         return back()->with('status', 'Đã gửi email reset mật khẩu.');
-    //     }
-    //     return back()->withErrors(['email'=>'Email khong ton tai.']);
-    // } 
+            return back()->with('status', 'Đã gửi email reset mật khẩu.');
+        }
+        return back()->withErrors(['email'=>'Email không tồn tại.']);
+    } 
 
-    // public function resetPassword(Request $request)
-    // {
-    //     return view('account.reset-password', ['token' => $request->token, 'email' => $request->email]);
-    // }
+    public function resetPassword($token)
+    {
+            return view('account.reset-password', ['token' => $token, 'email' => request('email')]);
+    }
 
 public function checkResetPassword(Request $request)
 {
     $request->validate([
-        'password' => 'required|min:8|confirmed',
         'token' => 'required',
-        'email' => '',
+        'email' => 'required|email',
+        'password' => 'required|confirmed|min:8',
     ]);
 
-    $email=$request->input('email');
-    $token=$request->input('token');
-    // $email=urldecode($request->query('email'));
-    // dd($email);
-$passwordReset=FacadesDB::table('password_reset_tokens')->where('email',$email)->where('token', $token)->first();
-
-    $user = User::where('email', $email)->first();
-    if (!$user) {
-        return back()->withErrors(['email' => 'Không tìm thấy người dùng với email này.']);
-    }
-
     $status = Password::reset(
-        $request->only('password', 'password_confirmation', 'token', 'email'),
+        $request->only('email', 'password', 'password_confirmation', 'token'),
         function ($user, $password) {
             $user->password = Hash::make($password);
             $user->save();
         }
     );
 
-    //     return $status == Password::PASSWORD_RESET
-    //                 ? redirect()->route('login')->with('status', __($status))
-    //                 : back()->withErrors(['email' => __($status)]);
-    // }
+    if ($status == Password::PASSWORD_RESET) {
+        return redirect()->route('account.login')->with('status', 'Đặt lại mật khẩu thành công.');
+    } elseif ($status == Password::INVALID_TOKEN) {
+        return back()->withErrors(['token' => 'Token đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.']);
+    }
+
+    return back()->withErrors(['email' => __($status)]);
+    }
 }

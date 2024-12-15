@@ -123,4 +123,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 15, // Token hết hạn sau 15 phút
+            'throttle' => 10, // Giới hạn yêu cầu đặt lại mật khẩu mỗi 10 phút
+        ],
+    ],
+
 ];
