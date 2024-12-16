@@ -98,7 +98,3 @@ document.getElementById("btnCancel").addEventListener("click", function () {
     window.history.back(); // Go back to the previous page
 });
 
-// Handle forgot password click
-document.getElementById("forgot").addEventListener("click", function () {
-    window.location.href = forgotPasswordUrl;
-});

@@ -28,7 +28,7 @@
                 required />
         </div>
         <div class="d-flex justify-content-start text-danger">
-            <span id="forgot">Bạn quên mật khẩu ư?</span>
+            <a href="{{ route('account.forgot-password') }}" class="forgot">Bạn quên mật khẩu?</a>
         </div>
         <div class="group_btn d-flex justify-content-center mt-4 p-2">
             <button type="reset" class="btn btn_cancel me-3" id="btnCancel">
