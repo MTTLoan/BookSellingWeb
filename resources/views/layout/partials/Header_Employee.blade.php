@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Header UI</title>
     <link href="{{ asset('assets/css/layout/partials/Header_Employee.css') }}" rel="stylesheet">
@@ -17,23 +14,81 @@
 
 <body>
     <header class="header">
-        <nav class="navbar navbar-expand-sm navbar-white bg-white">
+        <nav class="navbar navbar-header navbar-expand-lg navbar-white bg-white">
             <div class="container-fluid d-flex justify-content-between align-items-center" id="Logo">
-                <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu"
-                    aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="btn navbar-toggler me-2 d-lg-none" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <i class="bi bi-list"></i>
                 </button>
+
+                <div class="offcanvas offcanvas-start d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
+                    tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                    <div class="offcanvas-header">
+                        <h4 class="offcanvas-title" id="offcanvasScrollingLabel">MENU</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="list-unstyled components">
+                            <li>
+                                <a href="#">TỔNG QUAN</a>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#productSubmenu" aria-expanded="false"
+                                    class="dropdown-toggle">
+                                    SẢN PHẨM
+                                </a>
+                                <ul class="collapse list-unstyled" id="productSubmenu">
+                                    <li><a href="#">Danh mục sản phẩm</a></li>
+                                    <li><a href="#">Khuyến mãi</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#transactionSubmenu" aria-expanded="false"
+                                    class="dropdown-toggle">
+                                    GIAO DỊCH
+                                </a>
+                                <ul class="collapse list-unstyled" id="transactionSubmenu">
+                                    <li><a href="#">Phiếu đặt hàng</a></li>
+                                    <li><a href="#">Nhập hàng</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#partnerSubmenu" aria-expanded="false"
+                                    class="dropdown-toggle">
+                                    ĐỐI TÁC & NGUỒN LỰC
+                                </a>
+                                <ul class="collapse list-unstyled" id="partnerSubmenu">
+                                    <li><a href="#">Khách hàng</a></li>
+                                    <li><a href="#">Nhà cung cấp</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a data-bs-toggle="collapse" href="#reportSubmenu" aria-expanded="false"
+                                    class="dropdown-toggle">
+                                    BÁO CÁO
+                                </a>
+                                <ul class="collapse list-unstyled" id="reportSubmenu">
+                                    <li><a href="#">Bán hàng</a></li>
+                                    <li><a href="#">Tài chính</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">BÁN HÀNG</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('account.profile') }}">TÀI KHOẢN</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('account.logout') }}">ĐĂNG XUẤT</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('uploads/logo/Favicon.png') }}" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
-                <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
-                    <input class="form-control search-input" type="search" placeholder="Tìm kiếm sản phẩm..."
-                        aria-label="Search">
-                    <button class="btn search-btn" type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </form>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarMenu">
                     <ul class="navbar-nav d-flex align-items-center">
                         <li class="nav-item me-3 d-flex align-items-center">
@@ -55,7 +110,7 @@
                             </button>
                         </li>
 
-                        <li class="nav-item d-flex align-items-center">
+                        <li class="nav-item d-flex align-items-center ">
                             <span class="account-name me-1">Tài khoản</span>
                             <button class="nav-link icon-button" id="accountButton">
                                 <i class="bi bi-person-circle"></i>
@@ -67,8 +122,8 @@
         </nav>
     </header>
 
-    <script src="{{ asset('assets/js/layout/partials/Header_Employee.js') }}"></script>
 </body>
+
 
 
 </html>
