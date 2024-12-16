@@ -50,7 +50,7 @@
                             </li>
                             @if(Auth::check())
                             <li>
-                                <a href="#">TÀI KHOẢN</a>
+                                <a href="{{ route('account.profile') }}">TÀI KHOẢN</a>
                             </li>
                             <li>
                                 <a href="{{ route('account.logout') }}">ĐĂNG XUẤT</a>
@@ -90,7 +90,7 @@
                                 <i class="bi bi-person-fill user-icon"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+                                <li><a class="dropdown-item" href="{{ route('account.profile') }}">Tài khoản</a></li>
                                 <li><a class="dropdown-item" href="{{ route('account.change-password') }}">Đổi mật
                                         khẩu</a></li>
                                 <li>
@@ -118,7 +118,6 @@
             </div>
         </nav>
     </div>
-    <script src="{{ asset('assets/js/layout/partials/Header.js') }}"></script>
 </body>
 
 

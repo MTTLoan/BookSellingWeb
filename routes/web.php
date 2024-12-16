@@ -17,6 +17,9 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('/register', [AccountController::class, 'register'])->name('account.register');
     Route::post('/register', [AccountController::class, 'checkRegister']);
 
+    Route::get('/profile', [AccountController::class, 'profile'])->name('account.profile');
+    Route::post('/profile', [AccountController::class, 'checkProfile']);
+
     Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
         Route::get('/change-password', [AccountController::class, 'changePassword'])->name('account.change-password');
         Route::post('/change-password', [AccountController::class, 'checkChangePassword']);

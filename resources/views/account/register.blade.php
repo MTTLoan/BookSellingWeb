@@ -62,9 +62,9 @@
 
         <!-- Ngày sinh -->
         <div class="mb-3">
-            <label for="birthday" class="form-label">Ngày sinh <i class="text-danger">(*)</i></label>
+            <label for="birthday" class="form-label">Ngày sinh</label>
             <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday"
-                name="birthday" value="{{ old('birthday') }}" required>
+                name="birthday" value="{{ old('birthday') }}">
             @error('birthday')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -72,8 +72,8 @@
 
         <!-- Tỉnh, thành phố -->
         <div class="mb-3">
-            <label for="province" class="form-label">Tỉnh, thành phố <i class="text-danger">(*)</i></label>
-            <select class="form-select @error('province') is-invalid @enderror" id="province" name="province" required>
+            <label for="province" class="form-label">Tỉnh, thành phố</label>
+            <select class="form-select @error('province') is-invalid @enderror" id="province" name="province">
                 <option value="">Chọn tỉnh, thành phố</option>
                 <!-- Các option tỉnh/thành phố -->
             </select>
@@ -84,8 +84,8 @@
 
         <!-- Quận, huyện -->
         <div class="mb-3">
-            <label for="district" class="form-label">Quận, huyện <i class="text-danger">(*)</i></label>
-            <select class="form-select @error('district') is-invalid @enderror" id="district" name="district" required>
+            <label for="district" class="form-label">Quận, huyện</label>
+            <select class="form-select @error('district') is-invalid @enderror" id="district" name="district">
                 <option value="">Chọn quận, huyện</option>
                 <!-- Các option quận/huyện -->
             </select>
@@ -96,8 +96,8 @@
 
         <!-- Phường, xã -->
         <div class="mb-3">
-            <label for="ward" class="form-label">Phường, xã <i class="text-danger">(*)</i></label>
-            <select class="form-select @error('ward') is-invalid @enderror" id="ward" name="ward" required>
+            <label for="ward" class="form-label">Phường, xã </label>
+            <select class="form-select @error('ward') is-invalid @enderror" id="ward" name="ward">
                 <option value="">Chọn phường, xã</option>
                 <!-- Các option phường/xã -->
             </select>
@@ -108,9 +108,9 @@
 
         <!-- Địa chỉ -->
         <div class="mb-3">
-            <label for="address" class="form-label">Địa chỉ <i class="text-danger">(*)</i></label>
+            <label for="address" class="form-label">Địa chỉ </label>
             <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address"
-                value="{{ old('address') }}" placeholder="Nhập địa chỉ" required>
+                value="{{ old('address') }}" placeholder="Nhập địa chỉ">
             @error('address')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -136,7 +136,7 @@
 
         <!-- Nút hành động -->
         <div class="btn-container">
-            <button type="reset" class="btn btn-cancel">Hủy</button>
+            <button type="reset" class="btn btn-cancel" id="btnCancel">Hủy</button>
             <button type="submit" class="btn btn-register">Đăng ký</button>
         </div>
     </form>

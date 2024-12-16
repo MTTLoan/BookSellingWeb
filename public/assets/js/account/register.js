@@ -1,3 +1,8 @@
+// Handle cancel button click
+document.getElementById("btnCancel").addEventListener("click", function () {
+    window.history.back(); // Go back to the previous page
+});
+
 document
     .getElementById("registrationForm")
     .addEventListener("submit", function (event) {
