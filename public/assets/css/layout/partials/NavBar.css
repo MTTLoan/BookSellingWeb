@@ -1,121 +1,90 @@
-.navbar {
-    background-color: #DA392B;
-    padding: 0 60px;
-    /* Padding for both sides */
+.navbar-container .navbar-style {
+    background-color: #DA392B !important;
+    padding: 0 60px !important;
 }
 
-#overviewButton {
-    padding: .5rem 1rem ;
-    font-size: 1rem ;
-    margin: 0px;
+.navbar-container #overviewButton {
+    padding: .5rem 1rem !important;
+    font-size: 1rem !important;
+    margin: 0;
 }
 
-.navbar .nav-link,
-.navbar .navbar-brand,
-.navbar .nav-link i {
+.navbar-container .nav-link-style,
+.navbar .nav-link-style i {
     color: white !important;
 }
 
-.navbar .dropdown-menu {
-    background-color: #C53327;
+.navbar-container .dropdown-menu {
+    background-color: #C53327 !important;
     margin-top: 0;
-    /* Remove the gap between navbar and dropdown */
     padding: 0;
+    z-index: 1050 !important; /* Ensure dropdown is above other elements */
+    position: absolute; /* Ensure dropdown is positioned correctly */
 }
 
-.navbar .dropdown-item {
+.navbar-container .dropdown-item {
     color: white !important;
 }
 
-.navbar-toggler {
+.navbar-container .navbar-toggler {
     background-color: transparent;
-    /* Make the background transparent */
     border: none;
-    /* Remove the border */
 }
 
-.navbar-toggler .bi {
+.navbar-container .navbar-toggler .bi {
     color: white;
-    /* Change the icon color to white */
 }
 
-.nav-item {
-    color: #fff !important;
-}
-
-.nav-link:hover,
+.navbar-container .nav-link-style:hover,
 .dropdown-item:hover {
     color: #fff !important;
-    /* Change text color to white */
-    background-color: #9E291F;
-    /* Dark red background on hover */
+    background-color: #9E291F !important;
 }
 
-/* Active state color for navbar links and dropdown items */
-.nav-link.active,
+.navbar-container .nav-link-style.active,
 .dropdown-item.active {
     color: #fff !important;
-    /* Change text color to white */
-    background-color: #9E291F;
-    /* Dark red background when active */
-}
-
-/* Change active color for navbar links */
-.nav-link.active,
-.dropdown-item.active {
-    color: #9E291F;
-    /* Red for active state */
+    background-color: #9E291F !important;
 }
 
 @media (max-width: 940px) {
-    .navbar {
+    .navbar-container .navbar {
         padding: 0;
-        /* Set padding to 0 on both sides when screen width is 940px or less */
     }
 }
 
 @media (max-width: 840px) {
-    .navbar {
-        padding: 0;
-        /* Remove extra padding on small screens */
-    }
-
-    .navbar-collapse {
+    .navbar-container .navbar-collapse {
         display: flex;
         flex-direction: column;
     }
 
-    .navbar-nav {
+    .navbar-container .navbar-nav {
         width: 100%;
         text-align: left;
     }
 
-    .navbar-nav .nav-item {
+    .navbar-container .navbar-nav .nav-item {
         width: 100%;
     }
 
-    .navbar-nav .nav-link {
+    .navbar-container .nav-link-style {
         padding: 10px 20px;
     }
 
-    .navbar-brand {
+    .navbar-container .navbar-brand {
         margin-left: 0;
-        /* Remove margin entirely on small screens */
         justify-content: center;
-        /* Center the brand */
         text-align: center;
-        /* Ensure text is centered */
         width: 100%;
-        /* Make the brand take up full width */
     }
 
-    .navbar-toggler {
+    .navbar-container .navbar-toggler {
         margin-left: 0;
     }
 
-    .navbar-nav.ms-auto {
+    .navbar-container .navbar-nav.ms-auto {
         justify-content: center;
-        /* Center items on small screens */
         margin-right: 0;
     }
 }

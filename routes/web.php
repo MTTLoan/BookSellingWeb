@@ -7,6 +7,21 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 Route::get('/', function () {
     return view('home.index');
 })->name('home');
+
+Route::get('/test1', function () {
+    // return view('layout.partials.NavBar');
+    return view('layout.partials.Header_Employee');
+})->name('home');
+
+Route::get('/test2', function () {
+    // return view('layout.partials.NavBar');
+    return view('layout.partials.NavBar');
+})->name('home');
+
+Route::get('/admin', function () {
+    return view('master.admin');
+})->name('home.admin');
+
 Route::group(['prefix' => 'account'], function () {
     
     Route::get('/login', [AccountController::class, 'login'])->name('account.login');

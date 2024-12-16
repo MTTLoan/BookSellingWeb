@@ -60,7 +60,6 @@ class AccountController extends Controller
         ], 422);
     }
 
-
     public function register()
     {
         return view('account.register');
@@ -299,7 +298,6 @@ class AccountController extends Controller
             'message' => 'Dữ liệu không hợp lệ.',
         ], 422);
     }
-
 
     public function changePassword()
     {
