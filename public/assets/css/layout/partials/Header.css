@@ -1,0 +1,133 @@
+.header .navbar {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.header .company-name {
+    color: #c53327;
+    font-size: 25px;
+    font-family: "Old English Text MT", serif;
+    margin-left: 5px;
+}
+
+.header .search-input {
+    border: 1px solid #d35400;
+    border-radius: 0;
+    max-width: 500px;
+    flex-grow: 1;
+}
+
+.header .search-btn {
+    background-color: #d35400;
+    color: white;
+    border-radius: 0;
+    height: 38px;
+}
+
+.header .navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.header .navbar-nav .nav-link {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.header .register-link{
+    color: black;
+}
+
+.header .login-link {
+    color: #9e291f;
+    border-left: 2px solid #9e291f;
+    border-right: 2px solid #9e291f;
+    padding: 0 10px;
+    margin: 0 5px;
+}
+
+.header .user-icon {
+    font-size: 1.5rem;
+    color: black;
+    border: none;
+    margin-right: 10px;
+}
+
+.header .cart-icon {
+    font-size: 1.5rem;
+    color: black;
+}
+
+@media (max-width: 576px) {
+    .header .navbar {
+        flex-wrap: wrap;
+    }
+
+    .header .navbar-brand {
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    .header .navbar-brand img {
+        width: 30px;
+        height: 25px;
+    }
+
+    .header .search-input {
+        width: 100%;
+    }
+
+    .header .navbar-nav {
+        margin-top: 5px;
+    }
+
+    .header .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .header .cart-icon {
+        font-size: 1.2rem;
+    }
+}
+
+/* Offcanvas styles */
+.offcanvas {
+    width: 250px !important;
+}
+
+.offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.offcanvas-body ul {
+    padding-left: 0;
+}
+
+.offcanvas-body ul li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+.offcanvas-body ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.offcanvas-body ul li a:hover {
+    color: #c53327;
+}
