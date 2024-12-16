@@ -1,0 +1,131 @@
+.header .navbar-header {
+    border-bottom: 1px solid #ddd !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header .navbar-brand {
+    display: flex;
+    align-items: center;
+    margin-left: 60px !important;
+}
+
+.header .company-name {
+    color: #C53327 !important;
+    font-size: 25px;
+    font-family: Old English Text MT;
+    font-weight: 400;
+    margin-left: 5px;
+}
+
+.header .navbar-nav {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .navbar-nav .nav-link {
+    padding: 0 10px !important;
+    display: flex;
+    justify-content: center;
+    width: auto;
+    align-items: center;
+    background: none;
+}
+
+.header .icon-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: black !important;
+}
+
+@media (max-width: 992px) {
+    .header .navbar-brand {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+    }
+
+    .header .navbar-brand img {
+        width: 30px;
+        height: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .header .navbar-brand {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0px;
+    }
+
+    .header .navbar-brand img {
+        width: 30px;
+        height: 25px;
+    }
+
+    .header .company-name {
+        font-size: 20px;
+    }
+
+    .header .navbar-nav .nav-link {
+        font-size: 0.9rem;
+        padding: 0 10px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .header .navbar-nav {
+        margin-top: 5px;
+        align-items: center;
+    }
+
+    .header .icon-button {
+        font-size: 1.2rem;
+    }
+}
+
+
+/* Offcanvas styles */
+.offcanvas {
+    width: 270px !important;
+}
+
+.offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.offcanvas-body ul {
+    padding-left: 0;
+}
+
+.offcanvas-body ul li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+}
+
+.offcanvas-body ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.offcanvas-body ul li a:hover {
+    color: #c53327;
+}
