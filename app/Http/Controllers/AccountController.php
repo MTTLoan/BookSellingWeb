@@ -6,7 +6,10 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Mail\VerifyAccount;
 use App\Models\User;
+use Illuminate\Container\Attributes\DB;
+use App\Mail\PasswordReset;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -68,7 +71,7 @@ class AccountController extends Controller
             'name' => 'required|min:3|max:100|regex:/^[\S]*$/',
             'fullname' => 'required|min:3|max:100',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
             'phone_number' => 'required|digits_between:10,11',
             'birthday' => 'required|date|before:today',
@@ -93,7 +96,7 @@ class AccountController extends Controller
             'email.unique' => 'Email này đã được sử dụng.',
 
             'password.required' => 'Mật khẩu không được để trống.',
-            'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
 
             'password_confirmation.required' => 'Nhập lại mật khẩu không được để trống.',
             'password_confirmation.same' => 'Nhập lại mật khẩu không khớp.',
@@ -298,89 +301,89 @@ class AccountController extends Controller
 
     public function changePassword()
     {
-        return view('account.change-password'); // Hiển thị giao diện đổi mật khẩu
+        return view('account.change-password'); 
     }
 
     public function checkChangePassword(Request $request)
     {
-        // Xác thực dữ liệu đầu vào
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:8|confirmed',
-        ]);
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
 
-        // Lấy người dùng hiện tại
-        $user = Auth::user();
+    // Lấy người dùng hiện tại
+    $user = Auth::user();
 
-        // Ensure $user is an instance of User model
-        if (!$user instanceof User) {
-            return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
-        }
+    // Ensure $user is an instance of User model
+    if (!$user instanceof User) {
+        return back()->withErrors(['user' => 'Người dùng không hợp lệ.']);
+    }
 
-        // Kiểm tra mật khẩu hiện tại
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
-        }
+    // Kiểm tra mật khẩu hiện tại
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không đúng.']);
+    }
 
-        // Cập nhật mật khẩu mới
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+    // Cập nhật mật khẩu mới
+    $user->password = Hash::make($request->new_password);
+    $user->save();
 
         // Trả về thông báo thành công
         return redirect()->route('account.change-password')->with('success', 'Đổi mật khẩu thành công!');
     }
 
-    // public function forgotPassword()
-    // {
-    //     return view('account.forgot-password');
-    // }
+    public function forgotPassword()
+    {
+        return view('account.forgot-password');
+    }
 
-    // public function checkForgotPassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'email'=>'required|email',
-    //     ]);
 
-    //     $user=User::where('email',$request->email)->first();
+    public function checkForgotPassword(Request $request)
+    {
+        $request->validate([
+            'email'=>'required|email',
+        ]);
 
-    //     if ($user) {
-    //         $token=app('auth.password.broker')->createToken($user);
+        $user=User::where('email',$request->email)->first();
 
-    //         $resetLink=route('account.reset-password', ['token', 'email'=>$request->email]);
-    //         Mail::to($user->email)->send(new PasswordReset($resetLink));
+        if ($user) {
+            $token = Password::createToken($user);
+            $resetLink=route('account.reset-password', ['token' => $token, 'email'=>$request->email]);
+            Mail::to($user->email)->send(new PasswordReset($resetLink));
 
-    //         return back()->with('status', 'Đã gửi email reset mật khẩu.');
-    //     }
-    //     return back()->withErrors(['email'=>'Email khong ton tai.']);
-    // }
+            return back()->with('status', 'Đã gửi email reset mật khẩu.');
+        }
+        return back()->withErrors(['email'=>'Email không tồn tại.']);
+    } 
 
-    // public function resetPassword(Request $request)
-    // {
-    //     return view('account.reset-password', ['token' => $request->token, 'email' => $request->email]);
-    // }
+    public function resetPassword($token)
+    {
+            return view('account.reset-password', ['token' => $token, 'email' => request('email')]);
+    }
 
-    // // Xử lý reset mật khẩu
-    // public function checkResetPassword(Request $request)
-    // {
-    //     $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required|confirmed|min:8',
-    //         'token' => 'required',
-    //     ]);
+public function checkResetPassword(Request $request)
+{
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|confirmed|min:8',
+    ]);
 
-    //     // Kiểm tra token và email
-    //     $status = Password::reset(
-    //         $request->only('email', 'password', 'password_confirmation', 'token'),
-    //         function ($user, $password) {
-    //             $user->forceFill([
-    //                 'password' => Hash::make($password),
-    //             ])->save();
-    //         }
-    //     );
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function ($user, $password) {
+            $user->password = Hash::make($password);
+            $user->save();
+        }
+    );
 
-    //     return $status == Password::PASSWORD_RESET
-    //                 ? redirect()->route('login')->with('status', __($status))
-    //                 : back()->withErrors(['email' => __($status)]);
+    if ($status == Password::PASSWORD_RESET) {
+        return redirect()->route('account.login')->with('status', 'Đặt lại mật khẩu thành công.');
+    } elseif ($status == Password::INVALID_TOKEN) {
+        return back()->withErrors(['token' => 'Token đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.']);
+    }
 
-    // }
+    return back()->withErrors(['email' => __($status)]);
+    }
 }
