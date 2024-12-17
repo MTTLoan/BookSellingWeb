@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'cus' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
+
     ],
 
     /*
@@ -63,6 +68,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+            'key' => 'name', // Xác định cột được sử dụng
+        ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
             'key' => 'name', // Xác định cột được sử dụng
         ],
 

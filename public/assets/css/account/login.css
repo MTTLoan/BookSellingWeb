@@ -43,3 +43,8 @@ body {
     background-color: #9e291f !important;
     color: white !important;
 }
+
+.forgot {
+    color: #c53327 !important;
+    text-decoration: none !important;
+}

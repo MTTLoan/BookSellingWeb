@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Http\\Controllers\\AccountController' => $baseDir . '/app/Http/Controllers/AccountController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\HomePageController' => $baseDir . '/app/Http/Controllers/HomePageController.php',
+    'App\\Http\\Middleware\\AccountMiddleware' => $baseDir . '/app/Http/Middleware/AccountMiddleware.php',
+    'App\\Http\\Middleware\\RedirectIfNotAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfNotAuthenticated.php',
     'App\\Mail\\PasswordReset' => $baseDir . '/app/Mail/PasswordReset.php',
     'App\\Mail\\VerifyAccount' => $baseDir . '/app/Mail/VerifyAccount.php',
     'App\\Models\\Book' => $baseDir . '/app/Models/Book.php',
