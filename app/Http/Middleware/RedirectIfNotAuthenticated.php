@@ -17,7 +17,7 @@ class RedirectIfNotAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!Auth::guard($guard)->check()) {
+        if (!auth('cus')->check()) {
                 session()->flash('error', 'Bạn cần đăng nhập để truy cập trang này.');
                 return redirect()->route('account.login')->with('error', 'Bạn cần đăng nhập để truy cập trang này.');
             }

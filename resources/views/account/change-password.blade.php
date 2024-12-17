@@ -29,8 +29,7 @@
 
             <hr />
             <h6>
-                Mật khẩu của bạn phải chứa ít nhất 8 ký tự, đồng thời
-                bao gồm cả chữ số, chữ cái và ký tự đặc biệt (!@#$%).
+                Mật khẩu của bạn phải chứa ít nhất 6 ký tự.
             </h6>
         </div>
         <div class="form_changepassword">

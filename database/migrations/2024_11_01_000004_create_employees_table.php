@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('province', 100)->nullable();
             $table->date('starting_date');
             $table->integer('salary')->default(0);
-            $table->enum('position', ['director', 'branch_manager', 'staff', 'admin']);
+            $table->enum('role', ['director', 'branch_manager', 'staff', 'admin']);
             $table->foreignIdFor(Branch::class, 'branch_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });

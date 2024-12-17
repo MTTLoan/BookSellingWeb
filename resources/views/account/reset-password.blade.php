@@ -19,16 +19,15 @@
         @endif
         @if ($errors->any())
         <div class="alert alert-danger">
-            <ul>
+            <ol>
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
                 @endforeach
-            </ul>
+            </ol>
         </div>
         @endif
         <div class="text-secondary mb-4">
-            Mật khẩu của bạn phải chứa ít nhất 8 ký tự, đồng thời
-            bao gồm cả chữ số, chữ cái và ký tự đặc biệt (!@#$%).
+            Mật khẩu của bạn phải chứa ít nhất 6 ký tự.
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Mật khẩu mới</label>
