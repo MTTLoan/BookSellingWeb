@@ -301,7 +301,7 @@ class AccountController extends Controller
 
     public function changePassword()
     {
-        return view('account.change-password'); 
+        return view('account.change-password');
     }
 
     public function checkChangePassword(Request $request)
@@ -355,7 +355,7 @@ class AccountController extends Controller
             return back()->with('status', 'Đã gửi email reset mật khẩu.');
         }
         return back()->withErrors(['email'=>'Email không tồn tại.']);
-    } 
+    }
 
     public function resetPassword($token)
     {

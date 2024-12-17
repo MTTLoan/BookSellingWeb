@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Admin\BookController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 Route::get('/', function () {
@@ -32,10 +33,22 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('/profile', [AccountController::class, 'profile'])->name('account.profile');
         Route::post('/profile', [AccountController::class, 'checkProfile']);
     });
-    
+
     Route::get('/forgot-password', [AccountController::class, 'forgotPassword'])->name('account.forgot-password');
     Route::post('/forgot-password', [AccountController::class, 'checkForgotPassword']);
 
     Route::get('/reset-password/{token}', [AccountController::class, 'resetPassword'])->name('account.reset-password');
     Route::post('/reset-password/{token}', [AccountController::class, 'checkResetPassword']);
+});
+
+Route::group(['prefix' => 'account'], function () {
+    Route::resource('book', BookController::class);
+});
+
+Route::get('/test', function () {
+    return view('admin.book.index');
+});
+
+Route::get('/test1', function () {
+    return view('layout.partials.Header_Employee');
 });
