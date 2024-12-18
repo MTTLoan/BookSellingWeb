@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'customers',
         ],
+        'emp' => [
+            'driver' => 'session',
+            'provider' => 'employees',
+        ],
 
     ],
 
@@ -73,6 +77,11 @@ return [
         'customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class,
+            'key' => 'name', // Xác định cột được sử dụng
+        ],
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,
             'key' => 'name', // Xác định cột được sử dụng
         ],
 

@@ -69,10 +69,11 @@
                     </button>
                     <!-- Button add/import -->
                     <div class="button d-flex justify-content-end w-100">
-                        <button class="btn btn_add me-2 d-flex align-items-center text-nowrap" id="btnAdd">
+                        <a class="btn btn_add me-2 d-flex align-items-center text-nowrap" id="btnAdd"
+                            href="{{ route('book.create') }}">
                             <span class="material-symbols-outlined add"> add </span>
                             Thêm
-                        </button>
+                        </a>
                         <button class="btn btn_import d-flex align-items-center text-nowrap" id="btnImport"
                             type="button" data-bs-toggle="modal" data-bs-target="#modal_Import">
                             <span class="material-symbols-outlined import">
@@ -99,6 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- -->
                         <tr>
                             <td>1</td>
                             <td>Trốn lên mái nhà để khóc</td>
@@ -107,18 +109,19 @@
                             <td>150,000</td>
                             <td>195,000</td>
                             <td>
-                                <button type="button" class="btn_preview p-0" id="btnPreview">
+                                <a type="button" class="btn_preview p-0" id="btnPreview"
+                                    href="{{ route('book.show', 1) }}">
                                     <span class="material-symbols-outlined details">visibility</span>
-                                </button>
-                                <button type="button" class="btn_edit p-0" id="btnEdit">
+                                </a>
+                                <a type="button" class="btn_edit p-0" id="btnEdit" href="{{ route('book.edit', 1) }}">
                                     <span class="material-symbols-outlined edit">border_color</span>
-                                </button>
-                                <button type="button" class="btn_delete p-0" id="btnDelete">
+                                </a>
+                                <a type="button" class="btn_delete p-0" id="btnDelete">
                                     <span class="material-symbols-outlined delete">delete</span>
-                                </button>
+                                </a>
                             </td>
                         </tr>
-                        <!-- Thêm các hàng sản phẩm khác -->
+                        <!--  -->
                     </tbody>
                     <tfoot></tfoot>
                 </table>
@@ -264,11 +267,9 @@
 </div>
 @endsection
 
-
 @push('styles')
 <link href="{{ asset('assets/css/admin/book/index.css') }}" rel="stylesheet">
 @endpush
-
 
 @push('scripts')
 <script src="{{ asset('assets/js/admin/book/index.js') }}"></script>

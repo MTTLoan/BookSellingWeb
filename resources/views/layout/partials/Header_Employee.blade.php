@@ -39,7 +39,7 @@
                                     SẢN PHẨM
                                 </a>
                                 <ul class="collapse list-unstyled" id="productSubmenu">
-                                    <li><a href="#">Danh mục sản phẩm</a></li>
+                                    <li><a href="{{ route('book.index') }}">Danh mục sản phẩm</a></li>
                                     <li><a href="#">Khuyến mãi</a></li>
                                 </ul>
                             </li>
