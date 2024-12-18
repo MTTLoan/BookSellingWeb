@@ -26,7 +26,7 @@
             <label for="fullname" class="col-sm-3 col-form-label">Họ và tên <i class="text-danger">(*)</i></label>
             <div class="col-sm-9">
                 <input type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname"
-                    name="fullname" value="{{ $customer->fullname }}">
+                    name="fullname" value="{{ $user->fullname }}">
             </div>
             @error('fullname')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -36,7 +36,7 @@
             <label for="dob" class="col-sm-3 col-form-label">Ngày sinh <i class="text-danger">(*)</i></label>
             <div class="col-sm-9">
                 <input type="date" class="form-control @error('birthday') is-invalid @enderror" id="birthday"
-                    name="birthday" value="{{ $customer->birthday }}">
+                    name="birthday" value="{{ $user->birthday }}">
             </div>
             @error('birthday')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -47,8 +47,8 @@
             <div class="col-sm-9">
                 <select class="form-select @error('sex') is-invalid @enderror" id="sex" name="sex" required>
                     <option value="">Chọn giới tính</option>
-                    <option value="Nam" {{ $customer->sex == 'Nam' ? 'selected' : '' }}>Nam</option>
-                    <option value="Nữ" {{ $customer->sex == 'Nữ' ? 'selected' : '' }}>Nữ</option>
+                    <option value="Nam" {{ $user->sex == 'Nam' ? 'selected' : '' }}>Nam</option>
+                    <option value="Nữ" {{ $user->sex == 'Nữ' ? 'selected' : '' }}>Nữ</option>
                 </select>
             </div>
             @error('sex')
@@ -70,7 +70,7 @@
                     class="text-danger">(*)</i></label>
             <div class="col-sm-9">
                 <input type="tel" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number"
-                    name="phone_number" value="{{ $customer->phone_number }}">
+                    name="phone_number" value="{{ $user->phone_number }}">
             </div>
             @error('phone_number')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -118,7 +118,7 @@
             <label for="address" class="col-sm-3 col-form-label">Địa chỉ</label>
             <div class="col-sm-9">
                 <input type="text" class="form-control @error('address') is-invalid @enderror" id="address"
-                    name="address" value="{{ $customer->address }}">
+                    name="address" value="{{ $user->address }}">
             </div>
             @error('address')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -139,9 +139,9 @@
 @endpush
 @push('scripts')
 <script>
-const customerProvince = "{{ $customer->province }}";
-const customerDistrict = "{{ $customer->district }}";
-const customerWard = "{{ $customer->ward }}";
+const customerProvince = "{{ $user->province }}";
+const customerDistrict = "{{ $user->district }}";
+const customerWard = "{{ $user->ward }}";
 </script>
 <script src="{{ asset('assets/js/account/profile.js') }}"></script>
 @endpush

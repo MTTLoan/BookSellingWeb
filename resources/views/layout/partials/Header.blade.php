@@ -48,7 +48,7 @@
                             <li>
                                 <a href="#">BLOG</a>
                             </li>
-                            @if(Auth::check())
+                            @if(auth('cus')->check())
                             <li>
                                 <a href="{{ route('account.profile') }}">TÀI KHOẢN</a>
                             </li>
@@ -83,7 +83,7 @@
                 </form>
                 <div class="d-none d-md-flex" id="navbarMenu">
                     <ul class="navbar-nav">
-                        @if(Auth::check())
+                        @if(auth('cus')->check())
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">

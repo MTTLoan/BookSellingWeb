@@ -23,6 +23,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return view('admin.book.create');
     }
 
     /**
@@ -36,17 +37,21 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Book $book)
+    // public function show(Book $book)
+    public function show()
     {
         //
+        return view('admin.book.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Book $book)
+    // public function edit(Book $book)
+    public function edit()
     {
         //
+        return view('admin.book.edit');
     }
 
     /**
