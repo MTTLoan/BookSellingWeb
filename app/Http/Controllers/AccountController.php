@@ -22,7 +22,7 @@ class AccountController extends Controller
     public function logout()
     {
         auth('cus')->logout();
-        return redirect()->route('home')->with('ok', 'Verify account successfully');
+        return redirect()->route('home')->with('ok', 'logouted');
     }
 
     public function checkLogin(Request $req)
