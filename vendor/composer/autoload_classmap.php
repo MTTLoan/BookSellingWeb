@@ -7,9 +7,9 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Http\\Controllers\\AccountController' => $baseDir . '/app/Http/Controllers/AccountController.php',
+    'App\\Http\\Controllers\\Admin\\BookController' => $baseDir . '/app/Http/Controllers/Admin/BookController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HomePageController' => $baseDir . '/app/Http/Controllers/HomePageController.php',
-    'App\\Http\\Middleware\\AccountMiddleware' => $baseDir . '/app/Http/Middleware/AccountMiddleware.php',
     'App\\Http\\Middleware\\RedirectIfNotAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfNotAuthenticated.php',
     'App\\Mail\\PasswordReset' => $baseDir . '/app/Mail/PasswordReset.php',
     'App\\Mail\\VerifyAccount' => $baseDir . '/app/Mail/VerifyAccount.php',
@@ -29,7 +29,6 @@ return array(
     'App\\Models\\OrderDetail' => $baseDir . '/app/Models/OrderDetail.php',
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
     'App\\Models\\Supplier' => $baseDir . '/app/Models/Supplier.php',
-    'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\TelescopeServiceProvider' => $baseDir . '/app/Providers/TelescopeServiceProvider.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
