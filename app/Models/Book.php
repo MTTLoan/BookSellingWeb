@@ -14,7 +14,7 @@ class Book extends Model
     protected $fillable = [
         'quantity',
         'unit_price',
-        'expense',
+        'cost',
         'publishing_year',
         'page_number',
         'cover',
@@ -37,16 +37,19 @@ class Book extends Model
         return $this->hasMany(Image::class, 'book_id');
     }
 
-    public function goodsReceipt() {
+    public function goodsReceipt()
+    {
         return $this->belongsToMany(GoodsReceipt::class, 'goods_receipt_details', 'book_id', 'goods_receipt_detail_id')
             ->withPivot(['quantity', 'price']);
     }
 
-    public function carts()  {
+    public function carts()
+    {
         return $this->hasMany(Cart::class, 'book_id');
     }
 
-    public function branches() {
+    public function branches()
+    {
         return $this->belongsToMany(Branch::class, 'books_branches', 'book_id', 'branch_id')
             ->with('quantity');
     }

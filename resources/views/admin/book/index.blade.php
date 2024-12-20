@@ -74,13 +74,6 @@
                             <span class="material-symbols-outlined add"> add </span>
                             Thêm
                         </a>
-                        <button class="btn btn_import d-flex align-items-center text-nowrap" id="btnImport"
-                            type="button" data-bs-toggle="modal" data-bs-target="#modal_Import">
-                            <span class="material-symbols-outlined import">
-                                download
-                            </span>
-                            Tải lên
-                        </button>
                     </div>
                 </div>
             </div>
@@ -90,7 +83,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="serial" style="min-width: 40px">STT</th>
+                            <th scope="serial" style="min-width: 40px">ID</th>
                             <th scope="book_title" style="min-width: 140px">Tên sách</th>
                             <th scope="author_name" style="min-width: 120px">Tác giả</th>
                             <th scope="quantity" style="min-width: 65px">SL</th>
@@ -101,30 +94,44 @@
                     </thead>
                     <tbody>
                         <!-- -->
+                        @foreach($books as $book)
                         <tr>
-                            <td>1</td>
-                            <td>Trốn lên mái nhà để khóc</td>
-                            <td>Lam</td>
-                            <td>5</td>
-                            <td>150,000</td>
-                            <td>195,000</td>
+                            <td>{{ $book->id }}</td>
+                            <td>{{ $book->bookTitle->name }}</td>
+                            <td>{{ $book->bookTitle->author }}</td>
+                            <td>{{ $book->quantity }}</td>
+                            <td>{{ $book->cost }}</td>
+                            <td>{{ $book->unit_price }}</td>
                             <td>
                                 <a type="button" class="btn_preview p-0" id="btnPreview"
-                                    href="{{ route('book.show', 1) }}">
+                                    href="{{ route('book.show', $book->id) }}">
                                     <span class="material-symbols-outlined details">visibility</span>
                                 </a>
-                                <a type="button" class="btn_edit p-0" id="btnEdit" href="{{ route('book.edit', 1) }}">
+                                <a type="button" class="btn_edit p-0" id="btnEdit"
+                                    href="{{ route('book.edit', $book->id) }}">
                                     <span class="material-symbols-outlined edit">border_color</span>
                                 </a>
-                                <a type="button" class="btn_delete p-0" id="btnDelete">
-                                    <span class="material-symbols-outlined delete">delete</span>
-                                </a>
+                                <form action="{{ route('book.destroy', $book->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class=" btn_delete p-0" id="btnDelete"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                        <span class="material-symbols-outlined delete">delete</span>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
+                        @endforeach
                         <!--  -->
                     </tbody>
                     <tfoot></tfoot>
                 </table>
+
+                <!-- Hiển thị liên kết phân trang -->
+                <div class="d-flex justify-content-center">
+                    {{ $books->links('pagination::bootstrap-5') }}
+                </div>
             </div>
         </div>
     </div>
@@ -219,31 +226,6 @@
 </div>
 <!-- End Mobile Sidebar -->
 
-<!-- Modal Xóa sản phẩm -->
-<div class="modal modal_delete fade" id="modal_Delete">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <h5 class="modal-title fs-3 fw-bold" id="staticBackdropLabel">
-                    Xóa sản phẩm
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p>Bạn có chắc chắn muốn xóa sản phẩm này?</p>
-                <p class="fst-italic">(Khi xóa, dữ liệu sẽ không được hoàn tác.)</p>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn_cancel me-4" data-bs-dismiss="modal">
-                    Hủy
-                </button>
-                <button type="button" class="btn btn_agree" data-bs-dismiss="modal">
-                    Đồng ý
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Import File Modal -->
 <div class="modal modal_import" id="modal_Import">

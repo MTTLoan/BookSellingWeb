@@ -319,24 +319,24 @@ class AccountController extends Controller
     public function checkForgotPassword(Request $request)
     {
         $request->validate([
-            'email'=>'required|email',
+            'email' => 'required|email',
         ]);
 
-        $user=Customer::where('email',$request->email)->first();
+        $user = Customer::where('email', $request->email)->first();
 
         if ($user) {
             $token = Password::createToken($user);
-            $resetLink=route('account.reset-password', ['token' => $token, 'email'=>$request->email]);
+            $resetLink = route('account.reset-password', ['token' => $token, 'email' => $request->email]);
             Mail::to($user->email)->send(new PasswordReset($resetLink));
 
             return back()->with('status', 'Đã gửi email reset mật khẩu.');
         }
-        return back()->withErrors(['email'=>'Email không tồn tại.']);
+        return back()->withErrors(['email' => 'Email không tồn tại.']);
     }
 
     public function resetPassword($token)
     {
-            return view('account.reset-password', ['token' => $token, 'email' => request('email')]);
+        return view('account.reset-password', ['token' => $token, 'email' => request('email')]);
     }
 
     public function checkResetPassword(Request $request)

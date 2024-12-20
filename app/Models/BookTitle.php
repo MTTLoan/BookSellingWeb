@@ -26,7 +26,7 @@ class BookTitle extends Model
         return $this->hasMany(Book::class, 'book_title_id');
     }
 
-    public function bookTypes()
+    public function bookType()
     {
         return $this->belongsTo(BookType::class, 'book_type_id');
     }
