@@ -50,5 +50,9 @@ class Book extends Model
         return $this->belongsToMany(Branch::class, 'books_branches', 'book_id', 'branch_id')
             ->with('quantity');
     }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
     
 }
