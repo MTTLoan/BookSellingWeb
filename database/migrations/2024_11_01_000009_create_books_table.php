@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('quantity')->default(0);
             $table->integer('unit_price')->nullable();
-            $table->integer('expense')->nullable();
+            $table->integer('cost')->nullable();
             $table->year('publishing_year')->nullable();
             $table->integer('page_number')->nullable();
             $table->enum('cover', ['Bìa cứng', 'Bìa mềm'])->default('Bìa mềm');

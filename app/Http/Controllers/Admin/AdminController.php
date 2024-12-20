@@ -17,12 +17,19 @@ class AdminController extends Controller
     public function login()
     {
         // tạo 1 tài khoản admin tạm thời
-        // Employee::create([
-        //     'name' => 'admin',
-        //     'email' => '22520782@gm.uit.edu.vn',
-        //     'password' => bcrypt('123456'),
-        //     'email_verified_at' => now(),
-        // ]);
+        Employee::create([
+            'name' => 'admin',
+            'email' => '22520782@gm.uit.edu.vn',
+            'password' => bcrypt('123456'),
+            'email_verified_at' => now(),
+            'role' => 'admin',
+            'fullname' => 'Admin',
+            'sex' => 'Nam',
+            'birthday' => '2000-01-01',
+            'address' => '123 Phan Văn Trị',
+            'starting_date' => '2020-01-01',
+            'salary' => 10000000,
+        ]);
         return view('admin.login');
     }
 
