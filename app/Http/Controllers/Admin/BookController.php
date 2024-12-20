@@ -86,7 +86,7 @@ class BookController extends Controller
 
                 // Thêm mới Image
                 Image::create([
-                    'url' => 'uploads/products/' . $image_name,
+                    'url' => $image_name,
                     'book_id' => $book->id,
                 ]);
 
@@ -113,11 +113,10 @@ class BookController extends Controller
     /**
      * Display the specified resource.
      */
-    // public function show(Book $book)
-    public function show()
+    public function show(Book $book)
     {
-        //
-        return view('admin.book.show');
+        $book->load('bookTitle', 'bookTitle.bookType', 'bookTitle.suppliers', 'images');
+        return view('admin.book.show', compact('book'));
     }
 
     /**
