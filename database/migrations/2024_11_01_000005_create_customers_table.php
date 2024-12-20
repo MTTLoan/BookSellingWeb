@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('district', 100)->nullable();
             $table->string('province', 100)->nullable();
             $table->enum('sex', ['Nam', 'Nữ']);
-            $table->string('phone_number', 11);
+            $table->string('phone_number', 11)->nullable();
             $table->integer('total_revenue')->default(0);
             $table->timestamps();
         });
