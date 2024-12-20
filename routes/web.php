@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\BookController;
+use App\Http\Controllers\SalePageController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
-Route::get('/', function () {
-    return view('home.index');
-})->name('home');
+Route::get('/', [SalePageController::class, 'index'])->name('sale.index');
+Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 
 Route::get('/admin', function () {
     return view('master.admin');
