@@ -29,6 +29,7 @@ return new class extends Migration
             $table->integer('total_revenue')->default(0);
             $table->timestamps();
         });
+
         if (!Schema::hasTable('password_reset_tokens')) {
             Schema::create('password_reset_tokens', function (Blueprint $table) {
                 $table->string('email')->primary();

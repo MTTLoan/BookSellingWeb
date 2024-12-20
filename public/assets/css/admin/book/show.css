@@ -1,3 +1,10 @@
+.form-select:disabled {
+    background-color: white;
+}
+.form-control:focus {
+    border-color: rgb(222, 226, 230);
+    box-shadow: none;
+}
 body {
     margin: 20px 0 20px 0;
     box-sizing: border-box;
@@ -5,8 +12,8 @@ body {
     background-color: #f7f7f7 !important;
     font-size: 16px;
 }
-.container-edit {
-    margin-top: 20px;
+.container-show {
+    margin: 20px 0px;
 }
 @media (max-width: 576px) {
     .container-sm {
@@ -26,33 +33,15 @@ body {
     height: 45px;
     border-radius: 8px;
 }
-.btn_cancel {
-    background-color: ffffff;
-    border: 1px solid #C53327 !important;
-    color: #C53327 !important;
-}
-.btn_cancel:hover {
-    background-color: #E6E6E6 !important;
-    border: 1px solid #C53327 !important;
-    color: #C53327 !important;
-}
-.btn_save {
-    background-color: #C53327 !important;
+.btn_exit {
+    background-color: #c53327 !important;
     color: white !important;
 }
-.btn_save:hover {
+.btn_exit:hover {
     background-color: #9e291f !important;
     color: white !important;
 }
 .btn:active {
     border: none;
-    background-color: #C53327 !important;
-}
-.btn_close {
-    background-color: #00b63e !important;
-    color: white !important;
-}
-.btn_close:hover {
-    background-color: #009232 !important;
-    color: white !important;
+    background-color: #c53327 !important;
 }

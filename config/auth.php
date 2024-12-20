@@ -36,13 +36,17 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
         'cus' => [
             'driver' => 'session',
             'provider' => 'customers',
+        ],
+        'emp' => [
+            'driver' => 'session',
+            'provider' => 'employees',
         ],
 
     ],
@@ -65,14 +69,19 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-            'key' => 'name', // Xác định cột được sử dụng
-        ],
-        'users' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
+        //     'key' => 'name', // Xác định cột được sử dụng
+        // ],
+        'customers' => [
             'driver' => 'eloquent',
             'model' => App\Models\Customer::class,
+            'key' => 'name', // Xác định cột được sử dụng
+        ],
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Employee::class,
             'key' => 'name', // Xác định cột được sử dụng
         ],
 
