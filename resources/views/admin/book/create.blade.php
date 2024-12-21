@@ -17,7 +17,6 @@
                         <label for="book_type_id" class="form-label">Loại sách <i class="text-danger">(*)</i></label>
                         <select name="book_type_id" id="book_type_id"
                             class="form-select @error('book_type_id') is-invalid @enderror" required>
-                            <option value="" selected>Chọn loại sách...</option>
                             @foreach ($bookTypes as $bookType)
                             <option value="{{ $bookType->id }}">{{ $bookType->name }}</option>
                             @endforeach
@@ -112,8 +111,8 @@
                     </div>
                     <div class="col-12 p-2">
                         <label for="image" class="form-label">Hình ảnh <i class="text-danger">(*)</i></label>
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image"
-                            id="image" required />
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="images[]"
+                            id="image" multiple required />
                         @error('image')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

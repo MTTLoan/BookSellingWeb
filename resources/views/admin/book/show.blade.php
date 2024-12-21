@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-md-12 p-2">Hình ảnh:
                     @foreach($book->images as $image)
-                    <img src="{{ asset(uploads/products/$image->url) }}" alt="Hình ảnh" class="img-fixed-size" />
+                    <img src="{{ asset($image->url) }}" alt="Hình ảnh" class="img-fixed-size" />
                     @endforeach
                 </div>
                 <div class="group_btn d-flex justify-content-end p-2">
