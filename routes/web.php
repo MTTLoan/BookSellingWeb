@@ -8,8 +8,9 @@ use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
-Route::get('/', [SalePageController::class, 'index'])->name('sale.index');
-Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
+Route::get('/', [SalePageController::class, 'index'])->name('home');
+Route::get('/book-by-category/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
+Route::get('/book-by-category/{category}', [SalePageController::class, 'showBookByCategory'])->name('sale.showBookByCategory');
 
 Route::get('/admin', function () {
     return view('master.admin');
