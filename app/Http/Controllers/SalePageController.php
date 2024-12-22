@@ -66,6 +66,7 @@ class SalePageController extends Controller
                 'book_quantity' => $book->quantity,
                 'unit_price' => $book->unit_price,
                 'cost' => $book->cost,
+                'cost' => $book->cost,
                 'publishing_year' => $book->publishing_year,
                 'page_number' => $book->page_number,
                 'cover' => $book->cover,
@@ -74,10 +75,9 @@ class SalePageController extends Controller
         }
 
         // Lọc các booktype_name trùng lặp
-        $booktype_name_list = array_map("array_unique", $booktype_name_list); 
-                
-        // return view('home.index', compact(['booksByCategory', 'booktype_name_list']));
+        $booktype_name_list = array_map("array_unique", $booktype_name_list);
 
+        return view('home.index', compact(['booksByCategory', 'booktype_name_list']));
     }
 
     public function showBookDetails($book_id)
@@ -106,8 +106,6 @@ class SalePageController extends Controller
             ->get()
             ->first();
 
-        // dd($book);
-        
         // Lấy ảnh sách
         $images = DB::table('images')
             ->select(
@@ -128,7 +126,7 @@ class SalePageController extends Controller
             ->join('reviews', 'reviews.book_id', '=', 'books.id')
             ->where('books.id', $book_id)
             ->groupBy('books.id')
-            ->first(); 
+            ->first();
 
         // Lấy thông tin đường dẫn navbar
         $navbar_info = DB::table('books')
@@ -143,11 +141,11 @@ class SalePageController extends Controller
             ->where('books.id', $book_id)
             ->get()
             ->first();
-            
+
 
         // Tạo biến category để lấy sách cùng danh mục
         $category = $navbar_info->booktype_category;
-       
+
         // Lấy thông tin sách cùng danh muc
         $book_same_category = DB::table('books')
             ->distinct()
