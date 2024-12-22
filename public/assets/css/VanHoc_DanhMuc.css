@@ -1,0 +1,136 @@
+body {
+    background-color: #f7f7f7 !important;
+}
+
+.filter-option {
+    margin-right: 8px;
+    /* Space between text and next filter element */
+    white-space: nowrap;
+    /* Prevents text from wrapping */
+}
+
+.filter-button,
+.filter-dropdown {
+    margin-right: 8px;
+    /* Space between filter elements */
+    display: flex;
+    height: 2rem;
+}
+
+.filter-button {
+    background-color: #ba1a1a;
+    color: white;
+}
+
+/* Định dạng chung cho dropdown */
+.filter-dropdown {
+    background-color: #fff; /* Màu nền của dropdown */
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Màu khi dropdown được chọn */
+.filter-dropdown.selected{
+    background-color: #C53327; /* Màu nền khi được chọn */
+    border-color: #ccc; /* Đổi màu viền */
+    color: #fff; /* Đổi màu chữ */
+}
+
+/* Màu các tùy chọn trong dropdown */
+.filter-dropdown option {
+    background-color: #ffffff; /* Màu nền các tùy chọn */
+    color: #333; /* Màu chữ */
+    border-radius: 0; /* Không bo tròn */
+}
+
+.p-20 {
+    padding: 20px !important;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+    .filter-group {
+        flex-direction: column;
+        align-items: flex-start;
+        /* Align items to the start on smaller screens */
+    }
+
+    .filter-button,
+    .filter-dropdown {
+        margin-right: 0;
+        /* Remove margin on smaller screens for better layout */
+        margin-bottom: 8px;
+        /* Add space between stacked elements */
+    }
+}
+
+@media (max-width: 992px) {
+    #btnBuy {
+        min-width: 60px !important;
+    }
+    .p-20 {
+        padding: 10px !important;
+    }
+    .mb-20 {
+        margin-bottom: 10px;
+    }
+}
+
+/* Card Group */
+.card_group .btn {
+    height: 22px;
+    border-radius: 0;
+    font-size: 12px;
+    background: #da392b;
+    color: white;
+}
+
+.card_group .btn:hover {
+    background-color: #9e291f;
+    color: white;
+}
+
+.product {
+    border: 1px solid #eee;
+    box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+}
+#btnCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    color: #da392b;
+    text-align: center;
+    border: 1px solid #da392b;
+}
+.card_group #btnCart:hover {
+    border: 1px solid #9e291f;
+    color: #9e291f;
+}
+.container_product .btn_AddCart {
+    color: #da392b;
+    border: 1px solid #da392b;
+    background: white;
+}
+.container_product .container-sm-product .btn_AddCart:hover {
+    border-radius: 8px;
+    border: 1px solid #c53327;
+    background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.1) 100%
+        ),
+        #fff;
+    color: #da392b;
+}
+#btnBuy {
+    min-width: 96px;
+    padding: 5px 10px;
+}
+.cart_icon {
+    font-size: 14px;
+}
