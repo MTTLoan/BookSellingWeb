@@ -11,7 +11,8 @@
         </div>
         <form id="productForm" method="POST" enctype="multipart/form-data"
             action="{{ route('book.update', $book->id) }}">
-            @csrf @method('PUT')
+            @csrf
+            @method('PUT')
             <div class="form_themsanpham border p-4 rounded">
                 <div class="row g-3">
                     <div class="col-md-6 p-2">
@@ -136,7 +137,11 @@
                         @enderror
                         <div class="mt-2">
                             @foreach($book->images as $image)
-                            <img src="{{ asset($image->url) }}" alt="Hình ảnh" class="img-fixed-size" />
+                            <div class="img-container">
+                                <img src="{{ asset($image->url) }}" class="img-fixed-size" />
+                                <a href="{{ route('book.destroyImage', $image->id) }}"
+                                    class="btn btn-danger btn-sm remove-btn">Xóa</a>
+                            </div>
                             @endforeach
                         </div>
                     </div>
@@ -162,4 +167,32 @@
 
 @push('scripts')
 <script src="{{ asset('assets/js/admin/book/edit.js') }}"></script>
+
+@if ($errors->any())
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Sửa thất bại',
+    html: `
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            `,
+});
+</script>
+@endif
+
+@if (session('success'))
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Sửa thành công',
+    text: "{{ session('success') }}",
+}).then(function() {
+    window.location.href = "{{ route('book.index') }}";
+});
+</script>
+@endif
 @endpush

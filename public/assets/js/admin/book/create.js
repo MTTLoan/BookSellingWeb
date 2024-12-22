@@ -1,57 +1,52 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const currentYear = new Date().getFullYear();
-    const startYear = 1800;
-    const yearSelect = document.getElementById("publishing_year");
-
-    for (let year = currentYear; year >= startYear; year--) {
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        yearSelect.appendChild(option); // Thêm tùy chọn vào dropdown
-    }
-
     // Lắng nghe sự kiện nhấn nút Hủy
     document.getElementById("btnCancel").addEventListener("click", function () {
         window.history.back();
     });
 
-    // Lắng nghe sự kiện nhấn nút Lưu
-    document.getElementById("productForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+    // Xử lý hiển thị ảnh đã chọn
+    const imageInput = document.getElementById("image");
+    const imagePreview = document.getElementById("image-preview");
+    let files = [];
 
-        const formData = new FormData(this);
+    imageInput.addEventListener("change", function () {
+        const newFiles = Array.from(this.files);
+        files = files.concat(newFiles);
 
-        fetch(this.action, {
-            method: this.method,
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Thành công',
-                    text: data.message,
-                }).then(() => {
-                    window.location.href = '/admin/book'; // Điều hướng đến trang danh sách sản phẩm
+        imagePreview.innerHTML = ""; // Xóa nội dung cũ
+
+        files.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imgContainer = document.createElement("div");
+                imgContainer.classList.add("img-container");
+
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.classList.add("img-fixed-size");
+
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = "Xóa";
+                removeBtn.classList.add("btn", "btn-danger", "btn-sm", "remove-btn");
+                removeBtn.addEventListener("click", function () {
+                    files.splice(index, 1);
+                    imageInput.files = new FileListItems(files);
+                    imgContainer.remove();
                 });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Thất bại',
-                    text: data.message,
-                });
-            }
-        })
-        .catch(error => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Thất bại',
-                text: 'Đã có lỗi xảy ra, vui lòng thử lại.'.concat(' ', error),
-            });
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(removeBtn);
+                imagePreview.appendChild(imgContainer);
+            };
+            reader.readAsDataURL(file);
         });
     });
+
+    // Helper function to create a FileList from an array of files
+    function FileListItems(files) {
+        const b = new ClipboardEvent("").clipboardData || new DataTransfer();
+        for (let i = 0, len = files.length; i < len; i++) b.items.add(files[i]);
+        return b.files;
+    }
+
 });

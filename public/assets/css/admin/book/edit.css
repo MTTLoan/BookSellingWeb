@@ -43,14 +43,32 @@ body {
     background-color: #009232 !important;
     color: white !important;
 }
+
 .sub {
     font-size: 14px;
 }
+
+/* Hiển thị ảnh đã chọn */
 .img-fixed-size {
-    width: 150px;
-    height: 200px;
+    width: 150px; /* Đặt chiều rộng cố định */
+    height: 200px; /* Đặt chiều cao cố định */
     object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    margin: 5px; /* Khoảng cách giữa các ảnh */
+}
+
+.img-container {
+    display: inline-block;
+    position: relative;
     margin: 5px;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px; /* Giảm kích thước chữ */
+    padding: 2px 5px; /* Giảm padding */
+    line-height: 1; /* Giảm chiều cao dòng */
 }
 
 
