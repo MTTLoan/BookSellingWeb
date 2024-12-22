@@ -11,14 +11,14 @@
     <div class="row container_product m-0 g-4 bg-white">
         <div class="col-md-5 bg-white px-md-5 m-0 p-0">
             <div class="main-image text-center mb-4">
-                <img id="mainImage" src="{{ asset( "uploads/products/".$images[0]->image_url ) }}" alt="Main Image"
+                <img id="mainImage" src="{{ asset( $images[0]->image_url ) }}" alt="Main Image"
                     class="img-fluid" />
             </div>
             <div class="thumbnail-container d-flex justify-content-center gap-2 py-2">
                 @foreach ($images as $image) 
                     @if (!$loop->first)
                         <div class="thumbnail">
-                            <img src="{{ asset("uploads/products/".$image->image_url) }}" alt="Thumbnail 4"
+                            <img src="{{ asset($image->image_url) }}" alt="Thumbnail 4"
                                 onclick="updateMainImage(this)" class="img-fluid" />
                         </div>
                     @endif
@@ -104,7 +104,7 @@
                     @foreach ($book_same_category as $index => $item )
 
                         <div class="product p-20 mb-20 me-2 rounded w-auto">
-                            <img src="{{ asset("uploads/products/".$book_same_category_image[$index]) }}" alt="product"
+                            <img src="{{ asset($book_same_category_image[$index]) }}" alt="product"
                                 class="img-fluid" />
                             <h5 class="fw-bold my-2" id="price">{{ number_format($item->unit_price, 0, '', '.') }} đ</h5>
                             <p class="mb-2" id="title">
@@ -150,7 +150,7 @@
                         <p class="fs-5 fw-bold my-4">Hình ảnh sản phẩm</p>
                         
                         @foreach ($images as $image)
-                            <img src="{{ asset("uploads/products/".$image->image_url ) }}" alt="product" class="img-fluid px-md-5" />     
+                            <img src="{{ asset($image->image_url ) }}" alt="product" class="img-fluid px-md-5" />     
                         @endforeach
                     </div>
                 </div>
@@ -253,8 +253,9 @@
                 <div class="row comment my-4">
                     <div class="col-2">
                     @php
+                        
                         // Gán giá trị cho reviewCount và reviewScore nếu review_score tồn tại
-                        $reviewDate = isset($customer_review->create_at) ? $customer_review->create_at : '2000-01-01';
+                        $reviewDate = isset($customer_review->created_at) ? $customer_review->created_at : '2000-01-01';
                         $customerReviewScore = isset($customer_review->review_score) ? $customer_review->review_score : 0; 
                         $customer_review->customer_name = isset($customer_review->customer_name) ? $customer_review->customer_name : 'Khách hàng ẩn danh';
                     @endphp

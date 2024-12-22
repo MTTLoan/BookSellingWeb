@@ -212,7 +212,7 @@ class SalePageController extends Controller
             'customers.name as customer_name',
             'reviews.description',
             DB::raw('ROUND(reviews.score) as review_score'),
-            'reviews.created_at'
+            'reviews.created_at as created_at'
         )
         ->join('order_details', 'order_details.book_id', '=', 'reviews.book_id')
         ->join('orders', 'orders.id', '=', 'order_details.order_id')
