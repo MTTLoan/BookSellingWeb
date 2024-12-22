@@ -17,12 +17,34 @@ class BookController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::with(['bookTitle.bookType'])->orderBy('id', 'asc')->paginate(10);
-        return view('admin.book.index', compact('books'));
-    }
+        $query = Book::with(['bookTitle.bookType']);
 
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->whereHas('bookTitle', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                ->orWhere('author', 'like', '%' . $search . '%');
+            });
+        }
+
+        if ($request->has('filter_bookType')) {
+            $filterBookType = $request->input('filter_bookType');
+            $query->whereHas('bookTitle.bookType', function ($q) use ($filterBookType) {
+                $q->whereIn('id', $filterBookType);
+            });
+        }
+
+        if ($request->filled('filter_quantity')) {
+            $filterQuantity = $request->input('filter_quantity');
+            $query->where('quantity', '>=', $filterQuantity);
+        }
+
+    $books = $query->orderBy('id', 'asc')->paginate(20);
+    $bookTypes = BookType::all(); // Lấy tất cả các thể loại sách để hiển thị trong form tìm kiếm
+    return view('admin.book.index', compact('books', 'bookTypes'));
+}
     /**
      * Show the form for creating a new resource.
      */
