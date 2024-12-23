@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Lưu HTML gốc (mô tả sản phẩm)
     const originalHTML = contentContainer.innerHTML;
 
-    // HTML thay thế (đánh giá sản phẩm)
-   
 
     // Thêm sự kiện click cho nút "Mô tả sản phẩm"
     btnDescription.addEventListener("click", function () {

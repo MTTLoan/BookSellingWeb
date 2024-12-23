@@ -253,9 +253,8 @@
                 <div class="row comment my-4">
                     <div class="col-2">
                     @php
-                        
                         // Gán giá trị cho reviewCount và reviewScore nếu review_score tồn tại
-                        $reviewDate = isset($customer_review->created_at) ? $customer_review->created_at : '2000-01-01';
+                        $reviewDate = isset($customer_review->created_at) ? $customer_review->created_at : '2020-01-01';
                         $customerReviewScore = isset($customer_review->review_score) ? $customer_review->review_score : 0; 
                         $customer_review->customer_name = isset($customer_review->customer_name) ? $customer_review->customer_name : 'Khách hàng ẩn danh';
                     @endphp
