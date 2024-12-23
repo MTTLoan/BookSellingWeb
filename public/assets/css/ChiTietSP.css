@@ -188,3 +188,24 @@ input[type="number"]::-webkit-outer-spin-button {
 .container_product .kid_star {
     color: #F6A500;
 }
+
+#title_other_book {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 hàng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiển thị "..." khi bị cắt */
+    white-space: normal; /* Cho phép xuống hàng */
+    height: 3em; 
+    line-height: 1.5em; 
+}
+
+.container_description .product .image_container, .container_description .product .img-fluid {
+    height: 198px !important;
+}
+
+.description .img_preview {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}
