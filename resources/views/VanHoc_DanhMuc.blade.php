@@ -1,6 +1,6 @@
-@extends('master.admin')
+@extends('master.main')
 
-@section('title', 'Quản lý khuyến mãi')
+@section('title', 'Danh mục Văn học')
 
 @section('content')
 <div class="container-sm container_product mb-4 mt-4">
