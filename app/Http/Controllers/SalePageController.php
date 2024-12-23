@@ -225,31 +225,52 @@ class SalePageController extends Controller
         return view('ChiTietSanPham', compact(['book', 'images', 'review_total', 'review_score', 'navbar_info', 'book_same_category', 'review_distribution', 'customer_reviews', 'book_same_category_image']));
     }
 
-    public function showBookByCategory($category) {
-        // $books = DB::table('booktypes')
-        // ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
-        // ->join('books', 'books.book_title_id', '=', 'booktitles.id')
-        // ->join('images', 'images.book_id', '=', 'books.id')
-        // ->join('order_details', 'books.id', '=', 'order_details.book_id')
-        // ->select(
-        //     'books.id as book_id',
-        //     'booktypes.name as booktypes_name', 
-        //     'booktypes.quantity as booktypes_quantity',
-        //     'booktypes.category as category',
-        //     'booktitles.name as booktitles_name',
-        //     'booktitles.author as author',
-        //     'booktitles.description as description',
-        //     'books.quantity as quantity',
-        //     'books.unit_price as unit_price',
-        //     'books.cost as cost',
-        //     'books.publishing_year as publishing_year',
-        //     'books.page_number as page_number',
-        //     'images.url as cover',
-        //     'order_details.quantity as order_quantity'
-        // )
-        // ->where('booktypes.category', $category)
-        // ->get();
+    public function showBookByType($booktype_id) {
+        // Lấy tên thể loại sách
+        $booktypeName = DB::table('booktypes')
+            ->select('name')
+            ->where('id', $booktype_id)
+            ->first()
+            ->name; 
 
-        // dd($books);
+        // Lấy thông tin sách dựa vào thể loại
+        $books = DB::table('booktypes')
+            ->distinct()
+            ->select([
+                'booktypes.id as booktype_id',
+                'booktypes.name as booktype_name',
+                'books.id as book_id',
+                'booktitles.name as book_name',
+                'books.cost as price',
+                'saled_books.total_quantity as quantity',
+            ])
+            ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
+            ->join('books', 'books.book_title_id', '=', 'booktitles.id')
+            ->join('order_details', 'order_details.book_id', '=', 'books.id')
+            ->joinSub(
+                DB::table('order_details')
+                    ->select('books.id as saledbook_id', DB::raw('SUM(order_details.quantity) as total_quantity'))
+                    ->join('books', 'books.id', '=', 'order_details.book_id')
+                    ->groupBy('books.id'),
+                'saled_books',
+                'books.id',
+                '=',
+                'saled_books.saledbook_id'
+            )
+            ->where('booktypes.id', $booktype_id)
+            ->get();
+
+        // Lấy ảnh của lần lượt các sách trả về
+        $images = [];
+        foreach ($books as $b) {
+            $image = DB::table('images')
+                ->select('images.url as image_url')
+                ->where('images.book_id', '=', $b->book_id)
+                ->get()
+                ->first();
+            $images[$b->book_id] = $image ? $image->image_url : null;
+        }
+        // dd($images);
+        return view('VanHoc_DanhMuc', compact(['booktypeName' ,'books', 'images']));
     }
 }

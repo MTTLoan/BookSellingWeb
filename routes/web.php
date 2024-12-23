@@ -10,6 +10,7 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 Route::get('/', [SalePageController::class, 'index'])->name('home');
 Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
+Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
 
 Route::get('/admin', function () {
     return view('master.admin');
