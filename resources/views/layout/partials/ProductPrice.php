@@ -74,7 +74,6 @@
 
 <body>
     <div class="product-container">
-        <?php foreach ($products as $product): ?>
         <div class="product-card">
             <img src="<?= $product['image']; ?>" alt="<?= $product['name']; ?>">
             <div class="product-info">
@@ -83,7 +82,6 @@
                 <div class="price"><?= number_format($product['price'], 0, ',', '.'); ?> đ</div>
             </div>
         </div>
-        <?php endforeach; ?>
     </div>
 </body>
 

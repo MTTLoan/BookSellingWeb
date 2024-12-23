@@ -592,9 +592,10 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
 
     public static $classMap = array (
         'App\\Http\\Controllers\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/AccountController.php',
+        'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
+        'App\\Http\\Controllers\\Admin\\BookController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/BookController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\HomePageController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomePageController.php',
-        'App\\Http\\Middleware\\AccountMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AccountMiddleware.php',
+        'App\\Http\\Controllers\\SalePageController' => __DIR__ . '/../..' . '/app/Http/Controllers/SalePageController.php',
         'App\\Http\\Middleware\\RedirectIfNotAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfNotAuthenticated.php',
         'App\\Mail\\PasswordReset' => __DIR__ . '/../..' . '/app/Mail/PasswordReset.php',
         'App\\Mail\\VerifyAccount' => __DIR__ . '/../..' . '/app/Mail/VerifyAccount.php',
@@ -614,7 +615,6 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'App\\Models\\OrderDetail' => __DIR__ . '/../..' . '/app/Models/OrderDetail.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
         'App\\Models\\Supplier' => __DIR__ . '/../..' . '/app/Models/Supplier.php',
-        'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\TelescopeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/TelescopeServiceProvider.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
