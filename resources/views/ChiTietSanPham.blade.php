@@ -150,7 +150,7 @@
                         </p>
                         <p class="fs-5 fw-bold my-4">Hình ảnh sản phẩm</p>
 
-                        <div class="img_preview_container d-flex flex-wrap align-content-start">
+                        <div class="img_preview_container d-lg-flex flex-lg-wrap align-content-start">
                             @foreach ($images as $image)
                             <img src="{{ asset($image->image_url ) }}" alt="product"
                                 class="img_preview img-fluid px-md-5" />

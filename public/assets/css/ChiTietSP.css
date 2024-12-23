@@ -28,6 +28,11 @@ body {
         padding-left: 30px;
         padding-right: 30px;
     }
+    .description .img_preview {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+    }
 }
 .thumbnail .img-fluid {
     max-width: 70px;
