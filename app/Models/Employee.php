@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
 class Employee extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, CanResetPassword;
+    use HasFactory, Notifiable, CanResetPassword, Authorizable;
 
     /**
      * The attributes that are mass assignable.
@@ -57,7 +58,7 @@ class Employee extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    
+
     public function branch()
     {
         return $this->belongsTo(Branch::class, 'branch_id');

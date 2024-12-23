@@ -9,23 +9,47 @@ use App\Models\BookType;
 use App\Models\Image;
 use App\Models\Supplier;
 use Exception;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
 {
+    use AuthorizesRequests;
+    // use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+    // public function __construct()
+    // {
+    //     // Tự động áp dụng các kiểm tra quyền cho các hành động tiêu chuẩn
+    //     $this->authorizeResource(Book::class, 'book');
+    // }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
+        // dd(auth('web')->user());
         $query = Book::with(['bookTitle.bookType']);
 
+        $employee = auth('web')->user();
+
+        if ($employee->role === 'admin') {
+            // Admin xem tất cả sách
+            $books = Book::all();
+        } else {
+            // Staff và Branch Manager chỉ xem sách thuộc chi nhánh của mình
+            $books = Book::join('books_branches', 'books.id', '=', 'books_branches.book_id')
+            ->where('books_branches.branch_id', $employee->branch_id)
+            ->get(['books.*', 'books_branches.quantity']);
+
+        }
+
+        //filter và search
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->whereHas('bookTitle', function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%')
-                ->orWhere('author', 'like', '%' . $search . '%');
+                    ->orWhere('author', 'like', '%' . $search . '%');
             });
         }
 
@@ -41,15 +65,18 @@ class BookController extends Controller
             $query->where('quantity', '>=', $filterQuantity);
         }
 
-    $books = $query->orderBy('id', 'asc')->paginate(20);
-    $bookTypes = BookType::all(); // Lấy tất cả các thể loại sách để hiển thị trong form tìm kiếm
-    return view('admin.book.index', compact('books', 'bookTypes'));
-}
+        $books = $query->orderBy('id', 'asc')->paginate(20);
+        $bookTypes = BookType::all(); // Lấy tất cả các thể loại sách để hiển thị trong form tìm kiếm
+        return view('admin.book.index', compact('books', 'bookTypes'));
+    }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        // Kiểm tra quyền 'create' trên model Book
+        $this->authorize('create', Book::class);
+
         $bookTypes = BookType::orderBy('id', 'asc')->select('id', 'name')->get();
         $suppliers = Supplier::orderBy('id', 'asc')->select('id', 'name')->get();
         return view('admin.book.create', compact('bookTypes', 'suppliers'));
@@ -61,16 +88,20 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'unit_price' => 'min:1|gt:cost',
-            'cost' => 'min:1',
-            'publishing_year' => 'min:1',
-            'page_number' => 'min:1',
+            'unit_price' => 'integer|min:1|gt:cost',
+            'cost' => 'integer|min:1',
+            'publishing_year' => 'integer|min:1',
+            'page_number' => 'integer|min:1',
             'images.*' => 'file|mimes:jpeg,png,jpg,gif,svg',
         ], [
+            'unit_price.integer' => 'Giá bán phải là số nguyên',
             'unit_price.min' => 'Giá bán phải lớn hơn 0',
             'unit_price.gt' => 'Giá bán phải lớn hơn giá vốn',
+            'cost.integer' => 'Giá vốn phải là số nguyên',
             'cost.min' => 'Giá vốn phải lớn hơn 0',
+            'publishing_year.integer' => 'Năm xuất bản phải là số nguyên',
             'publishing_year.min' => 'Năm xuất bản phải lớn hơn 0',
+            'page_number.integer' => 'Số trang phải là số nguyên',
             'page_number.min' => 'Số trang phải lớn hơn 0',
             'images.*.file' => 'Ảnh phải là file',
             'images.*.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif, svg',
@@ -124,6 +155,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        $this->authorize('view', $book);
+
         $book->load('bookTitle', 'bookTitle.bookType', 'bookTitle.suppliers', 'images');
         return view('admin.book.show', compact('book'));
     }
@@ -133,6 +166,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
+        $this->authorize('update', $book);
         $bookTypes = BookType::orderBy('id', 'asc')->select('id', 'name')->get();
         $suppliers = Supplier::orderBy('id', 'asc')->select('id', 'name')->get();
         return view('admin.book.edit', compact('bookTypes', 'suppliers', 'book'));
@@ -144,16 +178,20 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
-            'unit_price' => 'min:1|gt:cost',
-            'cost' => 'min:1',
-            'publishing_year' => 'min:1',
-            'page_number' => 'min:1',
+            'unit_price' => 'integer|min:1|gt:cost',
+            'cost' => 'integer|min:1',
+            'publishing_year' => 'integer|min:1',
+            'page_number' => 'integer|min:1',
             'images.*' => 'file|mimes:jpeg,png,jpg,gif,svg',
         ], [
+            'unit_price.integer' => 'Giá bán phải là số nguyên',
             'unit_price.min' => 'Giá bán phải lớn hơn 0',
             'unit_price.gt' => 'Giá bán phải lớn hơn giá vốn',
+            'cost.integer' => 'Giá vốn phải là số nguyên',
             'cost.min' => 'Giá vốn phải lớn hơn 0',
+            'publishing_year.integer' => 'Năm xuất bản phải là số nguyên',
             'publishing_year.min' => 'Năm xuất bản phải lớn hơn 0',
+            'page_number.integer' => 'Số trang phải là số nguyên',
             'page_number.min' => 'Số trang phải lớn hơn 0',
             'images.*.file' => 'Ảnh phải là file',
             'images.*.mimes' => 'Ảnh phải có định dạng jpeg, png, jpg, gif, svg',
@@ -212,6 +250,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        $this->authorize('delete', $book);
         try {
             // Xóa các ảnh liên quan
             foreach ($book->images as $image) {

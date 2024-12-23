@@ -3,7 +3,7 @@
 @section('title', 'Đăng Nhập')
 
 @section('content')
-<div class="content p-4">
+<div class="content">
     <form id="loginForm" method="POST" action="{{ route('admin.login') }}">
         @csrf
         <div class="title fw-bold text-center mb-4">
@@ -46,7 +46,7 @@ const forgotPasswordUrl = "#";
 @endsection
 
 @push('styles')
-<link href="{{ asset('assets/css/account/login.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/admin/login.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')

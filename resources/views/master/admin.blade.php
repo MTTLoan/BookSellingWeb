@@ -28,14 +28,17 @@
 </head>
 
 <body>
-
+    @if(auth('web')->check())
     @include('layout.partials.Header_Employee')
 
     @include('layout.partials.NavBar')
+    @endif
 
     @yield('content')
 
+    @if(auth('web')->check())
     @include('layout.partials.Footer')
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Chèn các script riêng cho từng view -->
