@@ -9,8 +9,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 Route::get('/', [SalePageController::class, 'index'])->name('home');
-Route::get('/book-by-category/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
-Route::get('/book-by-category/{category}', [SalePageController::class, 'showBookByCategory'])->name('sale.showBookByCategory');
+Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 
 Route::get('/admin', function () {
     return view('master.admin');
@@ -52,11 +51,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/logout',[AdminController::class, 'logout'])->name('admin.logout');
 
     Route::resource('book', BookController::class);
-    Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
 });
 
 Route::get('/test', function () {
-    return view('account.login');
+    return view('VanHoc_DanhMuc');
 });
 
 Route::get('/test1', function () {

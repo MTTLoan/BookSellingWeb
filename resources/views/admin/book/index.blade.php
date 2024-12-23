@@ -8,47 +8,39 @@
         <div class="sidebar col-md-3 d-none d-md-block">
             <p class="fs-3 fw-bold">Sản phẩm</p>
 
-            <!-- Nút Xóa bộ lọc -->
-            <div class="filter_reset bg-white p-3 rounded-2 mb-4">
-                <form method="GET" action="{{ route('book.index') }}">
-                    <button type="submit" class="btn btn-delete-filter w-100">Xóa bộ lọc</button>
-                </form>
+            <!-- Số lượng trong kho -->
+            <div class="filter_author bg-white p-3 rounded-2 mb-4">
+                <label for="filter_author" class="form-label d-flex justify-content-between fw-bold ps-0"
+                    id="headingOne">
+                    Số lượng trong kho trên
+                </label>
+
+                <div class="ps-2">
+                    <input class="form-control" id="filter_value" type="number" placeholder="Nhập số lượng tồn kho"
+                        onchange="loadTableData()" />
+                </div>
             </div>
-
-            <form method="GET" action="{{ route('book.index') }}" id="filterForm">
-                <!-- Số lượng trong kho -->
-                <div class="filter_quantity bg-white p-3 rounded-2 mb-4">
-                    <label for="filter_quantity" class="form-label d-flex justify-content-between fw-bold ps-0"
-                        id="headingOne">
-                        Số lượng trong kho trên
-                    </label>
-                    <div class="ps-2">
-                        <input class="form-control" name="filter_quantity" type="number"
-                            placeholder="Nhập số lượng tồn kho" value="{{ request('filter_quantity') }}"
-                            onchange="document.getElementById('filterForm').submit();" />
+            <!-- Thể loại -->
+            <div class="filter_author bg-white p-3 rounded-2 mb-4">
+                <label for="filter_author" class="form-label d-flex justify-content-between fw-bold ps-0"
+                    id="headingTwo">
+                    Thể loại
+                </label>
+                <div class="ps-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genreTravel" />
+                        <label class="form-check-label" for="genreTravel">Sách du lịch</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genreStudy" />
+                        <label class="form-check-label" for="genreStudy">Sách học tập</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="genre" id="genreChildren" />
+                        <label class="form-check-label" for="genreChildren">Sách thiếu nhi</label>
                     </div>
                 </div>
-
-                <!-- Thể loại -->
-                <div class="filter_bookType bg-white p-3 rounded-2 mb-4">
-                    <label for="filter_bookType" class="form-label d-flex justify-content-between fw-bold ps-0"
-                        id="headingTwo">
-                        Thể loại
-                    </label>
-                    <div class="ps-2">
-                        @foreach ($bookTypes as $bookType)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="filter_bookType[]"
-                                value="{{ $bookType->id }}" id="bookType{{ $bookType->id }}"
-                                {{ in_array($bookType->id, request('filter_bookType', [])) ? 'checked' : '' }}
-                                onchange="document.getElementById('filterForm').submit();" />
-                            <label class="form-check-label"
-                                for="bookType{{ $bookType->id }}">{{ $bookType->name }}</label>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
 
         <!-- Mobile -->
@@ -62,13 +54,10 @@
         <div class="content col-md-9">
             <!-- Tìm kiếm -->
             <div class="group-top row d-flex justify-content-end">
-                <form method="GET" action="{{ route('book.index') }}" class="col-md-6">
-                    <div class="search d-flex mb-3">
-                        <input type="text" name="search" class="form-control me-1"
-                            placeholder="Tìm kiếm theo tên sách hoặc tên tác giả" value="{{ request('search') }}" />
-                        <button class="btn btn_search text-nowrap" type="submit">Tìm kiếm</button>
-                    </div>
-                </form>
+                <div class="search col-md-6 d-flex mb-3">
+                    <input type="text" class="form-control me-1" placeholder="Tên sách, tên tác giả, thể loại..." />
+                    <button class="btn btn_search text-nowrap">Tìm kiếm</button>
+                </div>
                 <div class="group_button col-md-6 d-flex mb-3">
                     <!-- Button trigger modal filter mobile -->
                     <button type="button"
@@ -238,6 +227,26 @@
 <!-- End Mobile Sidebar -->
 
 
+<!-- Import File Modal -->
+<div class="modal modal_import" id="modal_Import">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Tải lên file</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center">
+                <input type="file" id="fileInput" class="form-control-file" />
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn_search" data-bs-dismiss="modal">
+                    Hủy
+                </button>
+                <button type="button" class="btn btn_import">Tải lên</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('styles')
@@ -246,13 +255,4 @@
 
 @push('scripts')
 <script src="{{ asset('assets/js/admin/book/index.js') }}"></script>
-<script>
-function submitFilterForm() {
-    const filterQuantity = document.querySelector('input[name="filter_quantity"]').value;
-    if (filterQuantity === '' || filterQuantity === null || filterQuantity < 0 || filterQuantity > 1000) {
-        return;
-    }
-    document.getElementById('filterForm').submit();
-}
-</script>
 @endpush
