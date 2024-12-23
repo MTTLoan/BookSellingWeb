@@ -15,27 +15,27 @@ class SalePageController extends Controller
     public function index()
     {
         $books = DB::table('booktypes')
-            ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
-            ->join('books', 'books.book_title_id', '=', 'booktitles.id')
-            ->join('images', 'images.book_id', '=', 'books.id')
-            ->join('order_details', 'books.id', '=', 'order_details.book_id')
-            ->select(
-                'books.id as book_id',
-                'booktypes.name as booktypes_name',
-                'booktypes.quantity as booktypes_quantity',
-                'booktypes.category as category',
-                'booktitles.name as booktitles_name',
-                'booktitles.author as author',
-                'booktitles.description as description',
-                'books.quantity as quantity',
-                'books.unit_price as unit_price',
-                'books.cost as cost',
-                'books.publishing_year as publishing_year',
-                'books.page_number as page_number',
-                'images.url as cover',
-                'order_details.quantity as order_quantity'
-            )
-            ->get();
+        ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
+        ->join('books', 'books.book_title_id', '=', 'booktitles.id')
+        ->join('images', 'images.book_id', '=', 'books.id')
+        ->join('order_details', 'books.id', '=', 'order_details.book_id')
+        ->select(
+            'books.id as book_id',
+            'booktypes.name as booktypes_name', 
+            'booktypes.quantity as booktypes_quantity',
+            'booktypes.category as category',
+            'booktitles.name as booktitles_name',
+            'booktitles.author as author',
+            'booktitles.description as description',
+            'books.quantity as quantity',
+            'books.unit_price as unit_price',
+            'books.cost as cost',
+            'books.publishing_year as publishing_year',
+            'books.page_number as page_number',
+            'images.url as cover',
+            'order_details.quantity as order_quantity'
+        )
+        ->get();
 
         // Khởi tạo mảng kết quả theo category
         $booksByCategory = [];
@@ -65,6 +65,7 @@ class SalePageController extends Controller
                 'description' => $book->description,
                 'book_quantity' => $book->quantity,
                 'unit_price' => $book->unit_price,
+                'cost' => $book->cost,
                 'cost' => $book->cost,
                 'publishing_year' => $book->publishing_year,
                 'page_number' => $book->page_number,
@@ -118,8 +119,8 @@ class SalePageController extends Controller
         // Lấy điểm đánh giá tổng thể dùng hiển thị trong thông tin sách
         $review_score = DB::table('books')
             ->select(
-                'books.id',
-                DB::raw('ROUND(AVG(reviews.score), 1) as review_score'),
+            'books.id',
+                DB::raw('ROUND(AVG(reviews.score)) as review_score'),
                 DB::raw('COUNT(reviews.id) as review_count')
             )
             ->join('reviews', 'reviews.book_id', '=', 'books.id')
@@ -157,17 +158,28 @@ class SalePageController extends Controller
                 'order_details.quantity as order_quantity',
                 'books.unit_price',
                 'booktypes.category as book_category',
-                'booktypes.name as book_type_name'
+                'booktypes.name as book_type_name',
             )
             ->join('booktitles', 'booktitles.id', '=', 'books.book_title_id')
             ->join('booktypes', 'booktypes.id', '=', 'booktitles.book_type_id')
             ->join('order_details', 'order_details.book_id', '=', 'books.id')
-            ->join('images', 'images.book_id', '=', 'books.id')
             ->join('suppliers', 'suppliers.id', '=', 'booktitles.supplier_id')
             ->where('booktypes.category', '=', $category)
             ->get()
             ->take(2)
             ->toArray();
+        
+        $book_same_category_image = [];
+        foreach ($book_same_category as $it) {
+            $image = DB::table('images')
+                ->select(
+                    'images.url as image_url'
+                )
+                ->where('images.book_id', '=', $it->book_id)
+                ->get()
+                ->first();
+            $book_same_category_image[] = $image->image_url;
+        }   
 
         // Lấy phân bố đánh giá sách
         $review_distribution = [];
@@ -177,14 +189,13 @@ class SalePageController extends Controller
             )
             ->first()
             ->review_count;
-        // dd($review_total);
+        
         $review_list = DB::table('reviews')
             ->select(
                 'reviews.score as score',
             )
             ->get()
             ->toArray();
-        // dd($review_list);
 
         foreach ($review_list as $review) {
             if (!isset($review_distribution[$review->score])) {
@@ -192,25 +203,74 @@ class SalePageController extends Controller
             }
             $review_distribution[$review->score]++;
         }
-        dd($review_distribution);
-
 
         //Lấy đánh giá sách của khách hàng
         $customer_reviews = DB::table('reviews')
+        ->distinct()
+        ->select(
+            'customers.id as customer_id',
+            'customers.name as customer_name',
+            'reviews.description',
+            DB::raw('ROUND(reviews.score) as review_score'),
+            'reviews.created_at as created_at'
+        )
+        ->join('order_details', 'order_details.book_id', '=', 'reviews.book_id')
+        ->join('orders', 'orders.id', '=', 'order_details.order_id')
+        ->join('customers', 'customers.id', '=', 'orders.customer_id')
+        ->where('reviews.book_id', $book_id)
+        ->get()
+        ->toArray();
+        // dd($customer_reviews);
+
+        return view('ChiTietSanPham', compact(['book', 'images', 'review_total', 'review_score', 'navbar_info', 'book_same_category', 'review_distribution', 'customer_reviews', 'book_same_category_image']));
+    }
+
+    public function showBookByType($booktype_id) {
+        // Lấy tên thể loại sách
+        $booktypeName = DB::table('booktypes')
+            ->select('name')
+            ->where('id', $booktype_id)
+            ->first()
+            ->name; 
+
+        // Lấy thông tin sách dựa vào thể loại
+        $books = DB::table('booktypes')
             ->distinct()
-            ->select(
-                'customers.id as customer_id',
-                'customers.name as customer_name',
-                'reviews.description',
-                DB::raw('ROUND(reviews.score, 1) as review_score'),
-                'reviews.created_at'
+            ->select([
+                'booktypes.id as booktype_id',
+                'booktypes.name as booktype_name',
+                'books.id as book_id',
+                'booktitles.name as book_name',
+                'books.cost as price',
+                'saled_books.total_quantity as quantity',
+            ])
+            ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
+            ->join('books', 'books.book_title_id', '=', 'booktitles.id')
+            ->join('order_details', 'order_details.book_id', '=', 'books.id')
+            ->joinSub(
+                DB::table('order_details')
+                    ->select('books.id as saledbook_id', DB::raw('SUM(order_details.quantity) as total_quantity'))
+                    ->join('books', 'books.id', '=', 'order_details.book_id')
+                    ->groupBy('books.id'),
+                'saled_books',
+                'books.id',
+                '=',
+                'saled_books.saledbook_id'
             )
-            ->join('order_details', 'order_details.book_id', '=', 'reviews.book_id')
-            ->join('orders', 'orders.id', '=', 'order_details.order_id')
-            ->join('customers', 'customers.id', '=', 'orders.customer_id')
-            ->where('reviews.book_id', $book_id)
-            ->get()
-            ->toArray();
-        dd($customer_reviews);
+            ->where('booktypes.id', $booktype_id)
+            ->get();
+
+        // Lấy ảnh của lần lượt các sách trả về
+        $images = [];
+        foreach ($books as $b) {
+            $image = DB::table('images')
+                ->select('images.url as image_url')
+                ->where('images.book_id', '=', $b->book_id)
+                ->get()
+                ->first();
+            $images[$b->book_id] = $image ? $image->image_url : null;
+        }
+        // dd($images);
+        return view('VanHoc_DanhMuc', compact(['booktypeName' ,'books', 'images']));
     }
 }

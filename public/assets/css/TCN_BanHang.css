@@ -1,0 +1,101 @@
+body {
+    background-color: #f7f7f7 !important;
+    box-sizing: border-box !important;
+}
+
+.form_input:focus {
+    border: none !important;
+    border-bottom: 2px solid #f1f1f1 !important;
+    box-shadow: none !important;
+}
+
+.left_panel .img-fluid {
+    width: 80px;
+    height: 80px;
+}
+#quantity1 {
+    width: 40px !important;
+    height: 40px !important;
+}
+.left_panel .product-card {
+    gap: 10px;
+}
+.right_panel {
+    gap: 10px;
+}
+.price-box {
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+    cursor: pointer;
+}
+.price-box.active {
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    background: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.1) 100%
+        ),
+        #fff;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.container_selling .btn {
+    min-width: 96px;
+    height: 45px;
+    border-radius: 8px;
+}
+
+.right_panel .btn_checkOut {
+    background-color: #c53327 !important;
+    color: white !important;
+}
+
+.modal_complete .btn {
+    min-width: 120px;
+    height: 45px;
+    border-radius: 8px;
+}
+
+.modal_complete .btn_close {
+    background-color: #00b63e !important;
+    color: white !important;
+}
+
+.modal_complete .btn_close:hover {
+    background-color: #009232 !important;
+    color: white !important;
+}
+
+.right_panel .btn_checkOut:hover {
+    background-color: #9e291f !important;
+    color: white !important;
+}
+
+.right_panel .icon_quantity {
+    border: none;
+    background-color: #fff;
+    size: 20px;
+}
+
+.container_selling input {
+    border: none;   
+    height: 44px;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    padding: 0 10px;
+}
+
+.mobile_title {
+    color: #9e291f !important;
+}
+
+@media (max-width: 576px) {
+    .container_selling {
+        margin: 0 10px !important;
+    }
+}
+

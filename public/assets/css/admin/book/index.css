@@ -111,11 +111,6 @@ body {
     background-color: #ffffff;
     border: none;
 }
-.btn-delete-filter{
-    background-color: #c53327 !important;
-    color: white !important;
-    height: 40px;
-}
 .modal_delete .btn_cancel {
     background-color: #c53327;
     color: white;
