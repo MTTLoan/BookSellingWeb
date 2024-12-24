@@ -45,14 +45,12 @@
                 <button class="btn " data-target="Blog">BLOG</button>
             </div>
 
-
-
             <!-- Image Section -->
             <div class="container p-0">
                 <div class="row">
                     <!-- Column 1 (Banner Image) - Cột 1 chiếm 2 dòng -->
                     <div class="col-lg-9 main_banner">
-                        <img src=" {{ asset('uploads/banner/Banner.png') }}" alt="Banner Image"
+                        <img src="{{ asset('uploads/banner/Banner.png') }}" alt="Banner Image"
                             class="img-fluid rounded img-responsive">
                     </div>
                     <!-- Column 2, Row 1 (Book 1) -->
@@ -67,17 +65,40 @@
         </div>
     </div>
 
-    <h4 id="VanHoc" class="card-group-title">
-        <span class="card-group-title-main" data-category="VanHoc">Văn học</span>
-        <span class="card-group-subtitle">Tiểu thuyết | Trinh thám | Truyện ngắn | Giả tưởng | Kinh dị | Thơ
-            ca</span>
-        <a href="#" class="card-group-link-1">Xem thêm ></a>
-    </h4>
+    <!-- Loop through each book category and display books -->
+    @foreach ($bookTitles as $category => $books)
+    <div class="category-section" id="{{ $category }}">
+        <h4 class="card-group-title">
+            <span class="card-group-title-main">{{ mb_strtoupper($category, 'UTF-8')  }}</span>
+            <a href="#" class="card-group-link">Xem thêm ></a>
+        </h4>
 
-    <!-- Product Cards -->
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
-
+        <!-- Product Cards -->
+        <div class="card_group row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            @foreach ($books as $book)
+            <div class="col">
+                <div class="product p-20 mb-20 rounded w-auto bg-white">
+                    <img src="{{ asset($book->image_url) }}" alt="product" class="img-fluid" />
+                    <h5 class="fw-bold my-2" id="price">{{ number_format($book->unit_price, 0, ',', '.') }} đ</h5>
+                    <p class="mb-2" id="title">{{ $book->book_title_name }}</p>
+                    <div class="d-flex  p-0 justify-content-between align-content-center">
+                        <span id="sales">Đã bán {{ $book->sold_quantity }}</span>
+                        <div class="d-flex gap-md-1 mt-2 mt-md-0">
+                            <button class="btn d-flex p-0 bg-white" id="btnCart">
+                                <span class="material-symbols-outlined cart_icon">add_shopping_cart</span>
+                            </button>
+                            <button class="btn btn_buy d-flex align-content-center justify-content-center p-0 w-0"
+                                id="btnBuy">
+                                Mua ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
+    @endforeach
 
     <h4 class="card-group-title">
         <span class="card-group-title-main" data-category="Blog">Blog</span>
@@ -86,7 +107,7 @@
 
     <!-- Blog Cards -->
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-
+        <!-- Blog content goes here -->
     </div>
 </div>
 @endsection

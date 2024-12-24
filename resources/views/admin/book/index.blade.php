@@ -67,6 +67,7 @@
                             filter_alt
                         </span>
                     </button>
+                    @can('create', App\Models\Book::class)
                     <!-- Button add/import -->
                     <div class="button d-flex justify-content-end w-100">
                         <a class="btn btn_add me-2 d-flex align-items-center text-nowrap" id="btnAdd"
@@ -75,6 +76,7 @@
                             Thêm
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
 
@@ -95,6 +97,7 @@
                     <tbody>
                         <!-- -->
                         @foreach($books as $book)
+                        @can('view', $book)
                         <tr>
                             <td>{{ $book->id }}</td>
                             <td>{{ $book->bookTitle->name }}</td>
@@ -107,10 +110,14 @@
                                     href="{{ route('book.show', $book->id) }}">
                                     <span class="material-symbols-outlined details">visibility</span>
                                 </a>
+                                @can('update', $book)
                                 <a type="button" class="btn_edit p-0" id="btnEdit"
                                     href="{{ route('book.edit', $book->id) }}">
                                     <span class="material-symbols-outlined edit">border_color</span>
                                 </a>
+                                @endcan
+
+                                @can('delete', $book)
                                 <form action="{{ route('book.destroy', $book->id) }}" method="POST"
                                     style="display:inline;">
                                     @csrf
@@ -120,8 +127,10 @@
                                         <span class="material-symbols-outlined delete">delete</span>
                                     </button>
                                 </form>
+                                @endcan
                             </td>
                         </tr>
+                        @endcan
                         @endforeach
                         <!--  -->
                     </tbody>
@@ -255,4 +264,13 @@
 
 @push('scripts')
 <script src="{{ asset('assets/js/admin/book/index.js') }}"></script>
+<script>
+function submitFilterForm() {
+    const filterQuantity = document.querySelector('input[name="filter_quantity"]').value;
+    if (filterQuantity === '' || filterQuantity === null || filterQuantity < 0 || filterQuantity > 1000) {
+        return;
+    }
+    document.getElementById('filterForm').submit();
+}
+</script>
 @endpush
