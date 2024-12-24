@@ -14,71 +14,46 @@ class SalePageController extends Controller
      */
     public function index()
     {
-        $books = DB::table('booktypes')
-        ->join('booktitles', 'booktitles.book_type_id', '=', 'booktypes.id')
-        ->join('books', 'books.book_title_id', '=', 'booktitles.id')
-        ->join('images', 'images.book_id', '=', 'books.id')
-        ->join('order_details', 'books.id', '=', 'order_details.book_id')
-        ->select(
-            'books.id as book_id',
-            'booktypes.name as booktypes_name', 
-            'booktypes.quantity as booktypes_quantity',
-            'booktypes.category as category',
-            'booktitles.name as booktitles_name',
-            'booktitles.author as author',
-            'booktitles.description as description',
-            'books.quantity as quantity',
-            'books.unit_price as unit_price',
-            'books.cost as cost',
-            'books.publishing_year as publishing_year',
-            'books.page_number as page_number',
-            'images.url as cover',
-            'order_details.quantity as order_quantity'
-        )
-        ->get();
+        // Lấy tất cả các loại sách (book types)
+        $bookTypes = DB::table('booktypes')
+            ->select('booktypes.id as booktype_id', 'booktypes.name as booktype_name')
+            ->get();
 
-        // Khởi tạo mảng kết quả theo category
-        $booksByCategory = [];
-        $booktype_name_list = [];
+        $bookTitles = [];
 
-        // Duyệt qua các sách và nhóm theo category
-        foreach ($books as $book) {
-            // Kiểm tra nếu category này đã có trong mảng
-            if (!isset($booksByCategory[$book->category])) {
-                $booksByCategory[$book->category] = [];
-            }
-            // Kiểm tra nếu booktype_name này đã có trong mảng
-            if (!isset($booktype_name_list[$book->category])) {
-                $booktype_name_list[$book->category] = [];
-            }
+        foreach ($bookTypes as $bookType) {
+            // Lấy thông tin sách cho mỗi loại sách, bao gồm giá, số lượng bán ra, và ảnh của sách có id nhỏ nhất
+            $titles = DB::table('booktitles')
+                ->join('books', 'booktitles.id', '=', 'books.book_title_id')
+                ->leftJoin('order_details', 'books.id', '=', 'order_details.book_id')
+                ->leftJoin('images', 'books.id', '=', 'images.book_id')
+                ->select(
+                    'booktitles.id as book_title_id',
+                    'booktitles.name as book_title_name',
+                    'booktitles.author',
+                    'books.unit_price',
+                    DB::raw('COALESCE(SUM(order_details.quantity), 0) as sold_quantity'),
+                    DB::raw('MIN(images.url) as image_url') // Lấy ảnh có id nhỏ nhất
+                )
+                ->where('booktitles.book_type_id', $bookType->booktype_id)
+                ->groupBy(
+                    'booktitles.id',
+                    'booktitles.name',
+                    'booktitles.author',
+                    'books.unit_price'
+                )
+                ->orderBy('booktitles.id', 'asc')
+                ->limit(10) // Lấy tối đa 10 sách cho mỗi loại sách
+                ->get();
 
-            // Thêm thông tin booktype vào mảng của category
-            $booktype_name_list[$book->category][] = $book->booktypes_name;
-
-            // Thêm thông tin sách vào mảng của category
-            $booksByCategory[$book->category][] = [
-                'book_id' => $book->book_id,
-                'book_type_name' => $book->booktypes_name,
-                'book_type_quantity' => $book->booktypes_quantity,
-                'book_title_name' => $book->booktitles_name,
-                'author' => $book->author,
-                'description' => $book->description,
-                'book_quantity' => $book->quantity,
-                'unit_price' => $book->unit_price,
-                'cost' => $book->cost,
-                'cost' => $book->cost,
-                'publishing_year' => $book->publishing_year,
-                'page_number' => $book->page_number,
-                'cover' => $book->cover,
-                'order_quantity' => $book->order_quantity,
-            ];
+            // Thêm các book titles vào mảng theo tên loại sách
+            $bookTitles[$bookType->booktype_name] = $titles;
         }
 
-        // Lọc các booktype_name trùng lặp
-        $booktype_name_list = array_map("array_unique", $booktype_name_list);
-
-        return view('home.index', compact(['booksByCategory', 'booktype_name_list']));
+        // Trả về view với dữ liệu bookTitles
+        return view('home.index', compact('bookTitles'));
     }
+
 
     public function showBookDetails($book_id)
     {
@@ -119,7 +94,7 @@ class SalePageController extends Controller
         // Lấy điểm đánh giá tổng thể dùng hiển thị trong thông tin sách
         $review_score = DB::table('books')
             ->select(
-            'books.id',
+                'books.id',
                 DB::raw('ROUND(AVG(reviews.score)) as review_score'),
                 DB::raw('COUNT(reviews.id) as review_count')
             )
@@ -168,7 +143,7 @@ class SalePageController extends Controller
             ->get()
             ->take(2)
             ->toArray();
-        
+
         $book_same_category_image = [];
         foreach ($book_same_category as $it) {
             $image = DB::table('images')
@@ -179,7 +154,7 @@ class SalePageController extends Controller
                 ->get()
                 ->first();
             $book_same_category_image[] = $image->image_url;
-        }   
+        }
 
         // Lấy phân bố đánh giá sách
         $review_distribution = [];
@@ -189,7 +164,7 @@ class SalePageController extends Controller
             )
             ->first()
             ->review_count;
-        
+
         $review_list = DB::table('reviews')
             ->select(
                 'reviews.score as score',
@@ -206,32 +181,33 @@ class SalePageController extends Controller
 
         //Lấy đánh giá sách của khách hàng
         $customer_reviews = DB::table('reviews')
-        ->distinct()
-        ->select(
-            'customers.id as customer_id',
-            'customers.name as customer_name',
-            'reviews.description',
-            DB::raw('ROUND(reviews.score) as review_score'),
-            'reviews.created_at as created_at'
-        )
-        ->join('order_details', 'order_details.book_id', '=', 'reviews.book_id')
-        ->join('orders', 'orders.id', '=', 'order_details.order_id')
-        ->join('customers', 'customers.id', '=', 'orders.customer_id')
-        ->where('reviews.book_id', $book_id)
-        ->get()
-        ->toArray();
+            ->distinct()
+            ->select(
+                'customers.id as customer_id',
+                'customers.name as customer_name',
+                'reviews.description',
+                DB::raw('ROUND(reviews.score) as review_score'),
+                'reviews.created_at as created_at'
+            )
+            ->join('order_details', 'order_details.book_id', '=', 'reviews.book_id')
+            ->join('orders', 'orders.id', '=', 'order_details.order_id')
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->where('reviews.book_id', $book_id)
+            ->get()
+            ->toArray();
         // dd($customer_reviews);
 
         return view('ChiTietSanPham', compact(['book', 'images', 'review_total', 'review_score', 'navbar_info', 'book_same_category', 'review_distribution', 'customer_reviews', 'book_same_category_image']));
     }
 
-    public function showBookByType($booktype_id) {
+    public function showBookByType($booktype_id)
+    {
         // Lấy tên thể loại sách
         $booktypeName = DB::table('booktypes')
             ->select('name')
             ->where('id', $booktype_id)
             ->first()
-            ->name; 
+            ->name;
 
         // Lấy thông tin sách dựa vào thể loại
         $books = DB::table('booktypes')
@@ -271,6 +247,6 @@ class SalePageController extends Controller
             $images[$b->book_id] = $image ? $image->image_url : null;
         }
         // dd($images);
-        return view('VanHoc_DanhMuc', compact(['booktypeName' ,'books', 'images']));
+        return view('VanHoc_DanhMuc', compact(['booktypeName', 'books', 'images']));
     }
 }

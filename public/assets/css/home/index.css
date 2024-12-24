@@ -83,25 +83,8 @@ body {
     /* Title color */
 }
 
-/* Subtitle (Smaller Text) */
-.card-group-subtitle {
-    font-size: 0.9rem;
-    font-weight: normal;
-    color: #888;
-    /* Gray color */
-    margin-left: 1rem;
-    /* Space between title and subtitle */
-    flex-grow: 1;
-    /* Allow the subtitle to take available space */
-}
-
 /* Link style for 'Xem thêm' */
-.card-group-link-1,
-.card-group-link-2,
-.card-group-link-3,
-.card-group-link-4,
-.card-group-link-5,
-.card-group-link-6,
+.card-group-link,
 .card-group-link-blog {
     font-size: 0.9rem;
     color: #c53327;
@@ -112,6 +95,53 @@ body {
 .card-group-link:hover {
     text-decoration: underline;
     /* Underline on hover */
+}
+
+/* Card Group */
+.p-20 {
+    padding: 20px !important;
+}
+.mb-20 {
+    margin-bottom: 20px;
+}
+.card_group .btn {
+    height: 22px;
+    border-radius: 0;
+    font-size: 12px;
+    background: #da392b;
+    color: white;
+}
+
+.card_group .btn:hover {
+    background-color: #9e291f;
+    color: white;
+}
+
+.product {
+    border: 1px solid #eee;
+    box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+#btnCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    color: #da392b;
+    text-align: center;
+    border: 1px solid #da392b;
+}
+.card_group #btnCart:hover {
+    border: 1px solid #9e291f;
+    color: #9e291f;
+}
+
+#btnBuy {
+    min-width: 96px;
+    padding: 5px 10px;
+}
+.cart_icon {
+    font-size: 14px;
 }
 
 @media (max-width: 992px) {
@@ -129,6 +159,16 @@ body {
     .card-group-link-1,
     .card-group-link-blog {
         margin-top: 0.5rem;
+    }
+
+    #btnBuy {
+        min-width: 60px !important;
+    }
+    .p-20 {
+        padding: 10px !important;
+    }
+    .mb-20 {
+        margin-bottom: 10px;
     }
 }
 
