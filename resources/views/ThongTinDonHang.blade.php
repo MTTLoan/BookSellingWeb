@@ -30,7 +30,7 @@
                         <div class="order-status success">HOÀN THÀNH</div>
                     </div>
 
-                    <div class="order-details border-top border-bottom p-2">
+                    <div class="order-details border-top border-bottom p-2 d-flex flex-column gap-3">
                         <!-- Product 1 -->
                         <div class="product d-flex align-items-center">
                             <div class="image_container d-flex align-items-center justify-content-center me-2">
@@ -86,7 +86,7 @@
                         <div class="order-status success">HOÀN THÀNH</div>
                     </div>
 
-                    <div class="order-details border-top border-bottom p-2">
+                    <div class="order-details border-top border-bottom p-2 d-flex flex-column gap-3">
                         <!-- Product 1 -->
                         <div class="product d-flex align-items-center">
                             <div class="image_container d-flex align-items-center justify-content-center me-2">
