@@ -106,6 +106,13 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-style" id="overviewButton"
+                                href="{{ route('change-logs.index') }}">
+                                <i class="bi bi-clock-history"></i> Lịch sử
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Bán hàng aligned to the right -->

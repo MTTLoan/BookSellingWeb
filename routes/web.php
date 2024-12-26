@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BookController;
 
 use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ChangeLogController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 
 Route::get('/', [SalePageController::class, 'index'])->name('home');
@@ -54,6 +55,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('book', BookController::class);
     Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
+
+    Route::get('/change-logs', [ChangeLogController::class, 'index'])->name('change-logs.index');
+    Route::post('/change-logs/revert/{id}', [ChangeLogController::class, 'revert'])->name('change-logs.revert');
 });
 
 Route::get('/test', function () {
