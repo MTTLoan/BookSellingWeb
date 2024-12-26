@@ -40,7 +40,7 @@
                                 </a>
                                 <ul class="collapse list-unstyled" id="productSubmenu">
                                     <li><a href="{{ route('book.index') }}">Danh mục sản phẩm</a></li>
-                                    <li><a href="#">Khuyến mãi</a></li>
+                                    <li><a>Khuyến mãi</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -49,8 +49,8 @@
                                     GIAO DỊCH
                                 </a>
                                 <ul class="collapse list-unstyled" id="transactionSubmenu">
-                                    <li><a href="#">Phiếu đặt hàng</a></li>
-                                    <li><a href="#">Nhập hàng</a></li>
+                                    <li><a>Phiếu đặt hàng</a></li>
+                                    <li><a>Nhập hàng</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -59,8 +59,8 @@
                                     ĐỐI TÁC & NGUỒN LỰC
                                 </a>
                                 <ul class="collapse list-unstyled" id="partnerSubmenu">
-                                    <li><a href="#">Khách hàng</a></li>
-                                    <li><a href="#">Nhà cung cấp</a></li>
+                                    <li><a>Khách hàng</a></li>
+                                    <li><a>Nhà cung cấp</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -69,12 +69,12 @@
                                     BÁO CÁO
                                 </a>
                                 <ul class="collapse list-unstyled" id="reportSubmenu">
-                                    <li><a href="#">Bán hàng</a></li>
-                                    <li><a href="#">Tài chính</a></li>
+                                    <li><a>Bán hàng</a></li>
+                                    <li><a>Tài chính</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">BÁN HÀNG</a>
+                                <a>BÁN HÀNG</a>
                             </li>
                             <li>
                                 <a href="{{ route('account.profile') }}">TÀI KHOẢN</a>
@@ -114,7 +114,7 @@
                             <!-- <button class="nav-link icon-button" id="accountButton">
                                 <i class="bi bi-person-circle"></i>
                             </button> -->
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i>
                             </a>

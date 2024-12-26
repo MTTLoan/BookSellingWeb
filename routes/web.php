@@ -17,7 +17,6 @@ Route::get('/admin', function () {
 })->name('home.admin');
 
 Route::group(['prefix' => 'account'], function () {
-
     Route::get('/login', [AccountController::class, 'login'])->name('account.login');
     Route::post('/login', [AccountController::class, 'checkLogin']);
     Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');

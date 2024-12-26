@@ -34,19 +34,19 @@
                     <div class="offcanvas-body">
                         <ul class="list-unstyled components ">
                             <li>
-                                <a href="#">TRANG CHỦ</a>
+                                <a>TRANG CHỦ</a>
                             </li>
                             <li>
-                                <a href="#">ĐƠN HÀNG</a>
+                                <a>ĐƠN HÀNG</a>
                             </li>
                             <li>
-                                <a href="#">VOUCHER</a>
+                                <a>VOUCHER</a>
                             </li>
                             <li>
-                                <a href="#">REVIEW</a>
+                                <a>REVIEW</a>
                             </li>
                             <li>
-                                <a href="#">BLOG</a>
+                                <a>BLOG</a>
                             </li>
                             @if(auth('cus')->check())
                             <li>
@@ -64,7 +64,7 @@
                             </li>
                             @endif
                             <li>
-                                <a href="#">GIỎ HÀNG</a>
+                                <a>GIỎ HÀNG</a>
                             </li>
                         </ul>
                     </div>
@@ -85,7 +85,7 @@
                     <ul class="navbar-nav">
                         @if(auth('cus')->check())
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
+                            <a class="nav-link" id="userDropdown" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <i class="bi bi-person-fill user-icon"></i>
                             </a>
@@ -109,7 +109,7 @@
                         </li>
                         @endif
                         <li class="nav-item">
-                            <a href="#" class="nav-link cart-icon" id="cartButton">
+                            <a class="nav-link cart-icon" id="cartButton">
                                 <i class="bi bi-bag-heart-fill"></i>
                             </a>
                         </li>

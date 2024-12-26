@@ -45,3 +45,9 @@ body {
     border: none;
     background-color: #c53327 !important;
 }
+.img-fixed-size {
+    width: 150px;
+    height: 200px;
+    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    margin: 5px; 
+}
