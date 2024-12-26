@@ -73,10 +73,10 @@ class SalePageController extends Controller
                 'booktitles.description as book_description',
                 'books.page_number as page_number',
             )
-            ->join('booktitles', 'booktitles.id', '=', 'books.book_title_id')
-            ->join('booktypes', 'booktypes.id', '=', 'booktitles.book_type_id')
-            ->join('order_details', 'order_details.book_id', '=', 'books.id')
-            ->join('suppliers', 'suppliers.id', '=', 'booktitles.supplier_id')
+            ->leftJoin('booktitles', 'booktitles.id', '=', 'books.book_title_id')
+            ->leftJoin('booktypes', 'booktypes.id', '=', 'booktitles.book_type_id')
+            ->leftJoin('order_details', 'order_details.book_id', '=', 'books.id')
+            ->leftJoin('suppliers', 'suppliers.id', '=', 'booktitles.supplier_id')
             ->where('books.id', '=', $book_id)
             ->get()
             ->first();
