@@ -16,7 +16,9 @@ Route::get('/admin', function () {
     return view('master.admin');
 })->name('home.admin');
 
+
 Route::group(['prefix' => 'account'], function () {
+
     Route::get('/login', [AccountController::class, 'login'])->name('account.login');
     Route::post('/login', [AccountController::class, 'checkLogin']);
     Route::get('/logout', [AccountController::class, 'logout'])->name('account.logout');
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/logout',[AdminController::class, 'logout'])->name('admin.logout');
 
     Route::resource('book', BookController::class);
+    Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
 });
 
 Route::get('/test', function () {

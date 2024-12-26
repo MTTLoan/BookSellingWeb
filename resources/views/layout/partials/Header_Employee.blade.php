@@ -31,7 +31,7 @@
                     <div class="offcanvas-body">
                         <ul class="list-unstyled components">
                             <li>
-                                <a href="#">TỔNG QUAN</a>
+                                <a>TỔNG QUAN</a>
                             </li>
                             <li>
                                 <a data-bs-toggle="collapse" href="#productSubmenu" aria-expanded="false"
@@ -85,7 +85,7 @@
                         </ul>
                     </div>
                 </div>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand">
                     <img src="{{ asset('uploads/logo/Favicon.png') }}" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
