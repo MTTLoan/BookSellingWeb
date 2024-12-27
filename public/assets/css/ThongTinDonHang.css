@@ -1,0 +1,150 @@
+body {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f7f7 !important;
+    font-size: 16px;
+}
+.order_infor_container {
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    border-radius: 8px;
+    padding: 30px !important;
+}
+
+.form-header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-title::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #989696;
+    width: 10%;
+    margin-top: 10px;
+}
+
+.order_infor_container .status_nav {
+    margin-bottom: 10px;
+}
+
+.order_infor_container .status_nav_link {
+    padding: 10px 16px 10px 16px;
+    text-decoration: none;
+    color: black !important;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.order_infor_container .status_nav_link.active {
+    color: #da392b !important;
+    border-bottom: 1px solid #da392b;
+}
+
+.order_infor_container .status_nav_link:hover {
+    background-color: #f7f7f7;
+    /* Nền màu xám nhạt khi hover */
+    color: #333;
+    /* Màu chữ đen khi hover */
+    border-bottom: 1px solid #da392b;
+}
+
+..order-section{
+    display: flex;
+    row-gap: 20px;
+}
+
+.order-section .image_container, .order-section .product-image {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover;
+}
+
+.order-date {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-status {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.order-status.success {
+    color: green;
+    /* Màu xanh cho trạng thái hoàn thành */
+}
+
+.order-status.cancelled {
+    color: red;
+    /* Màu đỏ cho trạng thái hủy */
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btn-white {
+    border-radius: 8px !important;
+    border: 1px solid #00224D !important;
+    color: #00224D !important;
+}
+
+.btn-red {
+    border-radius: 8px !important;
+    background-color: #C53327 !important;
+    color: white !important;
+}
+
+@media (max-width: 576px) {
+    .order_infor_container {
+        padding: 10px !important;
+    }
+    body {
+        margin: 10px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .order_infor_container {
+        font-size: 12px !important;
+    }
+    .order_infor_container .status_nav_link {
+        padding: 6px 10px 6px 10px;
+    }
+}
+
+//popup_ChiTietDonHang.css
+@media (min-width: 768px) {
+    .popup .modal-dialog {
+        max-width: 50%;
+    }
+}
+@media (max-width: 768px) {
+    .popup .row {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+.popup span {
+    font-size: 14px;
+}
+.popup th,
+.popup td {
+    font-size: 14px;
+}
+.popup hr {
+    margin: 8px 0 !important;
+}
+
+.popup .delivery_infor {
+    max-width: 340px;
+}
+.popup .modal-dialog {
+    max-width: 50%;
+}
