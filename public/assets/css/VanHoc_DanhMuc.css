@@ -98,6 +98,11 @@ body {
     border: 1px solid #eee;
     box-shadow: 3px 3px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
+.product .image_container, .img-fluid {
+    height: 198px !important;
+}
+
 #btnCart {
     display: flex;
     justify-content: center;
@@ -134,3 +139,15 @@ body {
 .cart_icon {
     font-size: 14px;
 }
+
+#title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 hàng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiển thị "..." khi bị cắt */
+    white-space: normal; /* Cho phép xuống hàng */
+    height: 3em; 
+    line-height: 1.5em; 
+}
+

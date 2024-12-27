@@ -28,6 +28,7 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
+
         // dd(auth('web')->user());
         $query = Book::with(['bookTitle.bookType']);
 
@@ -88,6 +89,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+
             'unit_price' => 'integer|min:1|gt:cost',
             'cost' => 'integer|min:1',
             'publishing_year' => 'integer|min:1',

@@ -103,10 +103,12 @@
                     @foreach ($book_same_category as $index => $item )
 
                     <div class="product p-20 mb-20 me-2 rounded w-auto">
-                        <img src="{{ asset($book_same_category_image[$index]) }}" alt="product" class="img-fluid" />
+                        <div class="image_container d-flex align-items-center justify-content-center">
+                            <img src="{{ asset($book_same_category_image[$index]) }}" alt="product" class="img-fluid" />
+                        </div>
                         <h5 class="fw-bold my-2" id="price">{{ number_format($item->unit_price, 0, '', '.') }} đ</h5>
-                        <p class="mb-2" id="title">
-                            {{ $item->book_name }}
+                        <p class="mb-2" id="title_other_book">
+             {{ $item->book_name }}
                         </p>
                         <div class="d-flex flex-column flex-lg-row p-0 justify-content-between align-content-center">
                             <span id="sales">Đã bán {{ $item->order_quantity }}</span>
@@ -147,10 +149,13 @@
                         </p>
                         <p class="fs-5 fw-bold my-4">Hình ảnh sản phẩm</p>
 
-                        @foreach ($images as $image)
-                        <img src="{{ asset($image->image_url ) }}" alt="product" class="img-fluid px-md-5" />
-                        @endforeach
-                    </div>
+                        <div class="img_preview_container d-lg-flex flex-lg-wrap align-content-start">
+                            @foreach ($images as $image)
+                            <img src="{{ asset($image->image_url ) }}" alt="product"
+                                class="img_preview img-fluid px-md-5" />
+                            @endforeach
+                        </div>
+     </div>
                 </div>
             </div>
         </div>
@@ -158,7 +163,8 @@
     </div>
 </div>
 <script>
-const feedbackHTML = `
+    const feedbackHTML = `
+
     <style>
         .kid_star {
         color: #F6A500;
