@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ChangeLog;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class ChangeLogController extends Controller
      */
     public function index()
     {
-        $changeLogs = ChangeLog::orderBy('changed_at', 'desc')->paginate(10);
+        $changeLogs = ChangeLog::with('employee')->orderBy('changed_at', 'desc')->paginate(20);
         return view('admin.change-logs.index', compact('changeLogs'));
     }
 
@@ -33,6 +34,14 @@ class ChangeLogController extends Controller
 
         // Lấy trạng thái cũ toàn bộ dòng
         $oldData = json_decode($changeLog->old_value, true);
+
+        // Định dạng lại ngày giờ
+        if (isset($oldData['created_at'])) {
+            $oldData['created_at'] = Carbon::parse($oldData['created_at'])->format('Y-m-d H:i:s');
+        }
+        if (isset($oldData['updated_at'])) {
+            $oldData['updated_at'] = Carbon::parse($oldData['updated_at'])->format('Y-m-d H:i:s');
+        }
 
         // Khôi phục toàn bộ dòng
         DB::table($changeLog->table_name)

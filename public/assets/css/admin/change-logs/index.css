@@ -1,0 +1,25 @@
+body {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f7f7 !important;
+    font-size: 16px !important;
+}
+.container-change-logs {
+    margin: 20px;
+}
+.table {
+    border-collapse: collapse;
+}
+.table thead th {
+    background-color: #fbebe5 !important;
+    color: black !important;
+}
+.table tbody td {
+    font-size: 15px;
+}
+.btn_revert{
+    background-color: #c53327 !important;
+    color: white !important;
+    height: 40px;
+    width: 50%;
+}

@@ -20,4 +20,9 @@ class ChangeLog extends Model
         'operation_type',
         'changed_at',
     ];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'changed_by');
+    }
 }
