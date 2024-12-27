@@ -31,7 +31,7 @@
                     <div class="offcanvas-body">
                         <ul class="list-unstyled components">
                             <li>
-                                <a>TỔNG QUAN</a>
+                                <a href="{{ route('admin.index') }}">TỔNG QUAN</a>
                             </li>
                             <li>
                                 <a data-bs-toggle="collapse" href="#productSubmenu" aria-expanded="false"
@@ -64,14 +64,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a data-bs-toggle="collapse" href="#reportSubmenu" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    BÁO CÁO
-                                </a>
-                                <ul class="collapse list-unstyled" id="reportSubmenu">
-                                    <li><a>Bán hàng</a></li>
-                                    <li><a>Tài chính</a></li>
-                                </ul>
+                                <a href="{{ route('admin.salesReport') }}">BÁO CÁO</a>
                             </li>
                             <li>
                                 <a>BÁN HÀNG</a>

@@ -1,0 +1,19 @@
+table {
+    border-collapse: collapse;
+}
+
+table,
+td,
+th {
+    padding: 3px;
+    border: 1px solid black;
+}
+.btn-primary {
+    background-color: #d0483c !important;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}

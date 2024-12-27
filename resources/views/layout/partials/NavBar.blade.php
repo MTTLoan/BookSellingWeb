@@ -16,10 +16,19 @@
                     <ul class="navbar-nav">
                         <!-- Tổng quan with eye icon -->
                         <li class="nav-item">
-                            <a class="nav-link nav-link-style" id="overviewButton">
+                            <a class="nav-link nav-link-style" href="{{ route('admin.index') }}" id="overviewButton">
                                 <i class="bi bi-eye"></i> Tổng quan
                             </a>
                         </li>
+
+                        <!-- Tài khoản (chỉ dành cho admin) -->
+                        @if (auth('web')->user()->role === 'admin')
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-style" id="overviewButton">
+                                <i class="bi bi-person"></i> Tài khoản
+                            </a>
+                        </li>
+                        @endif
 
                         <!-- Dropdown 1 -->
                         <li class="nav-item dropdown dropdown-style">
@@ -34,15 +43,23 @@
                                         <i class="bi bi-list-ul"></i> Danh mục sản phẩm
                                     </a>
                                 </li>
+                                @if (in_array(auth('web')->user()->role, ['admin', 'branch_manager']))
                                 <li>
                                     <a class="dropdown-item" id="promotionButton">
                                         <i class="bi bi-tags"></i> Khuyến mãi
                                     </a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" id="reviewButton">
+                                        <i class="bi bi-star-fill"></i> Đánh giá
+                                    </a>
+                                </li>
+                                @endif
                             </ul>
                         </li>
 
-                        <!-- Dropdown 2 -->
+                        <!-- Giao dịch (chỉ dành cho staff và branch_manager) -->
+                        @if (in_array(auth('web')->user()->role, ['staff', 'branch_manager']))
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-link-style dropdown-toggle" id="navDropdown2" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,13 +71,16 @@
                                         <i class="bi bi-journal-check"></i> Phiếu đặt hàng
                                     </a>
                                 </li>
+                                @if (auth('web')->user()->role === 'branch_manager')
                                 <li>
                                     <a class="dropdown-item" id="importButton">
                                         <i class="bi bi-box-seam"></i> Nhập hàng
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
+                        @endif
 
                         <!-- Dropdown 3 -->
                         <li class="nav-item dropdown">
@@ -74,6 +94,7 @@
                                         <i class="bi bi-person"></i> Khách hàng
                                     </a>
                                 </li>
+                                @if (in_array(auth('web')->user()->role, ['admin', 'branch_manager']))
                                 <li>
                                     <a class="dropdown-item" id="supplierButton">
                                         <i class="bi bi-building"></i> Nhà cung cấp
@@ -81,41 +102,35 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" id="employeeButton">
-                                        <i class="bi bi-person-workspace"></i> Nhân viên
+                                        <i class="bi bi-person-workspace"></i> staff
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </li>
 
-                        <!-- Dropdown 4 -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-link-style  dropdown-toggle" id="navDropdown4" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-bar-chart"></i> Báo cáo
+                        <!-- Báo cáo (chỉ dành cho branch_manager và diẻctor) -->
+                        @if (in_array(auth('web')->user()->role, ['branch_manager', 'director']))
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-style" href="{{ route('admin.salesReport') }}"
+                                id="overviewButton">
+                                <i class="bi bi-eye"></i> Báo cáo
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navDropdown4">
-                                <li>
-                                    <a class="dropdown-item" id="salesReportButton">
-                                        <i class="bi bi-graph-up"></i> Bán hàng
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" id="financialReportButton">
-                                        <i class="bi bi-cash"></i> Tài chính
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+                        @endif
 
+                        @if (auth('web')->user()->role === 'admin')
                         <li class="nav-item">
                             <a class="nav-link nav-link-style" id="overviewButton"
                                 href="{{ route('change-logs.index') }}">
                                 <i class="bi bi-clock-history"></i> Lịch sử
                             </a>
                         </li>
+                        @endif
                     </ul>
 
-                    <!-- Bán hàng aligned to the right -->
+                    <!-- Bán hàng (chỉ dành cho staff và branch_manager) -->
+                    @if (in_array(auth('web')->user()->role, ['staff', 'branch_manager']))
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link nav-link-style" id="salesButton">
@@ -123,6 +138,7 @@
                             </a>
                         </li>
                     </ul>
+                    @endif
                 </div>
             </div>
         </nav>

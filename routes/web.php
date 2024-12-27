@@ -8,6 +8,7 @@ use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ChangeLogController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
+use App\Http\Middleware\RedirectIfNotEmployee;
 
 Route::get('/', [SalePageController::class, 'index'])->name('home');
 Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
@@ -49,9 +50,13 @@ Route::group(['prefix' => 'account'], function () {
 Route::get('/admin/login',[AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin/login',[AdminController::class, 'checkLogin']);
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class]], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/logout',[AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    Route::get('/statistics', [AdminController::class, 'index'])->name('admin.statistics');
+    Route::get('/sales-report', [AdminController::class, 'salesReport'])->name('admin.salesReport');
+    Route::get('/export-sales-report', [AdminController::class, 'exportSalesReport'])->name('admin.exportSalesReport');
 
     Route::resource('book', BookController::class);
     Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
