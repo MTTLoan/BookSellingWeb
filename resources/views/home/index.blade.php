@@ -39,7 +39,7 @@
         <div class="col-lg-9 px-3">
             <!-- Button Section with Border -->
             <div class="button-section border rounded d-flex justify-content-between mb-3 p-1 d-none d-md-flex">
-                <button class="btn me-3" data-target="DonHang">ĐƠN HÀNG</button>
+                <a href="{{ route('don-hang') }}" class="btn btn-primary me-3">ĐƠN HÀNG</a>
                 <button class="btn me-3" data-target="Voucher">VOUCHER</button>
                 <button class="btn me-3" data-target="Review">REVIEW</button>
                 <button class="btn " data-target="Blog">BLOG</button>
@@ -77,7 +77,7 @@
         <div class="card_group row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
             @foreach ($books as $book)
             <div class="col">
-                <div class="product p-20 mb-20 rounded w-auto bg-white">
+                <div class="product p-20 mb-20 rounded w-auto bg-white" data-book-id="{{ $book->book_title_id }}">
                     <img src="{{ asset($book->image_url) }}" alt="product" class="img-fluid" />
                     <h5 class="fw-bold my-2" id="price">{{ number_format($book->unit_price, 0, ',', '.') }} đ</h5>
                     <p class="mb-2" id="title">{{ $book->book_title_name }}</p>

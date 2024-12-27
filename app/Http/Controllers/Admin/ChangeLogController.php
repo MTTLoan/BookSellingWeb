@@ -43,13 +43,25 @@ class ChangeLogController extends Controller
             $oldData['updated_at'] = Carbon::parse($oldData['updated_at'])->format('Y-m-d H:i:s');
         }
 
-        // Khôi phục toàn bộ dòng
-        DB::table($changeLog->table_name)
+        // Kiểm tra bản ghi có tồn tại hay không
+        $exists = DB::table($changeLog->table_name)
             ->where('id', $changeLog->row_id)
-            ->update($oldData);
+            ->exists();
+
+        if ($exists) {
+            // Nếu tồn tại, thực hiện cập nhật
+            DB::table($changeLog->table_name)
+                ->where('id', $changeLog->row_id)
+                ->update($oldData);
+        } else {
+            // Nếu không tồn tại, thêm lại bản ghi
+            DB::table($changeLog->table_name)
+                ->insert($oldData);
+        }
 
         return redirect()->route('change-logs.index')->with('success', 'Khôi phục dòng dữ liệu thành công.');
     }
+
 
     /**
      * Ghi log khi xóa dữ liệu.

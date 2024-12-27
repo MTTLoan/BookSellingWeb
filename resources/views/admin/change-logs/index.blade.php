@@ -26,6 +26,7 @@
                 <th scope="new_value" style=" max-width: 140px">Giá trị mới</th>
                 <th scope="change_by" style="max-width: 50px">Thay đổi bởi</th>
                 <th scope="time" style="max-width: 50px">Thời gian</th>
+                <th scope="activity" style="max-width: 50px">Tác động</th>
                 <th scope="activity" style="max-width: 50px">Hành động</th>
             </tr>
         </thead>
@@ -49,6 +50,7 @@
                     @endif
                 </td>
                 <td>{{ $log->employee ? $log->employee->name : 'N/A' }}</td>
+                <td>{{ $log->operation_type }}</td>
                 <td>{{ $log->changed_at }}</td>
                 <td class="text-center">
                     <form action="{{ route('change-logs.revert', $log->id) }}" method="POST">
