@@ -15,6 +15,13 @@ Route::get('/book-by-category/{category}', [SalePageController::class, 'showBook
 Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
+Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('/remove-from-cart', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+
+Route::get('/don-hang', function () {
+    return view('GioHang');
+})->name('don-hang');
 
 
 Route::get('/admin', function () {
