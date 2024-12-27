@@ -1,11 +1,13 @@
 <?php
-        // Dữ liệu mẫu sản phẩm
-        $products = [
-            ['image' => '../../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg',
-            "name" => "Sách giáo khoa",
-            "quantity" => 5,
-            "price" => 50000],
-        ];
+// Dữ liệu mẫu sản phẩm
+$products = [
+    [
+        'image' => '../../../../public/assets/images/tron-len-mai-nha-de-khoc.jpg',
+        "name" => "Sách giáo khoa",
+        "quantity" => 5,
+        "price" => 50000
+    ],
+];
 ?>
 
 
@@ -24,51 +26,51 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Product Card</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-    .product-card {
-        display: flex;
-        align-items: center;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 10px;
-        width: 250px;
-        background-color: #ffffff;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 10px;
-    }
+        .product-card {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 250px;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
 
-    .product-card img {
-        width: 100px;
-        height: 100px;
-        border-radius: 5px;
-        object-fit: cover;
-        margin-right: 10px;
-    }
+        .product-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
 
-    .product-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
 
-    .product-info .name,
-    .product-info .quantity {
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #333;
-    }
+        .product-info .name,
+        .product-info .quantity {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
 
-    .product-info .price {
-        font-size: 16px;
-        font-weight: bold;
-        color: #C53327;
-    }
+        .product-info .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #C53327;
+        }
     </style>
 </head>
 

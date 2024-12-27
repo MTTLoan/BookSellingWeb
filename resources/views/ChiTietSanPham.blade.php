@@ -26,7 +26,6 @@
         </div>
 
         <!-- Thông tin sản phẩm -->
-
         <div class="col-md-7 info_product px-md-2 px-4 pb-4">
 
             <h2 class="fw-bold fs-2 mb-4" id="title">
@@ -109,7 +108,7 @@
                         </div>
                         <h5 class="fw-bold my-2" id="price">{{ number_format($item->unit_price, 0, '', '.') }} đ</h5>
                         <p class="mb-2" id="title_other_book">
-                            {{ $item->book_name }}
+             {{ $item->book_name }}
                         </p>
                         <div class="d-flex flex-column flex-lg-row p-0 justify-content-between align-content-center">
                             <span id="sales">Đã bán {{ $item->order_quantity }}</span>
@@ -156,7 +155,7 @@
                                 class="img_preview img-fluid px-md-5" />
                             @endforeach
                         </div>
-                    </div>
+     </div>
                 </div>
             </div>
         </div>
@@ -165,6 +164,7 @@
 </div>
 <script>
     const feedbackHTML = `
+
     <style>
         .kid_star {
         color: #F6A500;
@@ -186,7 +186,7 @@
                     <div>
                         @for ($i = 0; $i < $reviewScore; $i++)
                             <span class="material-symbols-outlined kid_star">
-                                kid_star 
+                                kid_star
                             </span>
                         @endfor
                     </div>
@@ -251,7 +251,7 @@
                     </p>
                 </div>
             </div>
-            
+
             @foreach ($customer_reviews as $customer_review)
                 <hr />
                 <div class="row comment my-4">
@@ -259,7 +259,7 @@
                     @php
                         // Gán giá trị cho reviewCount và reviewScore nếu review_score tồn tại
                         $reviewDate = isset($customer_review->created_at) ? $customer_review->created_at : '2020-01-01';
-                        $customerReviewScore = isset($customer_review->review_score) ? $customer_review->review_score : 0; 
+                        $customerReviewScore = isset($customer_review->review_score) ? $customer_review->review_score : 0;
                         $customer_review->customer_name = isset($customer_review->customer_name) ? $customer_review->customer_name : 'Khách hàng ẩn danh';
                     @endphp
                         <p id="name">{{ $customer_review->customer_name }}</p>
@@ -270,11 +270,11 @@
                             @for ($i = 0; $i < $customerReviewScore; $i++)
                                 <span class="material-symbols-outlined kid_star">
                                     kid_star
-                                </span>                           
+                                </span>
                             @endfor
                         </div>
                         <p id="comment">
-                            {{ $customer_review->description }} 
+                            {{ $customer_review->description }}
                         </p>
                     </div>
                 </div>

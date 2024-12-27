@@ -36,17 +36,17 @@ return [
     */
 
     'guards' => [
-        // 'web' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'employees',
+        ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'employees',
+        ],
         'cus' => [
             'driver' => 'session',
             'provider' => 'customers',
-        ],
-        'emp' => [
-            'driver' => 'session',
-            'provider' => 'employees',
         ],
 
     ],
@@ -82,7 +82,6 @@ return [
         'employees' => [
             'driver' => 'eloquent',
             'model' => App\Models\Employee::class,
-            'key' => 'name', // Xác định cột được sử dụng
         ],
 
         // 'users' => [

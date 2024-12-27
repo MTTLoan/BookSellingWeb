@@ -111,10 +111,24 @@
                         </li>
 
                         <li class="nav-item d-flex align-items-center ">
-                            <span class="account-name me-1">Tài khoản</span>
-                            <button class="nav-link icon-button" id="accountButton">
+                            <!-- <button class="nav-link icon-button" id="accountButton">
                                 <i class="bi bi-person-circle"></i>
-                            </button>
+                            </button> -->
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.logout') }}">
+                                        Logout
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -123,7 +137,5 @@
     </header>
 
 </body>
-
-
 
 </html>
