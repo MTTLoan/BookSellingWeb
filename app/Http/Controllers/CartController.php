@@ -46,7 +46,7 @@ class CartController extends \Illuminate\Routing\Controller
 
         // Lấy các item trong giỏ hàng và ảnh đầu tiên của mỗi cuốn sách
         $cartItems = Cart::with(['book.bookTitle', 'book.images' => function ($query) {
-            $query->orderBy('created_at')->limit(1); // Lấy ảnh đầu tiên theo thời gian tạo
+            $query->orderBy('id')->limit(1); // Lấy ảnh đầu tiên theo thời gian tạo
         }])
             ->where('customer_id', $userId)
             ->get();

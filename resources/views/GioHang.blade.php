@@ -18,7 +18,7 @@
 
                     <!-- Kiểm tra xem có ảnh không và hiển thị ảnh đầu tiên -->
                     @if($cartItem->book->images->isNotEmpty())
-                        <img src="{{ asset('uploads/products/' . $cartItem->book->images->first()->url) }}"
+                        <img src="{{ asset($cartItem->book->images->first()->url) }}"
                              alt="{{ $cartItem->book->bookTitle->name }}" class="cart-item-image">
                     @else
                         <img src="{{ asset('path/to/default-image.jpg') }}" alt="Default Image" class="cart-item-image">
