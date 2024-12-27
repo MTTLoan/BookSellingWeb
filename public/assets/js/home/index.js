@@ -57,8 +57,8 @@ document.querySelectorAll('#btnCart').forEach(button => {
     button.addEventListener('click', function (event) {
         event.preventDefault();
 
-        // Lấy ID sách từ thuộc tính data-book-id
-        const bookId = this.closest('.product').getAttribute('data-book-id');
+        // Lấy book_title_id từ thuộc tính data-book-id
+        const bookTitleId = this.closest('.product').getAttribute('data-book-id');
 
         fetch('/add-to-cart', {
             method: 'POST',
@@ -66,12 +66,11 @@ document.querySelectorAll('#btnCart').forEach(button => {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
             },
-            body: JSON.stringify({ book_id: bookId })
+            body: JSON.stringify({ book_title_id: bookTitleId })
         })
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
-                    // Hiển thị alert khi cập nhật thành công
                     alert(data.message);
                 }
             })

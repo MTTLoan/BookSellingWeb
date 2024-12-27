@@ -1,25 +1,38 @@
 <?php
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Book;
+use App\Models\Cart;
 
 class CartController extends \Illuminate\Routing\Controller
 {
     public function addToCart(Request $request)
     {
-        $bookId = $request->input('book_id');
-        $cart = session()->get('cart', []);
-
-        // Nếu sách đã có trong giỏ hàng, tăng số lượng
-        if (isset($cart[$bookId])) {
-            $cart[$bookId]++;
-        } else {
-            // Nếu chưa có, thêm sách với số lượng 1
-            $cart[$bookId] = 1;
+        if (!auth('cus')->check()) {
+            return response()->json(['message' => 'Bạn cần đăng nhập để thêm vào giỏ hàng.'], 401);
         }
 
-        // Lưu lại vào session
-        session()->put('cart', $cart);
+        $userId = auth('cus')->id();
+        $bookTitleId = $request->input('book_title_id');
 
-        return response()->json(['message' => 'Book added to cart successfully!', 'cart' => $cart]);
+        $book = Book::where('book_title_id', $bookTitleId)->first();
+        if (!$book) {
+            return response()->json(['message' => 'Sách không tồn tại.'], 404);
+        }
+        $bookId = $book->id;
+
+        $cartItem = Cart::where('customer_id', $userId)->where('book_id', $bookId)->first();
+        if ($cartItem) {
+            $cartItem->increment('quantity');
+        } else {
+            Cart::create([
+                'customer_id' => $userId,
+                'book_id' => $bookId,
+                'quantity' => 1,
+            ]);
+        }
+
+        return response()->json(['message' => 'Sách đã được thêm vào giỏ hàng!']);
     }
 }
