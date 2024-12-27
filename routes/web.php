@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\BookController;
@@ -11,6 +12,8 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 Route::get('/', [SalePageController::class, 'index'])->name('home');
 Route::get('/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add.to.cart');
+
 
 Route::get('/admin', function () {
     return view('master.admin');

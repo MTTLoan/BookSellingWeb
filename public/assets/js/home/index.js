@@ -52,3 +52,32 @@ document.querySelectorAll('.button-section .btn').forEach(button => {
         window.location.href = targetPage + ".blade.php";
     });
 });
+
+document.querySelectorAll('#btnCart').forEach(button => {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Lấy ID sách từ thuộc tính data-book-id
+        const bookId = this.closest('.product').getAttribute('data-book-id');
+
+        fetch('/add-to-cart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ book_id: bookId })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    // Hiển thị alert khi cập nhật thành công
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi thêm vào giỏ hàng. Vui lòng thử lại.');
+            });
+    });
+});
