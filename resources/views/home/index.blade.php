@@ -39,7 +39,7 @@
         <div class="col-lg-9 px-3">
             <!-- Button Section with Border -->
             <div class="button-section border rounded d-flex justify-content-between mb-3 p-1 d-none d-md-flex">
-                <a href="{{ route('gio-hang') }}" class="btn btn-primary me-3">ĐƠN HÀNG</a>
+                <a href="{{ route('don-hang') }}" class="btn btn-primary me-3">ĐƠN HÀNG</a>
                 <button class="btn me-3" data-target="Voucher">VOUCHER</button>
                 <button class="btn me-3" data-target="Review">REVIEW</button>
                 <button class="btn " data-target="Blog">BLOG</button>

@@ -4,6 +4,8 @@
 
 @section('content')
 
+
+
 <div class="container_DetailsProduct container-fluid-sm">
     <!-- Frame Sản phẩm chính-->
     <div class="row container_product m-0 g-4 bg-white">
