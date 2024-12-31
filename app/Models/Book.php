@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -57,5 +58,37 @@ class Book extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
-    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($model) {
+            $original = $model->getOriginal();
+            $changes = $model->getDirty();
+
+            ChangeLog::create([
+                'table_name' => $model->getTable(),
+                'row_id' => $model->id,
+                'old_value' => json_encode($original),
+                'new_value' => json_encode($changes),
+                'changed_by' => Auth::id(),
+                'operation_type' => 'update',
+                'changed_at' => now(),
+            ]);
+        });
+
+        static::deleting(function ($model) {
+            ChangeLog::create([
+                'table_name' => $model->getTable(),
+                'row_id' => $model->id,
+                'old_value' => json_encode($model->getAttributes()),
+                'new_value' => null,
+                'changed_by' => Auth::id(),
+                'operation_type' => 'delete',
+                'changed_at' => now(),
+            ]);
+        });
+    }
+
 }

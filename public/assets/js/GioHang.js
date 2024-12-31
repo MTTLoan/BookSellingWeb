@@ -1,68 +1,92 @@
-// Function to change item quantity
-    function changeQuantity(action, itemId) {
-        const quantity = document.querySelector(`#quantity${itemId}`);
-        let newQuantity = parseInt(quantity.value);
+function changeQuantity(action, itemId) {
+    const quantityInput = document.getElementById(`quantity${itemId}`);
+    let quantity = parseInt(quantityInput.value);
 
-        if (action === 'increase') {
-            newQuantity++;
-        } else if (action === 'decrease' && newQuantity > 1) {
-            newQuantity--;
+    if (action === 'increase') {
+        quantity++;
+    } else if (action === 'decrease' && quantity > 1) {
+        quantity--;
+    }
+
+    quantityInput.value = quantity;
+    updateItemTotal(itemId);
+
+    // Gọi API để cập nhật số lượng giỏ hàng
+    fetch(`/cart/${itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+        body: JSON.stringify({
+            quantity: quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateCartSummary();
+        } else {
+            alert(data.message);
         }
+    })
+    .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+    });
+}
 
-        quantity.value = newQuantity;
-        updateItemTotal(itemId); // Update total price for this item
-        updateTotal(); // Update overall totals
-    }
+function updateItemTotal(itemId) {
+    const quantity = parseInt(document.getElementById(`quantity${itemId}`).value);
+    const unitPrice = parseInt(document.getElementById(`total-price${itemId}`).dataset.unitPrice);
+    const totalPriceElement = document.getElementById(`total-price${itemId}`);
 
-    // Function to update total price for a single item
-    function updateItemTotal(itemId) {
-        const quantity = document.querySelector(`#quantity${itemId}`).value;
-        const unitPrice = 42000;
-        const totalPrice = quantity * unitPrice;
-        document.querySelector(`#total-price${itemId}`).textContent = totalPrice.toLocaleString() + ' đ';
-        updateTotal(); // Update overall totals
-    }
+    totalPriceElement.textContent = (quantity * unitPrice).toLocaleString('vi-VN') + ' đ';
 
-    // Function to remove an item from the cart
-    function removeItem(itemId) {
-        const item = document.getElementById(itemId);
-        item.remove();
-        updateTotal(); // Update overall totals after removing item
-    }
+    // Cập nhật tổng giá trị và số lượng toàn bộ giỏ hàng
+    updateCartSummary();
+}
 
-    // Update total price and quantity for checked items
-    function updateTotal() {
-        const cartItems = document.querySelectorAll('.cart-item'); // Select all cart items
-        let totalQuantity = 0;
-        let totalPrice = 0;
+function removeItem(itemId) {
+    fetch(`/cart/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+    }).then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById(`item${itemId}`).remove();
+            updateCartSummary();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Lỗi khi gọi API:', error);
+    });
+}
 
-        cartItems.forEach(item => {
-            const checkbox = item.querySelector('.cart-item-checkbox');
-            const quantityInput = item.querySelector('.cart-item-quantity input');
-            const quantity = parseInt(quantityInput.value);
-            const unitPrice = 42000;
+function updateCartSummary() {
+    let totalQuantity = 0;
+    let totalPrice = 0;
 
-            if (checkbox.checked) { // Only include checked items
-                totalQuantity += quantity;
-                totalPrice += quantity * unitPrice;
-            }
-        });
+    document.querySelectorAll('.cart-item').forEach(item => {
+        const quantity = parseInt(item.querySelector('input[type="text"]').value);
+        const unitPrice = parseInt(item.querySelector('.cart-item-total-price').dataset.unitPrice);
 
-        document.getElementById('total-quantity').textContent = totalQuantity;
-        document.getElementById('total-price').textContent = totalPrice.toLocaleString() + ' đ';
-    }
-
-    // Attach event listeners to checkboxes
-    document.querySelectorAll('.cart-item-checkbox').forEach(checkbox => {
-        checkbox.addEventListener('change', updateTotal); // Recalculate totals when checkbox state changes
+        totalQuantity += quantity;
+        totalPrice += quantity * unitPrice;
     });
 
-    // Checkout function
-    function checkout() {
-        const totalQuantity = parseInt(document.getElementById('total-quantity').textContent);
-        if (totalQuantity === 0) {
-            alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
-        } else {
-            alert("Thanh toán thành công!");
-        }
+    document.getElementById('total-quantity').textContent = totalQuantity;
+    document.getElementById('total-price').textContent = totalPrice.toLocaleString('vi-VN') + ' đ';
+}
+
+function checkout() {
+    const totalQuantity = parseInt(document.getElementById('total-quantity').textContent);
+    if (totalQuantity === 0) {
+        alert("Vui lòng chọn ít nhất một sản phẩm để thanh toán.");
+    } else {
+        alert("Thanh toán thành công!");
     }
+}

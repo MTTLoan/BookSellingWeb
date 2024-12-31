@@ -31,7 +31,7 @@
                     <div class="offcanvas-body">
                         <ul class="list-unstyled components">
                             <li>
-                                <a href="#">TỔNG QUAN</a>
+                                <a href="{{ route('admin.index') }}">TỔNG QUAN</a>
                             </li>
                             <li>
                                 <a data-bs-toggle="collapse" href="#productSubmenu" aria-expanded="false"
@@ -40,7 +40,7 @@
                                 </a>
                                 <ul class="collapse list-unstyled" id="productSubmenu">
                                     <li><a href="{{ route('book.index') }}">Danh mục sản phẩm</a></li>
-                                    <li><a href="#">Khuyến mãi</a></li>
+                                    <li><a>Khuyến mãi</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -49,8 +49,8 @@
                                     GIAO DỊCH
                                 </a>
                                 <ul class="collapse list-unstyled" id="transactionSubmenu">
-                                    <li><a href="#">Phiếu đặt hàng</a></li>
-                                    <li><a href="#">Nhập hàng</a></li>
+                                    <li><a>Phiếu đặt hàng</a></li>
+                                    <li><a>Nhập hàng</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -59,22 +59,15 @@
                                     ĐỐI TÁC & NGUỒN LỰC
                                 </a>
                                 <ul class="collapse list-unstyled" id="partnerSubmenu">
-                                    <li><a href="#">Khách hàng</a></li>
-                                    <li><a href="#">Nhà cung cấp</a></li>
+                                    <li><a>Khách hàng</a></li>
+                                    <li><a>Nhà cung cấp</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a data-bs-toggle="collapse" href="#reportSubmenu" aria-expanded="false"
-                                    class="dropdown-toggle">
-                                    BÁO CÁO
-                                </a>
-                                <ul class="collapse list-unstyled" id="reportSubmenu">
-                                    <li><a href="#">Bán hàng</a></li>
-                                    <li><a href="#">Tài chính</a></li>
-                                </ul>
+                                <a href="{{ route('admin.salesReport') }}">BÁO CÁO</a>
                             </li>
                             <li>
-                                <a href="#">BÁN HÀNG</a>
+                                <a>BÁN HÀNG</a>
                             </li>
                             <li>
                                 <a href="{{ route('account.profile') }}">TÀI KHOẢN</a>
@@ -85,7 +78,7 @@
                         </ul>
                     </div>
                 </div>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand">
                     <img src="{{ asset('uploads/logo/Favicon.png') }}" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
@@ -114,7 +107,7 @@
                             <!-- <button class="nav-link icon-button" id="accountButton">
                                 <i class="bi bi-person-circle"></i>
                             </button> -->
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i>
                             </a>

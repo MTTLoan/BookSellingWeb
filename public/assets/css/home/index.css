@@ -141,8 +141,28 @@ body {
     padding: 5px 10px;
 }
 .cart_icon {
-    font-size: 14px;
+    font-size: 14px !important;
 }
+
+.card_group .image_container, .img_book {
+    height: 198px !important;
+}
+
+.card_group #sales {
+    font-size: 12px !important;
+}
+
+.card_group #title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 hàng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiển thị "..." khi bị cắt */
+    white-space: normal; /* Cho phép xuống hàng */
+    height: 3em;
+    line-height: 1.5em;
+}
+
 
 @media (max-width: 992px) {
     .container-fluid-product {
@@ -176,4 +196,55 @@ body {
     .book-cell {
         display: none;
     }
+}
+
+body {
+    margin: 20px 0 20px 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    background-color: #f7f7f7;
+    font-size: 16px;
+}
+@media (max-width: 576px) {
+    .container-sm {
+        margin-left: 16px !important;
+        margin-right: 16px !important;
+    }
+}
+@media (max-width: 768px) {
+    .material-symbols-outlined {
+        font-size: 40px !important;
+    }
+    p {
+        font-size: 12px !important;
+    }
+    span {
+        font-size: 14px !important;
+    }
+    .cart_icon {
+        font-size: 14px !important;
+    }
+}
+.material-symbols-outlined {
+    font-size: 60px;
+}
+.color-orange {
+    color: #f38c30;
+}
+.color-green {
+    color: #00b63e;
+}
+.color-red {
+    color: #da392b;
+}
+.group_button .btn:hover {
+    color: #da392b;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #da392b;
+}
+.group_button .btn.active {
+    color: #da392b !important;
+    border-radius: 0 !important;
+    border: 0;
+    border-bottom: 1px solid #da392b;
 }
