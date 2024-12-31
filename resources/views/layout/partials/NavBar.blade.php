@@ -31,6 +31,7 @@
                         @endif
 
                         <!-- Dropdown 1 -->
+                        @if (in_array(auth('web')->user()->role, ['admin', 'branch_manager', 'staff']))
                         <li class="nav-item dropdown dropdown-style">
                             <a class="nav-link nav-link-style dropdown-toggle" id="navDropdown1" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,6 +58,7 @@
                                 @endif
                             </ul>
                         </li>
+                        @endif
 
                         <!-- Giao dịch (chỉ dành cho staff và branch_manager) -->
                         @if (in_array(auth('web')->user()->role, ['staff', 'branch_manager']))
@@ -83,6 +85,7 @@
                         @endif
 
                         <!-- Dropdown 3 -->
+                        @if (in_array(auth('web')->user()->role, ['admin', 'branch_manager', 'staff']))
                         <li class="nav-item dropdown">
                             <a class="nav-link nav-link-style dropdown-toggle" id="navDropdown3" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -108,6 +111,7 @@
                                 @endif
                             </ul>
                         </li>
+                        @endif
 
                         <!-- Báo cáo (chỉ dành cho branch_manager và diẻctor) -->
                         @if (in_array(auth('web')->user()->role, ['branch_manager', 'director']))

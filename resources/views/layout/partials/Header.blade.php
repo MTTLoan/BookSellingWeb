@@ -99,6 +99,11 @@
                                 <li><a class="dropdown-item" href="{{ route('account.logout') }}">Đăng xuất</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link cart-icon" id="cartButton" href="{{ route('cart.index') }}">
+                                <i class="bi bi-bag-heart-fill"></i>
+                            </a>
+                        </li>
                         @else
                         <li class="nav-item">
                             <a href="{{ route('account.register') }}" class="nav-link register-link">ĐĂNG KÝ</a>
@@ -108,11 +113,6 @@
                         </li>
                         </li>
                         @endif
-                        <li class="nav-item">
-                            <a class="nav-link cart-icon" id="cartButton">
-                                <i class="bi bi-bag-heart-fill"></i>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

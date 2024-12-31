@@ -141,8 +141,28 @@ body {
     padding: 5px 10px;
 }
 .cart_icon {
-    font-size: 14px;
+    font-size: 14px !important;
 }
+
+.card_group .image_container, .img_book {
+    height: 198px !important;
+}
+
+.card_group #sales {
+    font-size: 12px !important;
+}
+
+.card_group #title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Hiển thị tối đa 2 hàng */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Hiển thị "..." khi bị cắt */
+    white-space: normal; /* Cho phép xuống hàng */
+    height: 3em;
+    line-height: 1.5em;
+}
+
 
 @media (max-width: 992px) {
     .container-fluid-product {
@@ -199,6 +219,9 @@ body {
         font-size: 12px !important;
     }
     span {
+        font-size: 14px !important;
+    }
+    .cart_icon {
         font-size: 14px !important;
     }
 }
