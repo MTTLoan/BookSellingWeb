@@ -130,3 +130,4 @@
 cripts')
 <script src="{{ asset('assets/js/home/index.js') }}"></script>
 @endpush
+

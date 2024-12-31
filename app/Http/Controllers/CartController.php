@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Book;
@@ -84,4 +85,7 @@ class CartController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+
+
 }
