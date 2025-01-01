@@ -19,10 +19,10 @@ Route::get('/book-details/{book_tittle_id}', [SalePageController::class, 'showBo
 
 Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
-    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    // Route::post('/update-cart', [CartController::class, 'update'])->name('cart.update');
-    // Route::post('/remove-from-cart', [CartController::class, 'destroy'])->name('cart.destroy');
 });
+
+// Route để kiểm tra trạng thái đăng nhập
+Route::get('/check-login-status', [AccountController::class, 'checkLoginStatus']);
 
 Route::get('/admin', function () {
     return view('master.admin');
@@ -56,8 +56,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('/reset-password/{token}', [AccountController::class, 'checkResetPassword']);
 });
 
-Route::get('/admin/login',[AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin/login',[AdminController::class, 'checkLogin']);
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'checkLogin']);
 
 Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class]], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

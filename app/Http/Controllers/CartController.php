@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Book;
@@ -23,7 +22,7 @@ class CartController extends Controller
 
         // Lấy các item trong giỏ hàng và ảnh đầu tiên của mỗi cuốn sách
         $cartItems = Cart::with(['book' => function ($query) {
-            $query->with(['images' => function ($query) {
+            $query->with(['bookTitle', 'images' => function ($query) {
                 $query->orderBy('id')->limit(1); // Lấy ảnh đầu tiên
             }]);
         }])
@@ -47,15 +46,22 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cartItem = Cart::updateOrCreate(
-            [
+        $cartItem = Cart::where('customer_id', auth('cus')->id())
+            ->where('book_id', $validated['book_id'])
+            ->first();
+
+        if ($cartItem) {
+            // Nếu sản phẩm đã tồn tại trong giỏ hàng, cập nhật số lượng
+            $cartItem->quantity += $validated['quantity'];
+            $cartItem->save();
+        } else {
+            // Nếu sản phẩm chưa tồn tại trong giỏ hàng, tạo mới
+            $cartItem = Cart::create([
                 'customer_id' => auth('cus')->id(),
                 'book_id' => $validated['book_id'],
-            ],
-            [
-                'quantity' => DB::raw('quantity + ' . $validated['quantity']),
-            ]
-        );
+                'quantity' => $validated['quantity'],
+            ]);
+        }
 
         return response()->json(['success' => true, 'cartItem' => $cartItem]);
     }
@@ -85,7 +91,4 @@ class CartController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-
-
 }

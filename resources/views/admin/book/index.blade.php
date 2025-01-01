@@ -113,7 +113,7 @@
                             <td>{{ $book->id }}</td>
                             <td>{{ $book->bookTitle->name }}</td>
                             <td>{{ $book->bookTitle->author }}</td>
-                            <td>{{ $book->quantity }}</td>
+                            <td>{{ $book->branch_quantity ?? $book->quantity }}</td>
                             <td>{{ $book->cost }}</td>
                             <td>{{ $book->unit_price }}</td>
                             <td>
@@ -256,12 +256,12 @@
 @push('scripts')
 <script src="{{ asset('assets/js/admin/book/index.js') }}"></script>
 <script>
-function submitFilterForm() {
-    const filterQuantity = document.querySelector('input[name="filter_quantity"]').value;
-    if (filterQuantity === '' || filterQuantity === null || filterQuantity < 0 || filterQuantity > 1000) {
-        return;
+    function submitFilterForm() {
+        const filterQuantity = document.querySelector('input[name="filter_quantity"]').value;
+        if (filterQuantity === '' || filterQuantity === null || filterQuantity < 0 || filterQuantity > 1000) {
+            return;
+        }
+        document.getElementById('filterForm').submit();
     }
-    document.getElementById('filterForm').submit();
-}
 </script>
 @endpush

@@ -54,7 +54,6 @@ class SalePageController extends Controller
         return view('home.index', compact('bookTitles'));
     }
 
-
     public function showBookDetails($book_title_id)
     {
         $booktitle = DB::table('booktitles')->where('id', $book_title_id)->first();
@@ -89,7 +88,12 @@ class SalePageController extends Controller
             ->join('orders', 'reviews.order_id', '=', 'orders.id')
             ->join('customers', 'orders.customer_id', '=', 'customers.id')
             ->whereIn('book_id', $books->pluck('id')->toArray())
-            ->select('customers.name as customer_name', 'reviews.*')
+            ->select(
+                'customers.name as customer_name',
+                'reviews.score as review_score',
+                'reviews.description as review_comment', // Đảm bảo rằng tên cột đúng
+                'reviews.created_at as review_date'
+            )
             ->get();
 
         return view('ChiTietSanPham', compact('booktitle', 'books', 'images', 'review_score', 'customer_reviews'));

@@ -28,7 +28,6 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-
         // dd(auth('web')->user());
         $query = Book::with(['bookTitle.bookType']);
 
@@ -36,12 +35,13 @@ class BookController extends Controller
 
         if ($employee->role === 'admin') {
             // Admin xem tất cả sách
-            $books = Book::all();
+            $books = $query->orderBy('id', 'asc')->paginate(20);
         } else {
             // Staff và Branch Manager chỉ xem sách thuộc chi nhánh của mình
             $books = Book::join('books_branches', 'books.id', '=', 'books_branches.book_id')
                 ->where('books_branches.branch_id', $employee->branch_id)
-                ->get(['books.*', 'books_branches.quantity']);
+                ->select('books.*', 'books_branches.quantity as branch_quantity')
+                ->orderBy('id', 'asc')->paginate(20);
         }
 
         //filter và search
@@ -65,7 +65,6 @@ class BookController extends Controller
             $query->where('quantity', '>=', $filterQuantity);
         }
 
-        $books = $query->orderBy('id', 'asc')->paginate(20);
         $bookTypes = BookType::all(); // Lấy tất cả các thể loại sách để hiển thị trong form tìm kiếm
         return view('admin.book.index', compact('books', 'bookTypes'));
     }
@@ -88,7 +87,6 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-
             'unit_price' => 'integer|min:1|gt:cost',
             'cost' => 'integer|min:1',
             'publishing_year' => 'integer|min:1',
