@@ -1,0 +1,222 @@
+body {
+    background-color: #f7f7f7 !important;
+}
+
+.body-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    /* Giảm khoảng cách giữa hai form */
+    margin: 20px 50px;
+    /* Giảm margin chung cho body-container */
+}
+
+.form-container {
+    flex: 2;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    /* Giảm margin của mỗi form */
+}
+
+@media (max-width: 768px) {
+    .body-container {
+        flex-direction: column;
+        margin: 0;
+        /* Giảm margin ở màn hình nhỏ */
+    }
+
+    .form-container {
+        max-width: 100%;
+        margin-top: 10px;
+        /* Thêm khoảng cách giữa các form khi thu nhỏ màn hình */
+    }
+}
+
+.form-header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-title {
+    font-weight: bold;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.form-title::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background-color: #989696;
+    width: 50%;
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #c53327;
+    outline: none;
+}
+
+.form-check-input {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding-left: 10px;
+    /* Thêm khoảng cách bên trái của nút radio */
+}
+
+.form-check-label {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Tạo hiệu ứng khi radio button được chọn */
+.form-check-input:checked {
+    background-color: #c53327;
+    border-color: #c53327;
+}
+
+/* Thêm border cho phần label */
+.form-check {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 2px #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    transition: border 0.3s ease;
+}
+
+/* Thêm hiệu ứng khi hover lên label */
+.form-check:hover {
+    border-color: #c53327;
+}
+
+.cart-container {
+    width: 500px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+    font-weight: bold;
+}
+
+.cart-item-name {
+    flex: 2;
+}
+
+.cart-item-quantity {
+    flex: 1;
+    text-align: center;
+}
+
+.cart-item-price {
+    flex: 1;
+    text-align: right;
+}
+
+.cart-item-total-price {
+    font-weight: bold;
+    color: black;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.discount-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.discount-code {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.apply-discount {
+    background-color: #c53327;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.apply-discount:hover {
+    background-color: #a02a21;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    /* Căn đều 2 nút */
+    margin-top: 20px;
+}
+
+.btn-finish {
+    background-color: #c53327 !important;
+    color: white !important;
+}
+
+.btn-finish:hover {
+    background-color: #a02a21 !important;
+}
+
+.container_right {
+    max-height: 600px;
+}

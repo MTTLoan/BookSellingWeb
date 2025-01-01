@@ -54,7 +54,8 @@
                     <span id="total-price">{{ number_format($totalPrice, 0, ',', '.') }} đ</span>
                 </div>
             </div>
-            <button class="btn-checkout mt-3 w-100" onclick="checkout()">Thanh toán</button>
+            <a href="{{ route('order.create') }}" class="text-decoration-none text-white btn-checkout mt-3 w-100">Thanh
+                toán</a>
         </div>
     </div>
 </div>
