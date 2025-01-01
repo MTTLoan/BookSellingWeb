@@ -13,6 +13,7 @@ class Discount extends Model
     protected $fillable = [
         'name',
         'type',
+        'code',
         'start_date',
         'end_date',
         'value',
@@ -20,7 +21,8 @@ class Discount extends Model
         'made_by',
     ];
 
-    public function order() {
+    public function order()
+    {
         return $this->hasMany(Order::class, '');
     }
 }

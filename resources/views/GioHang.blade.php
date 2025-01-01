@@ -13,7 +13,6 @@
             @foreach ($cartItems as $item)
             <div class="cart-item d-flex mt-3 align-items-center justify-content-between" id="item{{ $item->id }}">
                 <div class="d-flex justify-content-start" style="width: 60%;">
-                    <input type="checkbox" class="cart-item-checkbox mx-md-3 mx-2">
                     <img src="{{ asset($item->book->images->first()->url) }}" alt="Product Image"
                         class="cart-item-image">
                     <div>
