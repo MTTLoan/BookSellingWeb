@@ -366,6 +366,6 @@ class AccountController extends Controller
 
     public function checkLoginStatus()
     {
-        return response()->json(['logged_in' => Auth::check()]);
+        return response()->json(['logged_in' => auth('cus')->check()]);
     }
 }

@@ -12,10 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('discounts', function(Blueprint $table) {
+        Schema::create('discounts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
             $table->enum('type', ['Website', 'Cửa hàng']);
+            $table->string('code', 4);
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('value')->default(10);

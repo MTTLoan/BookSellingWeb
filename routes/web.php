@@ -8,10 +8,11 @@ use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ChangeLogController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfNotEmployee;
 
-Route::get('/', [SalePageController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/book-by-category/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 Route::get('/book-by-category/{category}', [SalePageController::class, 'showBookByCategory'])->name('sale.showBookByCategory');
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');

@@ -68,47 +68,44 @@
     </div>
 
     <!-- Loop through each book category and display books -->
-    @foreach ($bookTitles as $category => $books)
-<div class="category-section" id="{{ $category }}">
-    <h4 class="card-group-title">
-        <span class="card-group-title-main">{{ mb_strtoupper($category, 'UTF-8')  }}</span>
-        <a href="#" class="card-group-link">Xem thêm ></a>
-    </h4>
+    @foreach ($bookTitles as $category => $titles)
+    <div class="category-section" id="{{ $category }}">
+        <h4 class="card-group-title">
+            <span class="card-group-title-main">{{ mb_strtoupper($category, 'UTF-8')  }}</span>
+            <a href="#" class="card-group-link">Xem thêm ></a>
+        </h4>
 
-    <!-- Product Cards -->
-    <div class="card_group row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-        @foreach ($books as $book)
-        <div class="col">
-
-            <div class="product p-20 mb-20 rounded w-auto bg-white" data-book-id="{{ $book->book_title_id }}">
-                <a href="{{ route('sale.showBookDetails', ['book_tittle_id' => $book->book_title_id]) }}"
-                    style="text-decoration: none; color: inherit;">
-                    <div class="image_container d-flex align-items-center justify-content-center">
-                        <img src="{{ asset($book->image_url) }}" alt="product" class="img-fluid img_book" />
-                    </div>
-                </a>
-
-                <h5 class="fw-bold my-2" id="price">{{ number_format($book->unit_price, 0, ',', '.') }} đ
-                </h5>
-                <p class="mb-2" id="title">{{ $book->book_title_name }}</p>
-                <div class="d-flex  p-0 justify-content-between align-content-center">
-                    <span id="sales">Đã bán {{ $book->sold_quantity }}</span>
-                    <div class="d-flex gap-md-1 mt-2 mt-md-0">
-                        <button class="btn d-flex p-0 bg-white" id="btnCart">
-                            <span class="material-symbols-outlined cart_icon">add_shopping_cart</span>
-                        </button>
-                        <button class="btn btn_buy d-flex align-content-center justify-content-center p-0 w-0"
-                            id="btnBuy">
-                            Mua ngay
-                        </button>
+        <!-- Product Cards -->
+        <div class="card_group row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            @foreach ($titles as $title)
+            <div class="col">
+                <div class="product p-20 mb-20 rounded w-auto bg-white" data-book-id="{{ $title->id }}">
+                    <a href="{{ route('sale.showBookDetails', ['book_tittle_id' => $title->id]) }}"
+                        style="text-decoration: none; color: inherit;">
+                        <div class="image_container d-flex align-items-center justify-content-center">
+                            <img src="{{ asset($title->image_url) }}" alt="product" class="img-fluid img_book" />
+                        </div>
+                    </a>
+                    <h5 class="fw-bold my-2" id="price">{{ number_format($title->unit_price, 0, ',', '.') }} đ</h5>
+                    <p class="mb-2" id="title">{{ $title->name }}</p>
+                    <div class="d-flex  p-0 justify-content-between align-content-center">
+                        <span id="sales">Đã bán {{ $title->sold_quantity }}</span>
+                        <div class="d-flex gap-md-1 mt-2 mt-md-0">
+                            <button class="btn d-flex p-0 bg-white" id="btnCart">
+                                <span class="material-symbols-outlined cart_icon">add_shopping_cart</span>
+                            </button>
+                            <button class="btn btn_buy d-flex align-content-center justify-content-center p-0 w-0"
+                                id="btnBuy">
+                                Mua ngay
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
-</div>
-@endforeach
+    @endforeach
 
     <h4 class="card-group-title">
         <span class="card-group-title-main" data-category="Blog">Blog</span>
@@ -130,4 +127,3 @@
 cripts')
 <script src="{{ asset('assets/js/home/index.js') }}"></script>
 @endpush
-

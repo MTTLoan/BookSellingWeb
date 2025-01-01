@@ -1,4 +1,3 @@
-// Đảm bảo mã chỉ chạy sau khi DOM đã tải
 document.addEventListener("DOMContentLoaded", function () {
     // Thêm sự kiện click cho các nút phiên bản
     document.querySelectorAll(".version-btn").forEach((button) => {
@@ -23,14 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
             const activeButton = document.querySelector(".version-btn.active");
             if (!activeButton) {
-                alert("Vui lòng chọn phiên bản sách.");
+                Swal.fire({
+                    icon: "warning",
+                    title: "Chưa chọn phiên bản",
+                    text: "Vui lòng chọn phiên bản sách.",
+                });
                 return;
             }
             const bookId = activeButton.getAttribute("data-book-id");
             const quantity = document.getElementById("quantity").value;
 
             if (quantity < 1) {
-                alert("Số lượng sách phải lớn hơn 0.");
+                Swal.fire({
+                    icon: "warning",
+                    title: "Số lượng không hợp lệ",
+                    text: "Số lượng sách phải lớn hơn 0.",
+                });
                 return;
             }
             // Kiểm tra xem người dùng đã đăng nhập chưa
@@ -63,15 +70,25 @@ document.addEventListener("DOMContentLoaded", function () {
                             .then((response) => response.json())
                             .then((data) => {
                                 if (data.success) {
-                                    alert("Thêm vào giỏ hàng thành công!");
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Thành công",
+                                        text: "Thêm vào giỏ hàng thành công!",
+                                    });
                                 } else {
-                                    alert("Có lỗi xảy ra, vui lòng thử lại.");
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Lỗi",
+                                        text: "Có lỗi xảy ra, vui lòng thử lại.",
+                                    });
                                 }
                             });
                     } else {
-                        alert(
-                            "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng."
-                        );
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Chưa đăng nhập",
+                            text: "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.",
+                        });
                     }
                 });
         });
