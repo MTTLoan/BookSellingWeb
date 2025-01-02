@@ -86,6 +86,7 @@ applyDiscountButton.addEventListener("click", function () {
         .then(function (response) {
             if (response.data.success) {
                 const discountAmount = response.data.discount;
+                const discountId = response.data.discount_id; // Lấy discount_id từ response
                 totalPrice -= discountAmount;
 
                 // Hiển thị mã giảm giá
@@ -102,6 +103,9 @@ applyDiscountButton.addEventListener("click", function () {
                     style: "currency",
                     currency: "VND",
                 }).format(totalPrice);
+
+                // Gán discount_id vào input ẩn
+                document.getElementById("discount-id").value = discountId;
             } else {
                 alert(response.data.message);
             }

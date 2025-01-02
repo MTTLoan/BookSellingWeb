@@ -78,6 +78,7 @@ class DiscountController extends Controller
             return response()->json([
                 'success' => true,
                 'discount' => $discount->value,
+                'discount_id' => $discount->id,
                 'message' => 'Mã giảm giá hợp lệ.'
             ]);
         } else {

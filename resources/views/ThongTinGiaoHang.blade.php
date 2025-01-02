@@ -3,12 +3,35 @@
 @section('content')
 
 <div class="shipping_infor_container body-container">
-    <div class="form-container">
-        <form>
+    @if(session('success'))
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Thành công',
+            text: `{{ session('success') }}`,
+        });
+    });
+    </script>
+    @endif
+    @if(session('error'))
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: `{{ session('error') }}`,
+        });
+    });
+    </script>
+    @endif
+    <form id="personal-info-form" class="form-container" action="{{ route('order.store') }}" method="POST">
+        @csrf
+        <div>
             <div class="form-header">
                 <div class="form-title">Thông tin giao hàng</div>
             </div>
-            <form id="personal-info-form">
+            <div>
                 <div class="form-group">
                     <label for="fullname">Họ và tên (*)</label>
                     <input type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname"
@@ -62,7 +85,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-            </form>
+            </div>
             <div class="form-header">
                 <div class="form-title">Phương thức thanh toán</div>
             </div>
@@ -76,10 +99,14 @@
                 <a type="button" class="btn btn-back" id="goToCart" href="{{ route('cart.index') }}">
                     <i class="bi bi-caret-left-fill"></i> Về giỏ hàng
                 </a>
+                <!-- Các trường nhập liệu khác -->
+                <input type="hidden" name="discount_id" id="discount-id">
+                <input type="hidden" name="total_price"
+                    value="{{ $cartItems->sum(function($item) { return $item->quantity * $item->book->unit_price; }) + 15000 }}">
                 <button type="submit" class="btn btn-finish" id="completeOrder">Hoàn tất đơn hàng</button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
     <div class="form-container container_right">
         <div class="discount-container">
             <input type="text" class="discount-code" placeholder="Mã giảm giá">
@@ -134,10 +161,10 @@
 
 @push('scripts')
 <script>
-    const customerProvince = "{{ $customer->province }}";
-    const customerDistrict = "{{ $customer->district }}";
-    const customerWard = "{{ $customer->ward }}";
-    const checkDiscountUrl = "{{ route('check.discount') }}"; // Truyền URL vào JavaScript
+const customerProvince = "{{ $customer->province }}";
+const customerDistrict = "{{ $customer->district }}";
+const customerWard = "{{ $customer->ward }}";
+const checkDiscountUrl = "{{ route('check.discount') }}"; // Truyền URL vào JavaScript
 </script>
 <script src="{{ asset('assets/js/ThongTinGiaoHang.js') }}"></script>
 @endpush
