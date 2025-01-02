@@ -90,7 +90,7 @@
                     <p class="mb-2" id="title">{{ $title->name }}</p>
                     <div class="d-flex  p-0 justify-content-between align-content-center">
                         <span id="sales">Đã bán {{ $title->sold_quantity }}</span>
-                        <div class="d-flex gap-md-1 mt-2 mt-md-0">
+                        <!-- <div class="d-flex gap-md-1 mt-2 mt-md-0">
                             <button class="btn d-flex p-0 bg-white" id="btnCart">
                                 <span class="material-symbols-outlined cart_icon">add_shopping_cart</span>
                             </button>
@@ -98,7 +98,7 @@
                                 id="btnBuy">
                                 Mua ngay
                             </button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

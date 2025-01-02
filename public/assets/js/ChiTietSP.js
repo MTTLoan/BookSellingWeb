@@ -92,6 +92,35 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
         });
+
+    // Thêm sự kiện click cho nút "Mua ngay"
+    document.getElementById("btnBuyNow").addEventListener("click", function () {
+        const activeButton = document.querySelector(".version-btn.active");
+        if (!activeButton) {
+            Swal.fire({
+                icon: "warning",
+                title: "Chưa chọn phiên bản",
+                text: "Vui lòng chọn phiên bản sách.",
+            });
+            return;
+        }
+        const bookId = activeButton.getAttribute("data-book-id");
+        const quantity = document.getElementById("quantity").value;
+
+        if (quantity < 1) {
+            Swal.fire({
+                icon: "warning",
+                title: "Số lượng không hợp lệ",
+                text: "Số lượng sách phải lớn hơn 0.",
+            });
+            return;
+        }
+
+        document.getElementById("buyNowBookId").value = bookId;
+        document.getElementById("buyNowQuantity").value = quantity;
+
+        document.getElementById("buyNowForm").submit();
+    });
 });
 
 function increaseQuantity() {

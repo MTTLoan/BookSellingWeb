@@ -122,6 +122,12 @@
         </div>
     </div>
 </div>
+
+<form id="buyNowForm" action="{{ route('order.buyNow') }}" method="POST" style="display: none;">
+    @csrf
+    <input type="hidden" name="book_id" id="buyNowBookId">
+    <input type="hidden" name="quantity" id="buyNowQuantity">
+</form>
 @endsection
 
 @push('styles')
