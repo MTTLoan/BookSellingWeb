@@ -1,12 +1,12 @@
 @extends('master.main')
 
-@section('title', 'Thể loại '.$booktypeName)
+@section('title', 'Tìm Kiếm')
 
 @section('content')
 <div class="container-sm container_product mb-4 mt-4">
     <div
         class="header-container d-flex flex-md-row flex-column justify-content-between align-items-md-end align-items-start mb-3">
-        <h1 class="card-group-title-main fw-bold text-nowrap me-4" data-category="VanHoc">{{ $booktypeName }}</h1>
+        <h1 class="card-group-title-main fw-bold text-nowrap me-4">Tìm kiếm</h1>
     </div>
 
 

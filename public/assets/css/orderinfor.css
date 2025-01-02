@@ -1,0 +1,296 @@
+body {
+    background-color: #f7f7f7 !important;
+}
+
+.form-container {
+    margin: 50px auto !important;
+    padding: 20px !important;
+    background-color: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    margin: 50px auto !important;
+}
+
+@media (max-width: 768px) {
+    .body-container {
+        flex-direction: column !important;
+        margin: 0 !important;
+        /* Giảm margin ở màn hình nhỏ */
+    }
+
+    .form-container {
+        max-width: 100% !important;
+        margin-top: 10px !important;
+        /* Thêm khoảng cách giữa các form khi thu nhỏ màn hình */
+    }
+}
+
+.breadcrumb-nav {
+    margin: 10px 60px !important;
+    font-size: 16px !important;
+}
+
+.breadcrumb-link {
+    color: #c53327 !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+}
+
+.breadcrumb-separator {
+    color: #333 !important;
+}
+
+.breadcrumb-current {
+    color: #333 !important;
+    font-weight: bold !important;
+}
+
+.form-header {
+    text-align: left !important;
+    margin-bottom: 20px !important;
+}
+
+.form-title {
+    font-weight: bold !important;
+    font-size: 24px !important;
+    color: #333 !important;
+    margin-bottom: 5px !important;
+    position: relative !important;
+}
+
+.form-title::after {
+    content: "";
+    display: block !important;
+    height: 2px !important;
+    background-color: #989696 !important;
+    width: 10% !important;
+    margin-top: 10px !important;
+}
+
+.form-group {
+    margin-bottom: 15px !important;
+}
+
+.form-group label {
+    font-weight: bold !important;
+    display: block !important;
+    margin-bottom: 5px !important;
+    color: #333 !important;
+}
+
+.form-group input,
+.form-group select {
+    width: 100% !important;
+    padding: 10px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    font-size: 16px !important;
+    background-color: #ffffff !important;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #c53327 !important;
+    outline: none !important;
+}
+
+.form-check-input {
+    position: relative !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid #ccc !important;
+    border-radius: 50% !important;
+    margin-right: 10px !important;
+    background-color: white !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    padding-left: 10px !important;
+    /* Thêm khoảng cách bên trái của nút radio */
+}
+
+.form-check-label {
+    font-size: 16px !important;
+    color: #333 !important;
+    cursor: pointer !important;
+}
+
+/* Tạo hiệu ứng khi radio button được chọn */
+.form-check-input:checked {
+    background-color: #c53327 !important;
+    border-color: #c53327 !important;
+}
+
+/* Thêm border cho phần label */
+.form-check {
+    display: flex !important;
+    align-items: center !important;
+    padding: 10px !important;
+    border: 2px #ccc solid !important;
+    border-radius: 4px !important;
+    margin-bottom: 10px !important;
+    transition: border 0.3s ease !important;
+}
+
+/* Thêm hiệu ứng khi hover lên label */
+.form-check:hover {
+    border-color: #c53327 !important;
+}
+
+.nav {
+    display: flex !important;
+    justify-content: flex-start !important;
+    margin-bottom: 20px !important;
+    gap: 10px !important;
+}
+
+.nav-link {
+    padding: 10px 20px !important;
+    text-decoration: none !important;
+    color: black !important;
+    transition: all 0.3s ease !important;
+    margin-bottom: 10px !important;
+}
+
+.nav-link.active {
+    color: #da392b !important;
+}
+
+.nav-link:hover {
+    background-color: #ddd !important;
+    /* Nền màu xám nhạt khi hover */
+    color: #333 !important;
+    /* Màu chữ đen khi hover */
+}
+
+.tab-content {
+    display: none !important;
+    padding: 20px !important;
+}
+
+.tab-content.active {
+    display: block !important;
+}
+
+.order-item {
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    background-color: #fff !important;
+}
+
+.order-info {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #ddd !important;
+}
+
+.product {
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #ddd !important;
+}
+
+.order-date {
+    font-size: 20px !important;
+    color: #333 !important;
+}
+
+.order-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.order-status.success {
+    color: green;
+    /* Màu xanh cho trạng thái hoàn thành */
+}
+
+.order-status.cancelled {
+    color: red;
+    /* Màu đỏ cho trạng thái hủy */
+}
+
+.order-details {
+    margin-bottom: 20px !important;
+}
+
+.product {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+}
+
+.product-image {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    margin-right: 15px !important;
+    border-radius: 4px !important;
+    border: 1px solid #ddd !important;
+}
+
+.product-info {
+    flex: 1 !important;
+}
+
+.product-name {
+    font-size: 14px !important;
+    font-weight: bold !important;
+    color: #333 !important;
+}
+
+.product-quantity {
+    font-size: 12px !important;
+    color: #777 !important;
+}
+
+.product-price {
+    font-weight: bold !important;
+    color: #333 !important;
+}
+
+.order-total {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin-bottom: 10px !important;
+    align-items: flex-end !important;
+}
+
+.order-total span {
+    font-size: 14px !important;
+    color: #333 !important;
+}
+
+.order-total .total-price {
+    font-weight: bold !important;
+    font-size: 20px !important;
+    color: #000 !important;
+}
+
+.order-actions {
+    display: flex !important;
+    gap: 10px !important;
+    justify-content: flex-end !important;
+    margin-top: 20px !important;
+}
+
+.btn-white {
+    border-radius: 8px !important;
+    border: 2px solid #00224d !important;
+    color: #00224d !important;
+}
+
+.btn-red {
+    border-radius: 8px !important;
+    background-color: #c53327 !important;
+    color: white !important;
+}
