@@ -40,7 +40,8 @@
             <!-- Button Section with Border -->
             <div class="button-section border rounded d-flex justify-content-between mb-3 p-1 d-none d-md-flex">
                 @if(auth('cus')->check())
-                <button class="btn me-3">ĐƠN HÀNG</button>
+                <button class="btn me-3"><a href="{{ route('order.orderinfor') }}"
+                        class="text-black text-decoration-none">ĐƠN HÀNG</a></button>
                 @endif
                 <button class="btn me-3" data-target="Voucher"><a href="{{ route('discounts.list') }}"
                         class="text-black text-decoration-none">VOUCHER</a>
@@ -92,15 +93,6 @@
                     <p class="mb-2" id="title">{{ $title->name }}</p>
                     <div class="d-flex  p-0 justify-content-between align-content-center">
                         <span id="sales">Đã bán {{ $title->sold_quantity }}</span>
-                        <!-- <div class="d-flex gap-md-1 mt-2 mt-md-0">
-                            <button class="btn d-flex p-0 bg-white" id="btnCart">
-                                <span class="material-symbols-outlined cart_icon">add_shopping_cart</span>
-                            </button>
-                            <button class="btn btn_buy d-flex align-content-center justify-content-center p-0 w-0"
-                                id="btnBuy">
-                                Mua ngay
-                            </button>
-                        </div> -->
                     </div>
                 </div>
             </div>

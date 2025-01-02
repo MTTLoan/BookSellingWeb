@@ -208,4 +208,39 @@ class OrderController extends Controller
             return redirect()->route('cart.index')->with('error', 'Đã xảy ra lỗi khi tạo đơn hàng: ' . $e->getMessage());
         }
     }
+
+    public function orderInfor()
+    {
+        $user = auth('cus')->user();
+        if (!$user) {
+            return redirect()->route('account.login')->with('error', 'Bạn cần đăng nhập để xem thông tin đơn hàng.');
+        }
+
+        $customerId = $user->id;
+        $orders = Order::with('orderDetail.book.bookTitle', 'orderDetail.book.images')
+            ->where('customer_id', $customerId)
+            ->get();
+
+        return view('orderinfor', compact('orders'));
+    }
+
+
+    public function cancelOrder(Request $request, Order $order)
+    {
+        if ($order->status !== 'Đã xác nhận') {
+            return response()->json(['success' => false, 'message' => 'Không thể hủy đơn hàng này.']);
+        }
+
+        $order->update(['status' => 'Đã hủy']);
+
+        foreach ($order->orderDetail as $detail) {
+            $book = $detail->book;
+
+            if ($book) {
+                $book->update(['quantity' => $book->quantity + $detail->quantity]);
+            }
+        }
+
+        return response()->json(['success' => true, 'message' => 'Đơn hàng đã được hủy thành công.']);
+    }
 }
