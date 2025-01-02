@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\BookBranch;
 use App\Models\Cart;
 use App\Models\Order;
@@ -101,6 +102,7 @@ class OrderController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -131,5 +133,79 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function buyNow(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $customer = auth('cus')->user();
+        $book = Book::with('bookTitle', 'images')->findOrFail($request->book_id);
+        $quantity = $request->quantity;
+        $totalPrice = $book->unit_price * $quantity;
+
+        return view('MuaNgay', compact('customer', 'book', 'quantity', 'totalPrice'));
+    }
+
+    public function buyNowCreate(Request $request)
+    {
+        $request->validate([
+            'book_id' => 'required|exists:books,id',
+            'quantity' => 'required|integer|min:1',
+            'address' => 'required|string|max:100',
+            'ward' => 'required|string|max:100',
+            'district' => 'required|string|max:100',
+            'province' => 'required|string|max:100',
+            'date_received' => 'nullable|date',
+            'discount_id' => 'nullable|exists:discounts,id',
+            'total_price' => 'required|integer|min:0',
+        ]);
+
+        $customer = auth('cus')->user();
+        $book = Book::findOrFail($request->book_id);
+
+        try {
+            DB::transaction(function () use ($request, $customer, $book) {
+                // Tạo đơn hàng mới
+                $order = Order::create([
+                    'type' => 'Website',
+                    'status' => 'Đã xác nhận',
+                    'address' => $request->address,
+                    'ward' => $request->ward,
+                    'district' => $request->district,
+                    'province' => $request->province,
+                    'date_received' => $request->date_received,
+                    'total_price' => $request->total_price,
+                    'discount_id' => $request->discount_id,
+                    'customer_id' => $customer->id,
+                ]);
+
+                // Thêm chi tiết đơn hàng và cập nhật số lượng sách
+                OrderDetail::create([
+                    'order_id' => $order->id,
+                    'book_id' => $book->id,
+                    'quantity' => $request->quantity,
+                    'price' => $book->unit_price,
+                ]);
+
+                // Trừ số lượng sách trong bảng books
+                $book->decrement('quantity', $request->quantity);
+
+                // Trừ số lượng sách trong bảng books_branches
+                $bookBranch = BookBranch::where('book_id', $book->id)
+                    ->where('branch_id', $customer->branch_id)
+                    ->first();
+                if ($bookBranch) {
+                    $bookBranch->decrement('quantity', $request->quantity);
+                }
+            });
+
+            return redirect()->route('cart.index')->with('success', 'Đơn hàng của bạn đã được tạo thành công.');
+        } catch (\Exception $e) {
+            return redirect()->route('cart.index')->with('error', 'Đã xảy ra lỗi khi tạo đơn hàng: ' . $e->getMessage());
+        }
     }
 }

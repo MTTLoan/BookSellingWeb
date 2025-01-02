@@ -24,6 +24,8 @@ Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
     Route::resource('order', OrderController::class);
     Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
+    Route::post('/buy-now', [OrderController::class, 'buyNow'])->name('order.buyNow');
+    Route::post('/buy-now-create', [OrderController::class, 'buyNowCreate'])->name('order.buyNowCreate');
 });
 
 // Route để kiểm tra trạng thái đăng nhập
