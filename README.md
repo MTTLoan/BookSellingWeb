@@ -3,9 +3,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/MTTLoan/DeadlineBeaters">
-    <img src="assets/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
   <h3 align="center">GOGO WHEELS - HỆ THỐNG CHO THUÊ XE</h3>
 
