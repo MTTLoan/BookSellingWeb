@@ -4,10 +4,10 @@
 <br />
 <div align="center">
 
-  <h3 align="center">GOGO WHEELS - HỆ THỐNG CHO THUÊ XE</h3>
+  <h3 align="center">CHAPTER ONE - WEBSITE BÁN SÁCH</h3>
 
   <p align="center">
-    Đối tác tin cậy trong việc cung cấp dịch vụ cho thuê xe!
+    Đối tác tin cậy trong việc cung cấp sách!
     <br />
     <a href="https://lle858756.wixsite.com/chapterone"><strong>Explore the docs »</strong></a>
     <br />
