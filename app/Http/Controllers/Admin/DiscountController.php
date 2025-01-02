@@ -88,4 +88,10 @@ class DiscountController extends Controller
             ]);
         }
     }
+
+    public function listDiscounts()
+    {
+        $discounts = Discount::where('type', 'Website')->get();
+        return view('LayVoucher', compact('discounts'));
+    }
 }

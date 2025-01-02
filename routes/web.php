@@ -19,6 +19,7 @@ Route::get('/book-by-category/book-details/{book_id}', [SalePageController::clas
 Route::get('/book-by-category/{category}', [SalePageController::class, 'showBookByCategory'])->name('sale.showBookByCategory');
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
 Route::get('/book-details/{book_tittle_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
+Route::get('/discounts', [DiscountController::class, 'listDiscounts'])->name('discounts.list');
 
 Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
