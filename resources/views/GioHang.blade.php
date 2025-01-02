@@ -13,8 +13,12 @@
             @foreach ($cartItems as $item)
             <div class="cart-item d-flex mt-3 align-items-center justify-content-between" id="item{{ $item->id }}">
                 <div class="d-flex justify-content-start" style="width: 60%;">
-                    <img src="{{ asset($item->book->images->first()->url) }}" alt="Product Image"
+                    @if($item->book->images->isNotEmpty())
+                    <img src="{{ $item->book->images->first()->url }}" alt="{{ $item->book->bookTitle->name }}"
                         class="cart-item-image">
+                    @else
+                    <img src="{{ asset('uploads/products/default.png') }}" alt="Default Image" class="cart-item-image">
+                    @endif
                     <div>
                         <div class="cart-item-name">{{ $item->book->bookTitle->name }}</div>
                         <!-- Loại bìa -->
@@ -54,7 +58,8 @@
                     <span id="total-price">{{ number_format($totalPrice, 0, ',', '.') }} đ</span>
                 </div>
             </div>
-            <button class="btn-checkout mt-3 w-100" onclick="checkout()">Thanh toán</button>
+            <a href="{{ route('order.create') }}" class="text-decoration-none text-white btn-checkout mt-3 w-100">Thanh
+                toán</a>
         </div>
     </div>
 </div>
@@ -65,5 +70,27 @@
 @endpush
 
 @push('scripts')
+@if(session('success'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: `{{ session('success') }}`,
+    });
+});
+</script>
+@endif
+@if(session('error'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    Swal.fire({
+        icon: 'error',
+        title: 'Lỗi',
+        text: `{{ session('error') }}`,
+    });
+});
+</script>
+@endif
 <script src="{{ asset('assets/js/GioHang.js') }}"></script>
 @endpush

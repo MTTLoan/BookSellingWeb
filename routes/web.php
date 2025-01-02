@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ChangeLogController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfNotEmployee;
 
@@ -20,6 +22,8 @@ Route::get('/book-details/{book_tittle_id}', [SalePageController::class, 'showBo
 
 Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
+    Route::resource('order', OrderController::class);
+    Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
 });
 
 // Route để kiểm tra trạng thái đăng nhập

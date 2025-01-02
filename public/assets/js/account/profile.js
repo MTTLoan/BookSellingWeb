@@ -3,8 +3,6 @@ document.getElementById("btnCancel").addEventListener("click", function () {
     window.history.back(); // Go back to the previous page
 });
 
-
-
 // Khai báo các biến toàn cục
 const province = document.getElementById("province");
 const districts = document.getElementById("district");
@@ -76,7 +74,6 @@ districts.onchange = function () {
         wards.value = customerWard;
     }
 };
-
 
 //
 // Xử lý gửi form với AJAX
@@ -165,7 +162,7 @@ document
                         text: data.message,
                     }).then(() => {
                         location.reload(); // Tải lại trang sau khi hiển thị thông báo thành công
-                    });;
+                    });
                     form.reset();
                     clearErrors(); // Xóa lỗi sau khi gửi thành công
                 } else {
