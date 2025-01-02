@@ -12,6 +12,51 @@ class SalePageController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $sort_by = $request->input('sort_by', 'price_asc');
+
+        // Tìm kiếm các tiêu đề sách dựa trên từ khóa
+        $titles = DB::table('booktitles')
+            ->join('books', 'booktitles.id', '=', 'books.book_title_id')
+            ->leftJoin('order_details', 'books.id', '=', 'order_details.book_id')
+            ->join('images', 'books.id', '=', 'images.book_id')
+            ->where('booktitles.name', 'LIKE', "%{$query}%")
+            ->select(
+                'booktitles.id',
+                'booktitles.name',
+                'booktitles.author',
+                DB::raw('MIN(books.unit_price) as unit_price'),
+                DB::raw('COALESCE(SUM(order_details.quantity), 0) as sold_quantity'),
+                DB::raw('MIN(images.url) as image_url')
+            )
+            ->groupBy(
+                'booktitles.id',
+                'booktitles.name',
+                'booktitles.author',
+                'booktitles.book_type_id'
+            );
+
+        // Áp dụng sắp xếp
+        switch ($sort_by) {
+            case 'price_asc':
+                $titles->orderBy('unit_price', 'asc');
+                break;
+            case 'price_desc':
+                $titles->orderBy('unit_price', 'desc');
+                break;
+            case 'sold_desc':
+                $titles->orderBy('sold_quantity', 'desc');
+                break;
+        }
+
+        $titles = $titles->get();
+
+        return view('TimKiemSP', compact('titles', 'query', 'sort_by'));
+    }
+
     public function showBookDetails($book_title_id)
     {
         $booktitle = DB::table('booktitles')->where('id', $book_title_id)->first();

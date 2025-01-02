@@ -20,6 +20,7 @@ Route::get('/book-by-category/{category}', [SalePageController::class, 'showBook
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
 Route::get('/book-details/{book_tittle_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 Route::get('/discounts', [DiscountController::class, 'listDiscounts'])->name('discounts.list');
+Route::get('/search', [SalePageController::class, 'search'])->name('search');
 
 Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
@@ -85,7 +86,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class
 });
 
 Route::get('/test', function () {
-    return view('GioHang');
+    return view('TimKiemSP');
 });
 
 Route::get('/test1', function () {
