@@ -42,7 +42,9 @@
                 @if(auth('cus')->check())
                 <button class="btn me-3">ĐƠN HÀNG</button>
                 @endif
-                <button class="btn me-3" data-target="Voucher">VOUCHER</button>
+                <button class="btn me-3" data-target="Voucher"><a href="{{ route('discounts.list') }}"
+                        class="text-black text-decoration-none">VOUCHER</a>
+                </button>
                 <button class="btn me-3" data-target="Review">REVIEW</button>
                 <button class="btn " data-target="Blog">BLOG</button>
             </div>

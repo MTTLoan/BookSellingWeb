@@ -154,11 +154,11 @@
                 <!-- Hiển thị liên kết phân trang -->
                 <div class="d-flex justify-content-center">
                     {{ $books->links('pagination::bootstrap-5') }}
-                </div> --}}
+            </div> --}}
 
-            </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Modal Filter Mobile -->
 <div class="modal modal-filter fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
