@@ -83,7 +83,6 @@ class BookPolicy
      */
     public function forceDelete(Employee $employee, Book $book)
     {
-        // Admin có thể xóa vĩnh viễn sách, các vai trò khác không được phép
-        return $employee->role === 'admin';
+        
     }
 }

@@ -363,4 +363,9 @@ class AccountController extends Controller
 
         return back()->withErrors(['email' => __($status)]);
     }
+
+    public function checkLoginStatus()
+    {
+        return response()->json(['logged_in' => auth('cus')->check()]);
+    }
 }

@@ -12,48 +12,50 @@ class SalePageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function search(Request $request)
     {
-        // Lấy tất cả các loại sách (book types)
-        $bookTypes = DB::table('booktypes')
-            ->select('booktypes.id as booktype_id', 'booktypes.name as booktype_name')
-            ->get();
+        $query = $request->input('query');
+        $sort_by = $request->input('sort_by', 'price_asc');
 
-        $bookTitles = [];
+        // Tìm kiếm các tiêu đề sách dựa trên từ khóa
+        $titles = DB::table('booktitles')
+            ->join('books', 'booktitles.id', '=', 'books.book_title_id')
+            ->leftJoin('order_details', 'books.id', '=', 'order_details.book_id')
+            ->join('images', 'books.id', '=', 'images.book_id')
+            ->where('booktitles.name', 'LIKE', "%{$query}%")
+            ->select(
+                'booktitles.id',
+                'booktitles.name',
+                'booktitles.author',
+                DB::raw('MIN(books.unit_price) as unit_price'),
+                DB::raw('COALESCE(SUM(order_details.quantity), 0) as sold_quantity'),
+                DB::raw('MIN(images.url) as image_url')
+            )
+            ->groupBy(
+                'booktitles.id',
+                'booktitles.name',
+                'booktitles.author',
+                'booktitles.book_type_id'
+            );
 
-        foreach ($bookTypes as $bookType) {
-            // Lấy thông tin sách cho mỗi loại sách, bao gồm giá, số lượng bán ra, và ảnh của sách có id nhỏ nhất
-            $titles = DB::table('booktitles')
-                ->join('books', 'booktitles.id', '=', 'books.book_title_id')
-                ->leftJoin('order_details', 'books.id', '=', 'order_details.book_id')
-                ->leftJoin('images', 'books.id', '=', 'images.book_id')
-                ->select(
-                    'booktitles.id as book_title_id',
-                    'booktitles.name as book_title_name',
-                    'booktitles.author',
-                    'books.unit_price',
-                    DB::raw('COALESCE(SUM(order_details.quantity), 0) as sold_quantity'),
-                    DB::raw('MIN(images.url) as image_url') // Lấy ảnh có id nhỏ nhất
-                )
-                ->where('booktitles.book_type_id', $bookType->booktype_id)
-                ->groupBy(
-                    'booktitles.id',
-                    'booktitles.name',
-                    'booktitles.author',
-                    'books.unit_price'
-                )
-                ->orderBy('booktitles.id', 'asc')
-                ->limit(10) // Lấy tối đa 10 sách cho mỗi loại sách
-                ->get();
-
-            // Thêm các book titles vào mảng theo tên loại sách
-            $bookTitles[$bookType->booktype_name] = $titles;
+        // Áp dụng sắp xếp
+        switch ($sort_by) {
+            case 'price_asc':
+                $titles->orderBy('unit_price', 'asc');
+                break;
+            case 'price_desc':
+                $titles->orderBy('unit_price', 'desc');
+                break;
+            case 'sold_desc':
+                $titles->orderBy('sold_quantity', 'desc');
+                break;
         }
 
-        // Trả về view với dữ liệu bookTitles
-        return view('home.index', compact('bookTitles'));
-    }
+        $titles = $titles->get();
 
+        return view('TimKiemSP', compact('titles', 'query', 'sort_by'));
+    }
 
     public function showBookDetails($book_title_id)
     {
@@ -89,7 +91,12 @@ class SalePageController extends Controller
             ->join('orders', 'reviews.order_id', '=', 'orders.id')
             ->join('customers', 'orders.customer_id', '=', 'customers.id')
             ->whereIn('book_id', $books->pluck('id')->toArray())
-            ->select('customers.name as customer_name', 'reviews.*')
+            ->select(
+                'customers.name as customer_name',
+                'reviews.score as review_score',
+                'reviews.description as review_comment', // Đảm bảo rằng tên cột đúng
+                'reviews.created_at as review_date'
+            )
             ->get();
 
         return view('ChiTietSanPham', compact('booktitle', 'books', 'images', 'review_score', 'customer_reviews'));
