@@ -9,21 +9,31 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ChangeLogController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfNotEmployee;
 
-Route::get('/', [SalePageController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/book-by-category/book-details/{book_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
 Route::get('/book-by-category/{category}', [SalePageController::class, 'showBookByCategory'])->name('sale.showBookByCategory');
 Route::get('/book-by-type/{booktype_id}', [SalePageController::class, 'showBookByType'])->name('sale.showBookByType');
 Route::get('/book-details/{book_tittle_id}', [SalePageController::class, 'showBookDetails'])->name('sale.showBookDetails');
+Route::get('/discounts', [DiscountController::class, 'listDiscounts'])->name('discounts.list');
+Route::get('/search', [SalePageController::class, 'search'])->name('search');
 
 Route::middleware([RedirectIfNotAuthenticated::class])->group(function () {
     Route::resource('cart', CartController::class);
-    // Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    // Route::post('/update-cart', [CartController::class, 'update'])->name('cart.update');
-    // Route::post('/remove-from-cart', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::resource('order', OrderController::class);
+    Route::post('/check-discount', [DiscountController::class, 'checkDiscount'])->name('check.discount');
+    Route::post('/buy-now', [OrderController::class, 'buyNow'])->name('order.buyNow');
+    Route::post('/buy-now-create', [OrderController::class, 'buyNowCreate'])->name('order.buyNowCreate');
+    Route::post('/cancelorder/{order}', [OrderController::class, 'cancelOrder'])->name('order.cancelorder');
+    Route::get('/orderinfor', [OrderController::class, 'orderInfor'])->name('order.orderinfor');
 });
+
+// Route để kiểm tra trạng thái đăng nhập
+Route::get('/check-login-status', [AccountController::class, 'checkLoginStatus']);
 
 Route::get('/admin', function () {
     return view('master.admin');
@@ -57,8 +67,8 @@ Route::group(['prefix' => 'account'], function () {
     Route::post('/reset-password/{token}', [AccountController::class, 'checkResetPassword']);
 });
 
-Route::get('/admin/login',[AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin/login',[AdminController::class, 'checkLogin']);
+Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'checkLogin']);
 
 Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class]], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
@@ -78,7 +88,7 @@ Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class
 });
 
 Route::get('/test', function () {
-    return view('GioHang');
+    return view('TimKiemSP');
 });
 
 Route::get('/test1', function () {

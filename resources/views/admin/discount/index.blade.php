@@ -90,15 +90,16 @@
                             filter_alt
                         </span>
                     </button>
+                    @can('create', App\Models\Discount::class)
                     <!-- Button add/import -->
                     <div class="button d-flex justify-content-end w-100">
-                        <a class="btn btn_add d-flex align-items-center text-nowrap" id="btnAdd" href="#">
-                            <span class="material-symbols-outlined add">
-                                add
-                            </span>
+                        <a class="btn btn_add me-2 d-flex align-items-center text-nowrap" id="btnAdd"
+                            href="{{ route('discount.create') }}">
+                            <span class="material-symbols-outlined add"> add </span>
                             Thêm
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
 
@@ -128,7 +129,28 @@
                             <td>{{ number_format($discount->value) }}</td>
                             <td>{{ number_format($discount->starting_price) }}</td>
                             <td>
-                                <!-- Action buttons -->
+                                <a type="button" class="btn_preview p-0" id="btnPreview"
+                                    href="{{ route('discount.show', $discount->id) }}">
+                                    <span class="material-symbols-outlined details">visibility</span>
+                                </a>
+                                @can('update', $discount)
+                                <a type="button" class="btn_edit p-0" id="btnEdit"
+                                    href="{{ route('discount.edit', $discount->id) }}">
+                                    <span class="material-symbols-outlined edit">border_color</span>
+                                </a>
+                                @endcan
+
+                                @can('delete', $discount)
+                                <form action="{{ route('discount.destroy', $discount->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class=" btn_delete p-0" id="btnDelete"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                        <span class="material-symbols-outlined delete">delete</span>
+                                    </button>
+                                </form>
+                                @endcan
                             </td>
                         </tr>
                         @endforeach

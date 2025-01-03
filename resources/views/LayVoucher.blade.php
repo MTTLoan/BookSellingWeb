@@ -10,79 +10,46 @@
             <h1>Voucher</h1>
         </div>
         <div class="list">
-            <div class="col coupon justify-content-center d-flex mb-2 rounded">
+            @foreach ($discounts as $discount)
+            <div class="col coupon d-flex justify-content-between mb-2 rounded">
                 <div class="icon_coupon align-content-center rounded-start">
-                    <img src="/public/assets/images/ico_coupongreen.png" alt="Voucher" class="img-fluid" />
+                    <img src="{{ asset('uploads/images/promo-code.png') }}" alt="Voucher" class="img-fluid" />
                 </div>
                 <div class="coupon_code justify-content-start p-3">
-                    <p class="fw-bold">Mã giảm giá 100K</p>
-                    <p>
-                        Không áp dụng cho đơn hàng bao gồm giá trị của
-                        các sản phẩm Ngoại Văn, Manga, Phiếu Quà Tặng,
-                        Sách Giáo Khoa, Máy Tính và Giấy Photo và Một Số
-                        Loại Giấy và Bảng Khác
+                    <p class="fw-bold">{{ $discount->name }}</p>
+                    <p>{{ $discount->description }}</p>
+                    <p>Giảm ngay {{ number_format($discount->value) }} VNĐ khi mua sách bất kỳ trị giá từ
+                        {{ number_format($discount->starting_price) }} VNĐ trở lên! Cùng Chapter One khám phá những câu
+                        chuyện mới!
                     </p>
-                    <p class="fw-bold">Mã voucher - FHS100KT10</p>
+                    <p>Ghi chú: Voucher có giá trị từ ngày {{ $discount->start_date }} đến {{ $discount->end_date }}.
+                    </p>
                 </div>
-                <div class="buttons p-3">
-                    <button class="btn btn_details text-nowrap">
-                        Chi tiết
-                    </button>
-                    <button class="btn btn_copy text-nowrap">
+                <div class="buttons p-3 d-flex align-content-center justify-content-center rounded-end">
+                    <p class="fw-bold text-center">{{ $discount->code }}</p>
+                    <button class="btn btn_copy text-nowrap" onclick="copyToClipboard('{{ $discount->code }}')">
                         Sao chép
                     </button>
                 </div>
             </div>
-            <div class="col coupon justify-content-center d-flex mb-2 rounded">
-                <div class="icon_coupon align-content-center rounded-start">
-                    <img src="/public/assets/images/ico_coupongreen.png" alt="Voucher" class="img-fluid" />
-                </div>
-                <div class="coupon_code justify-content-start p-3">
-                    <p class="fw-bold">Mã giảm giá 100K</p>
-                    <p>
-                        Không áp dụng cho đơn hàng bao gồm giá trị của
-                        các sản phẩm Ngoại Văn, Manga, Phiếu Quà Tặng,
-                        Sách Giáo Khoa, Máy Tính và Giấy Photo và Một Số
-                        Loại Giấy và Bảng Khác
-                    </p>
-                    <p class="fw-bold">Mã voucher - FHS100KT10</p>
-                </div>
-                <div class="buttons p-3">
-                    <button class="btn btn_details text-nowrap">
-                        Chi tiết
-                    </button>
-                    <button class="btn btn_copy text-nowrap">
-                        Sao chép
-                    </button>
-                </div>
-            </div>
-            <div class="col coupon justify-content-center d-flex mb-2 rounded">
-                <div class="icon_coupon align-content-center rounded-start">
-                    <img src="/public/assets/images/ico_coupongreen.png" alt="Voucher" class="img-fluid" />
-                </div>
-                <div class="coupon_code justify-content-start p-3">
-                    <p class="fw-bold">Mã giảm giá 100K</p>
-                    <p>
-                        Không áp dụng cho đơn hàng bao gồm giá trị của
-                        các sản phẩm Ngoại Văn, Manga, Phiếu Quà Tặng,
-                        Sách Giáo Khoa, Máy Tính và Giấy Photo và Một Số
-                        Loại Giấy và Bảng Khác
-                    </p>
-                    <p class="fw-bold">Mã voucher - FHS100KT10</p>
-                </div>
-                <div class="buttons p-3">
-                    <button class="btn btn_details text-nowrap">
-                        Chi tiết
-                    </button>
-                    <button class="btn btn_copy text-nowrap">
-                        Sao chép
-                    </button>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 @endsection
+
 @push('styles')
 <link href="{{ asset('assets/css/LayVoucher.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script>
+    function copyToClipboard(code) {
+        navigator.clipboard.writeText(code).then(function() {
+            alert('Đã sao chép mã: ' + code);
+        }, function(err) {
+            console.error('Không thể sao chép mã: ', err);
+        });
+    }
+</script>
 @endpush

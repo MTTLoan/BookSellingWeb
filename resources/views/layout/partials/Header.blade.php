@@ -74,9 +74,11 @@
                     <img src="{{ asset('uploads/logo/Favicon.png') }}" alt="" width="40" height="40">
                     <span class="company-name">Chapter One</span>
                 </a>
-                <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center">
-                    <input class="form-control search-input" type="search" placeholder="Tìm kiếm sản phẩm..."
-                        aria-label="Search">
+                <form class="d-flex mx-auto flex-grow-1 mx-2 justify-content-center" action="{{ route('search') }}"
+                    method="GET">
+                    <input class="form-control search-input" type="search" name="query"
+                        placeholder="Tìm kiếm sản phẩm..." aria-label="Search" value="{{ request('query') }}">
+                    <input type="hidden" name="sort_by" value="{{ request('sort_by') }}">
                     <button class="btn search-btn" type="submit">
                         <i class="bi bi-search"></i>
                     </button>
