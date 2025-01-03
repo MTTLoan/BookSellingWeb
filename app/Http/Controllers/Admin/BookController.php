@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\BookTitle;
 use App\Models\BookType;
+use App\Models\ChangeLog;
 use App\Models\Image;
 use App\Models\Supplier;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BookController extends Controller
@@ -249,37 +251,39 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        $this->authorize('delete', $book);
-        try {
-            // Xóa các ảnh liên quan
-            foreach ($book->images as $image) {
-                $image_path = public_path($image->url);
-                if (file_exists($image_path)) {
-                    unlink($image_path);
-                }
-                $image->delete();
-            }
+        $book = Book::findOrFail($book->id);
+        $book->delete();
 
-            // Xóa sách
-            $book->delete();
+        ChangeLog::create([
+            'table_name' => 'books',
+            'row_id' => $book->id,
+            'column_name' => null,
+            'old_value' => json_encode($book->toArray()),
+            'new_value' => null,
+            'changed_by' => Auth::id(),
+            'operation_type' => 'delete',
+            'changed_at' => now(),
+        ]);
 
-            return redirect()->route('book.index')->with('success', 'Xóa sách và các ảnh liên quan thành công.');
-        } catch (\Exception $e) {
-            Log::error('Lỗi: ' . $e->getMessage());
-            return redirect()->route('book.index')->with('error', 'Xóa sách thất bại.');
-        }
+        return redirect()->route('book.index')->with('success', 'Xóa sách và các ảnh liên quan thành công.');
     }
 
-    public function destroyImage(Image $image)
+    public function restore($id)
     {
-        $image_name = $image->url;
-        if ($image->delete()) {
-            $image_path = public_path($image_name);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
-            return redirect()->back()->with('oke', 'Xóa ảnh thành công.');
-        }
-        return redirect()->back()->with('no', 'Xóa ảnh thất bại.');
+        $book = Book::withTrashed()->findOrFail($id);
+        $book->restore();
+
+        ChangeLog::create([
+            'table_name' => 'books',
+            'row_id' => $book->id,
+            'column_name' => null,
+            'old_value' => null,
+            'new_value' => json_encode($book->toArray()),
+            'changed_by' => Auth::id(),
+            'operation_type' => 'restore',
+            'changed_at' => now(),
+        ]);
+
+        return redirect()->route('books.index')->with('success', 'Book restored successfully.');
     }
 }
