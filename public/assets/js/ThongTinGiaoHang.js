@@ -104,6 +104,8 @@ applyDiscountButton.addEventListener("click", function () {
                     currency: "VND",
                 }).format(totalPrice);
 
+                document.getElementById("total_price").value = totalPrice;
+
                 // Gán discount_id vào input ẩn
                 document.getElementById("discount-id").value = discountId;
             } else {

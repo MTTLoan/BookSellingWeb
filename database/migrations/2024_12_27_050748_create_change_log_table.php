@@ -23,6 +23,7 @@ class CreateChangeLogTable extends Migration
             $table->bigInteger('changed_by')->nullable(); // ID người sửa đổi
             $table->enum('operation_type', ['create', 'update', 'delete'])->default('update'); // Loại thay đổi
             $table->timestamp('changed_at')->useCurrent(); // Thời gian thay đổi
+            $table->softDeletes();
             $table->timestamps(); // created_at, updated_at
         });
     }

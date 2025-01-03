@@ -219,6 +219,7 @@ class OrderController extends Controller
         $customerId = $user->id;
         $orders = Order::with('orderDetail.book.bookTitle', 'orderDetail.book.images')
             ->where('customer_id', $customerId)
+            ->orderBy('id', 'desc')
             ->get();
 
         return view('orderinfor', compact('orders'));
