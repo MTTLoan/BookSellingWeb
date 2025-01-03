@@ -13,7 +13,7 @@ class DiscountPolicy
     public function viewAny(Employee $employee)
     {
         // Staff và Branch Manager chỉ xem khuyến mãi thuộc chi nhánh của mình
-        return in_array($employee->role, ['staff', 'branch_manager', 'admin']);
+        return in_array($employee->role, ['branch_manager', 'admin']);
     }
 
     /**
@@ -24,7 +24,7 @@ class DiscountPolicy
         // Kiểm tra khuyến mãi thuộc chi nhánh nào thông qua bảng trung gian
         $branchDiscounts = $employee->branch->discounts->pluck('id')->toArray();
 
-        if (in_array($employee->role, ['staff', 'branch_manager'])) {
+        if (in_array($employee->role, ['branch_manager'])) {
             return in_array($discount->id, $branchDiscounts);
         }
 

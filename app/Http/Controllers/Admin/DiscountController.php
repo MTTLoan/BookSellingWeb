@@ -19,26 +19,26 @@ class DiscountController extends Controller
 
     public function index(Request $request)
     {
-        $query = Discount::with(['branches']);
         $employee = auth('web')->user();
-
-        // Truy vấn theo vai trò
+    
+        // Paginate results for branch managers or admin
         if ($employee->role === 'admin') {
-            // Admin xem tất cả khuyến mãi
-            $discounts = Discount::all();  // Admin can view all discounts
+            // Admin can view all discounts
+            $discounts = Discount::paginate(20); // Paginate the results
         } else {
-            // Staff and Branch Manager can only view discounts for their own branch
+            // Staff and Branch Managers can view only their branch's discounts
             $discounts = Discount::join('branches_discounts', 'discounts.id', '=', 'branches_discounts.discount_id')
                 ->where('branches_discounts.branch_id', $employee->branch_id)
                 ->select('discounts.*')
-                ->orderBy('id', 'asc')->paginate(20);
+                ->paginate(20); // Paginate the results
         }
 
-        // $discounts = discount::all();
-        // Pass data to the view
+        
+    
+        // Pass paginated discounts to the view
         return view('admin.discount.index', compact('discounts'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -80,7 +80,6 @@ class DiscountController extends Controller
                 $branchDiscount = BranchDiscount::create();
                 $branchDiscount->discount_id = $discount->id;
                 $branchDiscount->branch_id = $employee->branch_id;
-                $branchDiscount->save();
             }
 
             return redirect()->route('discount.index')->with('success', 'Khuyến mãi đã được thêm thành công và liên kết với chi nhánh của bạn.');
