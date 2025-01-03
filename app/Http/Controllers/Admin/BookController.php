@@ -33,17 +33,6 @@ class BookController extends Controller
 
         $employee = auth('web')->user();
 
-        if ($employee->role === 'admin') {
-            // Admin xem tất cả sách
-            $books = $query->orderBy('id', 'asc')->paginate(20);
-        } else {
-            // Staff và Branch Manager chỉ xem sách thuộc chi nhánh của mình
-            $books = Book::join('books_branches', 'books.id', '=', 'books_branches.book_id')
-                ->where('books_branches.branch_id', $employee->branch_id)
-                ->select('books.*', 'books_branches.quantity as branch_quantity')
-                ->orderBy('id', 'asc')->paginate(20);
-        }
-
         //filter và search
         if ($request->has('search')) {
             $search = $request->input('search');
@@ -63,6 +52,17 @@ class BookController extends Controller
         if ($request->filled('filter_quantity')) {
             $filterQuantity = $request->input('filter_quantity');
             $query->where('quantity', '>=', $filterQuantity);
+        }
+
+        if ($employee->role === 'admin') {
+            // Admin xem tất cả sách
+            $books = $query->orderBy('id', 'asc')->paginate(20);
+        } else {
+            // Staff và Branch Manager chỉ xem sách thuộc chi nhánh của mình
+            $books = Book::join('books_branches', 'books.id', '=', 'books_branches.book_id')
+                ->where('books_branches.branch_id', $employee->branch_id)
+                ->select('books.*', 'books_branches.quantity as branch_quantity')
+                ->orderBy('id', 'asc')->paginate(20);
         }
 
         $bookTypes = BookType::all(); // Lấy tất cả các thể loại sách để hiển thị trong form tìm kiếm
