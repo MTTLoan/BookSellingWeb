@@ -41,7 +41,7 @@ class BookController extends Controller
             // Staff và Branch Manager chỉ xem sách thuộc chi nhánh của mình
             $books = Book::join('books_branches', 'books.id', '=', 'books_branches.book_id')
                 ->where('books_branches.branch_id', $employee->branch_id)
-                ->get(['books.*', 'books_branches.quantity']);
+                ->get(['books.id', 'books_branches.quantity']);
         }
 
         //filter và search

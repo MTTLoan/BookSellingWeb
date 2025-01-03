@@ -183,3 +183,10 @@ body {
         padding: 0 10px !important;
     }
 }
+
+
+.btn-delete-filter{
+    background-color: #c53327 !important;
+    color: white !important;
+    height: 40px;
+}

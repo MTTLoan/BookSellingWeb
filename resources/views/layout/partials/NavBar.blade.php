@@ -46,7 +46,7 @@
                                 </li>
                                 @if (in_array(auth('web')->user()->role, ['admin', 'branch_manager']))
                                 <li>
-                                    <a class="dropdown-item" id="promotionButton">
+                                    <a class="dropdown-item" id="promotionButton" href="{{ route('discount.index') }}">
                                         <i class="bi bi-tags"></i> Khuyến mãi
                                     </a>
                                 </li>

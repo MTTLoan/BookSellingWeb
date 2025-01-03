@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\SalePageController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ChangeLogController;
+use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\CartController;
 use App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Middleware\RedirectIfNotEmployee;
@@ -69,6 +70,8 @@ Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class
 
     Route::resource('book', BookController::class);
     Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
+
+    Route::resource('discount', DiscountController::class);
 
     Route::get('/change-logs', [ChangeLogController::class, 'index'])->name('change-logs.index');
     Route::post('/change-logs/revert/{id}', [ChangeLogController::class, 'revert'])->name('change-logs.revert');

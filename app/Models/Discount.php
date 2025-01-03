@@ -23,4 +23,9 @@ class Discount extends Model
     public function order() {
         return $this->hasMany(Order::class, '');
     }
+
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branches_discounts', 'discount_id', 'branch_id');
+    }
 }
