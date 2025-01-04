@@ -7,7 +7,7 @@
   <h3 align="center">CHAPTER ONE - WEBSITE BÁN SÁCH</h3>
 
   <p align="center">
-    Đối tác tin cậy trong việc cung cấp sách!
+    Website thương mại điện tử đáng tin cậy trong việc cung cấp sách!
     <br />
     <a href="https://lle858756.wixsite.com/chapterone"><strong>Explore the docs »</strong></a>
     <br />
