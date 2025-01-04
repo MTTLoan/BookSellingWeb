@@ -7,52 +7,42 @@
     <div class="row">
         <div class="sidebar col-md-3 d-none d-md-block">
             <p class="sidebar_title fs-3 fw-bold">Khuyến mãi</p>
-            <!-- Chi nhánh -->
-            <div class="filter_branch bg-white p-3 rounded-2 mb-4">
-                <form id="branchForm">
-                    <div class="mb-3">
-                        <label for="filter_branch" class="form-label d-flex justify-content-between fw-bold">
-                            Chi nhánh
-                        </label>
-                        <input class="form-control" list="branch_name" name="filter_branch" id="filter_branch"
-                            placeholder="Chọn chi nhánh" onchange="loadTableData()" />
-                        <datalist class="branch_name" id="branch_name">
-                            <option value="TP HCM"></option>
-                            <option value="Hà Nội"></option>
-                        </datalist>
-                    </div>
+
+            <!-- Nút Xóa bộ lọc -->
+            <div class="filter_reset bg-white p-3 rounded-2 mb-4">
+                <form method="GET" action="{{ route('discount.index') }}">
+                    <button type="submit" class="btn btn-delete-filter w-100">Xóa bộ lọc</button>
                 </form>
             </div>
-            <!-- Thời gian khuyến mãi -->
-            <div class="filter_date bg-white p-3 rounded-2 mb-4">
-                <label for="filter_date" class="form-label d-flex justify-content-between" id="headingOne">
-                    Thời gian
-                </label>
-                <div class="ps-2">
-                    <form>
+
+            <form method="GET" action="{{ route('discount.index') }}" id="filterForm">
+                <!-- Thời gian khuyến mãi -->
+                <div class="filter_date bg-white p-3 rounded-2 mb-4">
+                    <label for="filter_date" class="form-label d-flex justify-content-between fw-bold" id="headingOne">
+                        Thời gian
+                    </label>
+                    <div class="ps-2">
                         <div class="mb-3">
                             <label for="startDate" class="form-label">Từ</label>
-                            <input type="date" id="startDate" class="form-control" required />
+                            <input type="date" name="start_date" id="startDate" class="form-control" value="{{ request('start_date') }}" onchange="document.getElementById('filterForm').submit();" />
                         </div>
                         <div class="mb-3">
                             <label for="endDate" class="form-label">đến</label>
-                            <input type="date" id="endDate" class="form-control" required />
+                            <input type="date" name="end_date" id="endDate" class="form-control" value="{{ request('end_date') }}" onchange="document.getElementById('filterForm').submit();" />
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <!-- Giá trị áp dụng từ -->
-            <div class="filter_value bg-white p-3 rounded-2 mb-4">
-                <form id="valueForm">
+                <!-- Giá trị áp dụng từ -->
+                <div class="filter_value bg-white p-3 rounded-2 mb-4">
                     <div class="mb-3">
-                        <label for="filter_author" class="form-label d-flex justify-content-between fw-bold">
+                        <label for="filter_value" class="form-label d-flex justify-content-between fw-bold">
                             Giá trị áp dụng từ
                         </label>
-                        <input class="form-control" id="filter_value" type="number" placeholder="Nhập giá trị đơn hàng"
-                            onchange="loadTableData()" />
+                        <input class="form-control" id="filter_value" name="filter_value" type="number"
+                            placeholder="Nhập giá trị đơn hàng" value="{{ request('filter_value') }}" onchange="document.getElementById('filterForm').submit();" />
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
         <!-- Mobile -->
@@ -67,10 +57,12 @@
             <!-- Tìm kiếm -->
             <div class="group-top row d-flex justify-content-end">
                 <div class="search col-md-6 d-flex mb-3">
-                    <input type="text" class="form-control me-1" placeholder="Tên sách, tên tác giả, thể loại..." />
-                    <button class="btn btn_search text-nowrap">
-                        Tìm kiếm
-                    </button>
+                    <form method="GET" action="{{ route('discount.index') }}" class="d-flex w-100">
+                        <input type="text" name="search" class="form-control me-1" placeholder="Tên khuyến mãi, mã giảm giá..." value="{{ request('search') }}" />
+                        <button type="submit" class="btn btn_search text-nowrap">
+                            Tìm kiếm
+                        </button>
+                    </form>
                 </div>
                 <div class="group_button col-md-6 d-flex mb-3">
                     <!-- Button trigger modal filter mobile -->
@@ -81,15 +73,16 @@
                             filter_alt
                         </span>
                     </button>
+                    @can('create', App\Models\Discount::class)
                     <!-- Button add/import -->
                     <div class="button d-flex justify-content-end w-100">
-                        <a class="btn btn_add d-flex align-items-center text-nowrap" id="btnAdd" href="#">
-                            <span class="material-symbols-outlined add">
-                                add
-                            </span>
+                        <a class="btn btn_add me-2 d-flex align-items-center text-nowrap" id="btnAdd"
+                            href="{{ route('discount.create') }}">
+                            <span class="material-symbols-outlined add"> add </span>
                             Thêm
                         </a>
                     </div>
+                    @endcan
                 </div>
             </div>
 
@@ -98,67 +91,68 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="serial" style="min-width: 40px">
-                                STT
-                            </th>
-                            <th scope="promotion_title" style="min-width: 140px">
-                                Tên khuyến mãi
-                            </th>
-                            <th scope="chanel_type" style="min-width: 85px">
-                                Kênh bán
-                            </th>
-                            <th scope="start_date" style="min-width: 65px">
-                                Ngày BĐ
-                            </th>
-                            <th scope="end_date" style="min-width: 65px">
-                                Ngày KT
-                            </th>
-                            <th scope="value" style="min-width: 80px">
-                                Giá trị
-                            </th>
-                            <th scope="order_value" style="min-width: 80px">
-                                Đơn từ
-                            </th>
-                            <th scope="action" style="min-width: 100px">
-                                Hành động
-                            </th>
+                            <th scope="serial" style="min-width: 40px">STT</th>
+                            <th scope="promotion_title" style="min-width: 140px">Tên khuyến mãi</th>
+                            <th scope="chanel_type" style="min-width: 85px">Kênh bán</th>
+                            <th scope="start_date" style="min-width: 65px">Ngày BĐ</th>
+                            <th scope="end_date" style="min-width: 65px">Ngày KT</th>
+                            <th scope="value" style="min-width: 80px">Giá trị</th>
+                            <th scope="order_value" style="min-width: 80px">Đơn từ</th>
+                            <th scope="action" style="min-width: 100px">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($discounts as $discount)
                         <tr>
-                            <td>1</td>
-                            <td>Ngày Sách và Văn hóa đọc 2023</td>
-                            <td>Cửa hàng</td>
-                            <td>20/10/2024</td>
-                            <td>24/10/2024</td>
-                            <td>50,000</td>
-                            <td>200,000</td>
+                            <td>{{ $discount->id }}</td>
+                            <td>{{ $discount->name }}</td>
+                            <td>{{ $discount->type }}</td>
+                            <td>{{ \Carbon\Carbon::parse($discount->start_date)->format('d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($discount->end_date)->format('d/m/Y') }}</td>
+                            <td>{{ number_format($discount->value) }}</td>
+                            <td>{{ number_format($discount->starting_price) }}</td>
                             <td>
-                                <button type="button" class="btn_preview p-0" id="btnPreview">
+                                <a type="button" class="btn_preview p-0" id="btnPreview"
+                                    href="{{ route('discount.show', $discount->id) }}">
                                     <span class="material-symbols-outlined details">visibility</span>
-                                </button>
-                                <button type="button" class="btn_edit p-0" id="btnEdit">
+                                </a>
+                                @can('update', $discount)
+                                <a type="button" class="btn_edit p-0" id="btnEdit"
+                                    href="{{ route('discount.edit', $discount->id) }}">
                                     <span class="material-symbols-outlined edit">border_color</span>
-                                </button>
-                                <button type="button" class="btn_delete p-0" id="btnDelete">
-                                    <span class="material-symbols-outlined delete">delete</span>
-                                </button>
+                                </a>
+                                @endcan
+
+                                @can('delete', $discount)
+                                <form action="{{ route('discount.destroy', $discount->id) }}" method="POST"
+                                    style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class=" btn_delete p-0" id="btnDelete"
+                                        onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')">
+                                        <span class="material-symbols-outlined delete">delete</span>
+                                    </button>
+                                </form>
+                                @endcan
                             </td>
                         </tr>
-                        <!-- Thêm các hàng sản phẩm khác -->
+                        @endforeach
+                        @if($discounts->isEmpty())
+                        <tr>
+                            <td colspan="8" class="text-center">Không có chương trình khuyến mãi nào.</td>
+                        </tr>
+                        @endif
                     </tbody>
-                    <tfoot></tfoot>
                 </table>
 
-                {{--
-                <!-- Hiển thị liên kết phân trang -->
+                <!-- Pagination links -->
                 <div class="d-flex justify-content-center">
-                    {{ $books->links('pagination::bootstrap-5') }}
-            </div> --}}
+                    {{ $discounts->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
 
         </div>
     </div>
-</div>
 </div>
 <!-- Modal Filter Mobile -->
 <div class="modal modal-filter fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -260,9 +254,9 @@
 @endsection
 
 @push('styles')
-<link href="{{ asset('assets/css/QLKhuyenMai.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/admin/discount/index.css') }}" rel="stylesheet">
 @endpush
 
 @push('scripts')
-<script src="{{ asset('assets/js/QLKhuyenMai.js') }}"></script>
+<script src="{{ asset('assets/js/admin/discount/index.js') }}"></script>
 @endpush

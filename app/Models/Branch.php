@@ -32,4 +32,9 @@ class Branch extends Model
         return $this->belongsToMany(Book::class, 'books_branches', 'branch_id', 'book_id')
                     ->withPivot('quantity');
     }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'branches_discounts', 'branch_id', 'discount_id');
+    }
 }

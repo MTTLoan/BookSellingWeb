@@ -81,6 +81,8 @@ Route::group(['prefix' => 'admin', 'middleware' => [RedirectIfNotEmployee::class
     Route::resource('book', BookController::class);
     Route::get('/book-date-image/{image}', [BookController::class, 'destroyImage'])->name('book.destroyImage');
 
+    Route::resource('discount', DiscountController::class);
+
     Route::get('/change-logs', [ChangeLogController::class, 'index'])->name('change-logs.index');
     Route::post('/change-logs/revert/{id}', [ChangeLogController::class, 'revert'])->name('change-logs.revert');
 });

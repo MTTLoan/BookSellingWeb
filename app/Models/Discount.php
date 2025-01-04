@@ -25,4 +25,10 @@ class Discount extends Model
     {
         return $this->hasMany(Order::class, '');
     }
+
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class, 'branches_discounts', 'discount_id', 'branch_id');
+    }
+    
 }
