@@ -20,22 +20,38 @@ class DiscountController extends Controller
     public function index(Request $request)
     {
         $employee = auth('web')->user();
-    
-        // Paginate results for branch managers or admin
-        if ($employee->role === 'admin') {
-            // Admin can view all discounts
-            $discounts = Discount::paginate(20); // Paginate the results
-        } else {
-            // Staff and Branch Managers can view only their branch's discounts
-            $discounts = Discount::join('branches_discounts', 'discounts.id', '=', 'branches_discounts.discount_id')
-                ->where('branches_discounts.branch_id', $employee->branch_id)
-                ->select('discounts.*')
-                ->paginate(20); // Paginate the results
+        $query = Discount::query();
+
+        // Áp dụng bộ lọc
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->where('start_date', '<=', $request->start_date)
+                ->where('end_date', '>=', $request->end_date);
         }
 
-        
-    
-        // Pass paginated discounts to the view
+        if ($request->filled('filter_value')) {
+            $query->where('starting_price', '>=', $request->filter_value);
+        }
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('code', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Phân trang kết quả cho quản lý chi nhánh hoặc admin
+        if ($employee->role === 'admin') {
+            // Admin có thể xem tất cả các khuyến mãi
+            $discounts = $query->paginate(20);
+        } else {
+            // Nhân viên và Quản lý chi nhánh chỉ có thể xem các khuyến mãi của chi nhánh của họ
+            $discounts = $query->join('branches_discounts', 'discounts.id', '=', 'branches_discounts.discount_id')
+                ->where('branches_discounts.branch_id', $employee->branch_id)
+                ->select('discounts.*')
+                ->paginate(20);
+        }
+
+        // Truyền các khuyến mãi đã phân trang tới view
         return view('admin.discount.index', compact('discounts'));
     }
     
@@ -45,10 +61,10 @@ class DiscountController extends Controller
    
     // Show the form for creating a new discount
     public function create()
-    {
-        $this->authorize('create', Discount::class);
-        return view('admin.discount.create');
-    }
+{
+    $branches = Branch::all(); // Lấy tất cả các chi nhánh
+    return view('admin.discount.create', compact('branches'));
+}
 
     // Store a newly created discount
     public function store(Request $request)
@@ -59,35 +75,31 @@ class DiscountController extends Controller
             'code' => 'required|string|max:255|unique:discounts',
             'start_date' => 'required|date|before_or_equal:end_date',
             'end_date' => 'required|date|after_or_equal:start_date',
-            'value' => 'required|integer|min:0',
-            'starting_price' => 'required|integer|min:0',
-        ], [
-            'value.integer' => 'Giá trị phải là số nguyên',
-            'code.unique' => 'Mã giảm giá đã tồn tại',
-            'end_date.date' => 'Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu',
-            'starting_price.integer' => 'Giá trị áp dụng phải là số nguyên',
+            'type' => 'required|string',
+            'value' => 'required|numeric',
+            'starting_price' => 'required|numeric',
         ]);
 
-        try {
-            // Create the discount
-            $discount = Discount::create($request->all());
+        // Create the discount
+        $discount = Discount::create([
+            'name' => $validated['name'],
+            'code' => $validated['code'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'type' => $validated['type'],
+            'value' => $validated['value'],
+            'starting_price' => $validated['starting_price'],
+        ]);
 
-            // Get the branch of the logged-in employee (assumed the user is a branch manager)
-            $employee = auth('web')->user();
-            
-            if ($employee->role === 'branch_manager') {
-                // Add the discount to the manager's branch
-                $branchDiscount = BranchDiscount::create();
-                $branchDiscount->discount_id = $discount->id;
-                $branchDiscount->branch_id = $employee->branch_id;
-            }
-
-            return redirect()->route('discount.index')->with('success', 'Khuyến mãi đã được thêm thành công và liên kết với chi nhánh của bạn.');
-        } catch (\Exception $e) {
-            // Log the error and show an error message to the user
-            Log::error('Error adding discount: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Lỗi xảy ra, vui lòng thử lại.']);
+        // Attach branches to the discount
+        if (Auth::user()->role === 'admin') {
+            $discount->branches()->attach($request->branch_id);
+        } else {
+            $discount->branches()->attach(Auth::user()->branch_id);
         }
+
+        // Redirect to the discount index page with a success message
+        return redirect()->route('discount.index')->with('success', 'Khuyến mãi đã được tạo thành công.');
     }
 
 
@@ -96,10 +108,8 @@ class DiscountController extends Controller
      */
     public function show(Discount $discount)
     {
-        $this->authorize('view', $discount);
-
-        $discount->load('branches');
-        return view('admin.discount.show', compact('discount'));
+        $branches = $discount->branches; // Lấy các chi nhánh liên quan đến khuyến mãi
+        return view('admin.discount.show', compact('discount', 'branches'));
     }
 
     /**
@@ -108,7 +118,8 @@ class DiscountController extends Controller
     public function edit(Discount $discount)
     {
         $this->authorize('update', $discount);
-        return view('admin.discount.edit', compact('discount'));
+        $branches = Branch::all(); // Lấy tất cả các chi nhánh
+        return view('admin.discount.edit', compact('discount', 'branches'));
     }
 
 
@@ -117,25 +128,37 @@ class DiscountController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Discount $discount)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:discounts,code,' . $discount->id,
-            'start_date' => 'required|date|before_or_equal:end_date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'value' => 'required|integer|min:0',
-            'starting_price' => 'required|integer|min:0',
-        ]);
+{
+    // Validate the request data
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'code' => 'required|string|max:255|unique:discounts,code,' . $discount->id,
+        'start_date' => 'required|date|before_or_equal:end_date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+        'type' => 'required|string',
+        'branch_id' => 'required|array',
+        'branch_id.*' => 'exists:branches,id',
+        'value' => 'required|numeric',
+        'starting_price' => 'required|numeric',
+    ]);
 
-        try {
-            $discount->update($request->all());
-            return redirect()->route('discount.index')->with('success', 'Khuyến mãi đã được sửa thành công.');
-        } catch (\Exception $e) {
-            Log::error('Error: ' . $e->getMessage());
-            return back()->withErrors(['error' => 'Lỗi xảy ra, vui lòng thử lại.']);
-        }
-    }
+    // Update the discount
+    $discount->update([
+        'name' => $validated['name'],
+        'code' => $validated['code'],
+        'start_date' => $validated['start_date'],
+        'end_date' => $validated['end_date'],
+        'type' => $validated['type'],
+        'value' => $validated['value'],
+        'starting_price' => $validated['starting_price'],
+    ]);
 
+    // Sync branches to the discount
+    $discount->branches()->sync($validated['branch_id']);
+
+    // Redirect to the discount index page with a success message
+    return redirect()->route('discount.index')->with('success', 'Khuyến mãi đã được cập nhật thành công.');
+}
     /**
      * Remove the specified resource from storage.
      */

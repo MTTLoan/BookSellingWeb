@@ -16,50 +16,31 @@
             </div>
 
             <form method="GET" action="{{ route('discount.index') }}" id="filterForm">
-                <!-- Chi nhánh -->
-                <div class="filter_branch bg-white p-3 rounded-2 mb-4" id="branchForm">
-                    <div class="mb-3">
-                        <label for="filter_branch" class="form-label d-flex justify-content-between fw-bold">
-                            Chi nhánh
-                        </label>
-                        <input class="form-control" list="branch_name" name="filter_branch" id="filter_branch"
-                            placeholder="Chọn chi nhánh" value="{{ request('filter_branch') }}"
-                            onchange="document.getElementById('filterForm').submit();" />
-                        <datalist class="branch_name" id="branch_name">
-                            <option value="TP HCM"></option>
-                            <option value="Hà Nội"></option>
-                        </datalist>
-                    </div>
-                </div>
                 <!-- Thời gian khuyến mãi -->
                 <div class="filter_date bg-white p-3 rounded-2 mb-4">
-                    <label for="filter_date" class="form-label d-flex justify-content-between" id="headingOne">
+                    <label for="filter_date" class="form-label d-flex justify-content-between fw-bold" id="headingOne">
                         Thời gian
                     </label>
                     <div class="ps-2">
-                        <form>
-                            <div class="mb-3">
-                                <label for="startDate" class="form-label">Từ</label>
-                                <input type="date" id="startDate" class="form-control" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="endDate" class="form-label">đến</label>
-                                <input type="date" id="endDate" class="form-control" required />
-                            </div>
-                        </form>
+                        <div class="mb-3">
+                            <label for="startDate" class="form-label">Từ</label>
+                            <input type="date" name="start_date" id="startDate" class="form-control" value="{{ request('start_date') }}" onchange="document.getElementById('filterForm').submit();" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="endDate" class="form-label">đến</label>
+                            <input type="date" name="end_date" id="endDate" class="form-control" value="{{ request('end_date') }}" onchange="document.getElementById('filterForm').submit();" />
+                        </div>
                     </div>
                 </div>
                 <!-- Giá trị áp dụng từ -->
                 <div class="filter_value bg-white p-3 rounded-2 mb-4">
-                    <form id="valueForm">
-                        <div class="mb-3">
-                            <label for="filter_author" class="form-label d-flex justify-content-between fw-bold">
-                                Giá trị áp dụng từ
-                            </label>
-                            <input class="form-control" id="filter_value" type="number"
-                                placeholder="Nhập giá trị đơn hàng" onchange="loadTableData()" />
-                        </div>
-                    </form>
+                    <div class="mb-3">
+                        <label for="filter_value" class="form-label d-flex justify-content-between fw-bold">
+                            Giá trị áp dụng từ
+                        </label>
+                        <input class="form-control" id="filter_value" name="filter_value" type="number"
+                            placeholder="Nhập giá trị đơn hàng" value="{{ request('filter_value') }}" onchange="document.getElementById('filterForm').submit();" />
+                    </div>
                 </div>
             </form>
         </div>
@@ -76,10 +57,12 @@
             <!-- Tìm kiếm -->
             <div class="group-top row d-flex justify-content-end">
                 <div class="search col-md-6 d-flex mb-3">
-                    <input type="text" class="form-control me-1" placeholder="Tên sách, tên tác giả, thể loại..." />
-                    <button class="btn btn_search text-nowrap">
-                        Tìm kiếm
-                    </button>
+                    <form method="GET" action="{{ route('discount.index') }}" class="d-flex w-100">
+                        <input type="text" name="search" class="form-control me-1" placeholder="Tên khuyến mãi, mã giảm giá..." value="{{ request('search') }}" />
+                        <button type="submit" class="btn btn_search text-nowrap">
+                            Tìm kiếm
+                        </button>
+                    </form>
                 </div>
                 <div class="group_button col-md-6 d-flex mb-3">
                     <!-- Button trigger modal filter mobile -->
@@ -272,4 +255,8 @@
 
 @push('styles')
 <link href="{{ asset('assets/css/admin/discount/index.css') }}" rel="stylesheet">
+@endpush
+
+@push('scripts')
+<script src="{{ asset('assets/js/admin/discount/index.js') }}"></script>
 @endpush

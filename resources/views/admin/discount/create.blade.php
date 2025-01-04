@@ -13,7 +13,7 @@
             @csrf
             <div class="form_xemkhuyenmai border p-4 rounded">
                 <div class="row g-3">
-                    <div class="col-md-12 p-2">
+                    <div class="col-md-6 p-2">
                         <label for="chanel_type" class="form-label">Loại kênh bán (*)</label>
                         <select name="type" id="type" class="form-select" required>
                             <option value="" selected>Chọn loại kênh bán...</option>
@@ -21,10 +21,30 @@
                             <option>Website</option>
                         </select>
                     </div>
+                    @if(auth()->user()->role === 'admin')
+                    <div class="col-md-6 p-2">
+                        <label for="branch_name" class="form-label">Chi nhánh (*)</label>
+                        <p class="sub fst-italic text-secondary p-0">
+                            (giữ phím ctrl hoặc shift (hoặc kéo bằng chuột) để chọn nhiều mục)
+                        </p>
+                        <select multiple name="branch_id[]" id="branch_id" class="form-select" required>
+                            @foreach ($branches as $branch)
+                            <option value="{{ $branch->id }}" {{ in_array($branch->id, old('branch_id', [])) ?
+                                'selected' : '' }}>
+                                {{ $branch->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('branch_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    @endif
+
                     <div class="col-md-6 p-2">
                         <label for="promotion_name" class="form-label">Tên khuyến mãi (*)</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
-                            placeholder="Nhập vào tên khuyến mãi" value="{{ old('name') }}" required />
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                            id="name" placeholder="Nhập vào tên khuyến mãi" value="{{ old('name') }}" required />
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -39,16 +59,17 @@
                     </div>
                     <div class="col-md-6 p-2">
                         <label for="start_date" class="form-label">Ngày bắt đầu (*)</label>
-                        <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date"
-                            placeholder="Chọn ngày bắt đầu..." value="{{ old('start_date') }}" required />
+                        <input type="date" class="form-control @error('start_date') is-invalid @enderror"
+                            name="start_date" id="start_date" placeholder="Chọn ngày bắt đầu..."
+                            value="{{ old('start_date') }}" required />
                         @error('start_date')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-6 p-2">
                         <label for="end_date" class="form-label">Ngày kết thúc (*)</label>
-                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" id="end_date"
-                            placeholder="Chọn ngày kết thúc ..." value="{{ old('end_date') }}" required />
+                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date"
+                            id="end_date" placeholder="Chọn ngày kết thúc ..." value="{{ old('end_date') }}" required />
                         @error('end_date')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

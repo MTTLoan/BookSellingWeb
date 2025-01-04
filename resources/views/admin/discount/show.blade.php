@@ -15,7 +15,11 @@
                 <div class="col-md-6 p-2">Mã code: {{ $discount->code }} </div>
                 <div class="col-md-6 p-2">Loại kênh bán: {{ $discount->type }} </div>
                 <div class="col-md-6 p-2">Tên khuyến mãi: {{ $discount->name }} </div>
-                <div class="col-md-6 p-2">Chi nhánh: {{ $discount->branches->first()->name }} </div>
+                <div class="col-md-6 p-2">Chi nhánh: 
+                    @foreach ($branches as $branch)
+                        {{ $branch->name }}@if (!$loop->last), @endif
+                    @endforeach
+                </div>
                 <div class="col-md-6 p-2">Ngày bắt đầu: {{ $discount->start_date }} </div>
                 <div class="col-md-6 p-2">Ngày kết thúc: {{ $discount->end_date }} </div>
                 <div class="col-md-6 p-2">Giá trị: {{ $discount->value }} </div>
